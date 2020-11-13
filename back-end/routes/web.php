@@ -18,6 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify'=>true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes(['verify'=>true]);
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+Route::get('/logout', function () {
+    //logout user
+    Auth::logout();
+    // redirect to homepage
+    return redirect('/');
+});
