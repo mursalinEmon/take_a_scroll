@@ -25,4 +25,7 @@ class HomeController extends Controller
     {
         return view('vendor.vendor_dashboard');
     }
+    public function chat(){
+        return view('chat.chat');
+    }
 }

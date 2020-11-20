@@ -21,6 +21,9 @@ Route::get('/', function () {
 
 Auth::routes(['verify'=>true]);
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/chat', 'HomeController@chat')->name('chat');
+Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
+
 
 Route::get('/logout', function () {
     //logout user
