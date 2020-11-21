@@ -26,7 +26,8 @@ files.keys().map(key =>
         files(key).default
     )
 );
-
+import VueChatScroll from "vue-chat-scroll";
+Vue.use(VueChatScroll);
 Vue.component(
     "example-component",
     require("./components/ExampleComponent.vue").default

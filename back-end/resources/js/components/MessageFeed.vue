@@ -1,5 +1,5 @@
 <template>
-    <div class="feed">
+    <div class="feed"  v-chat-scroll="{always: false, smooth: true}">
         <ul v-if="contact">
             <li v-for="(message,index) in messages" :key="index"><div :class="`message${message.to ==contact.id?' sent':' received'}`"><div class="text" >{{message.body}}</div></div></li>
         </ul>
@@ -40,7 +40,7 @@ export default {
                 margin:10px,0px;
                 width:100%;
                 .text{
-                    max-width:200px;
+                    max-width:400px;
                     border-radius: 10px;
                     padding:1rem;
                     display:inline-block;

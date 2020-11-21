@@ -39,6 +39,8 @@ export default {
   }),
   mounted(){
       this.fetchContacts();
+      console.log(this.contacts[0].id);
+
   },
   methods:{
       fetchContacts(){
@@ -47,6 +49,7 @@ export default {
           ).then((res)=>{
 
              this.contacts=res.data;
+             this.selectedContact(0,this.contacts[0]);
           }).catch((err)=>{console.log(err)});
       },
       selectedContact(index,contact){
