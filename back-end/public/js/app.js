@@ -1943,40 +1943,76 @@ __webpack_require__.r(__webpack_exports__);
     MessageComposer: _MessageComposer_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     MessageFeed: _MessageFeed_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  props: {
+    user: {
+      type: Object,
+      "default": null
+    }
+  },
   data: function data() {
     return {
       selected: 0,
       contacts: [],
       messages: [],
-      contact: {}
+      contact: {},
+      status: ""
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.fetchContacts();
-    console.log(this.contacts[0].id);
+    Echo["private"]("messages.".concat(this.user.id)).listen('ChatEvent', function (e) {
+      _this.handleNewMessage(e.message);
+    });
   },
   methods: {
     fetchContacts: function fetchContacts() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/fetch-contacts').then(function (res) {
-        _this.contacts = res.data;
+        _this2.contacts = res.data;
 
-        _this.selectedContact(0, _this.contacts[0]);
+        _this2.selectedContact(0, _this2.contacts[0]);
       })["catch"](function (err) {
         console.log(err);
       });
     },
     selectedContact: function selectedContact(index, contact) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.selected = index;
       this.contact = contact;
       axios.get("/messages/".concat(contact.id)).then(function (res) {
-        _this2.messages = res.data;
+        _this3.messages = res.data;
       })["catch"](function (err) {
         concole.log(err);
       });
+    },
+    sendMessage: function sendMessage(e) {
+      var _this4 = this;
+
+      this.messages.push({
+        'body': e,
+        'to': this.contact.id
+      });
+      this.status = "sending............";
+      axios.post('/message/send', {
+        body: e,
+        to: this.contact.id
+      }).then(function (res) {
+        _this4.status = "sent.......";
+        setTimeout(function () {
+          _this4.status = "";
+        }, 200);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    handleNewMessage: function handleNewMessage(message) {
+      if (this.contact && message.from == this.contact.id) {
+        this.messages.push(message);
+      }
     }
   }
 });
@@ -2038,7 +2074,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    sendMessage: function sendMessage() {
+    sendMessage: function sendMessage(e) {
+      e.preventDefault();
+
       if (this.message == "") {
         return;
       }
@@ -44621,13 +44659,18 @@ var render = function() {
         "div",
         { staticClass: "col-md-8" },
         [
-          _c("h1", [_vm._v("Select A Contact")]),
+          _c("h1", [
+            _vm._v(
+              _vm._s(_vm.contact ? _vm.contact.name : "Select A Contact") + " "
+            ),
+            _c("small", [_vm._v(_vm._s(_vm.status))])
+          ]),
           _vm._v(" "),
           _c("message-feed", {
             attrs: { contact: _vm.contact, messages: _vm.messages }
           }),
           _vm._v(" "),
-          _c("message-composer")
+          _c("message-composer", { on: { send: _vm.sendMessage } })
         ],
         1
       ),
@@ -44821,8 +44864,8 @@ var render = function() {
         {
           name: "chat-scroll",
           rawName: "v-chat-scroll",
-          value: { always: false, smooth: true },
-          expression: "{always: false, smooth: true}"
+          value: { always: false, smooth: true, scrollonremoved: true },
+          expression: "{always: false, smooth: true, scrollonremoved:true}"
         }
       ],
       staticClass: "feed"
@@ -44838,7 +44881,7 @@ var render = function() {
                   {
                     class:
                       "message" +
-                      (message.to == _vm.contact.id ? " sent" : " received")
+                      (message.to == _vm.contact.id ? " received" : " sent")
                   },
                   [
                     _c("div", { staticClass: "text" }, [

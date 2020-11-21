@@ -2,9 +2,9 @@
   <div class="">
      <div class="d-flex">
         <div class="col-md-8">
-            <h1>Select A Contact</h1>
-            <message-feed :contact="contact" :messages="messages"></message-feed>
-             <message-composer></message-composer>
+            <h1>{{contact? contact.name:"Select A Contact"}} <small>{{status}}</small></h1>
+            <message-feed :contact="contact" :messages="messages" ></message-feed>
+             <message-composer @send="sendMessage"></message-composer>
         </div>
         <div class=" col-md-4">
             <div> <h2 class="text-center">Contacts <span class="badge badge-primary rounded-pill">20</span></h2></div>
@@ -29,21 +29,29 @@ import MessageComposer from './MessageComposer.vue'
 import MessageFeed from './MessageFeed.vue'
 export default {
   components: { MessageComposer, MessageFeed },
-
+  props:{
+       user:{
+            type:Object,
+            default:null
+        },
+  },
   data:()=>({
     selected:0,
     contacts:[],
     messages:[],
     contact:{},
+    status:"",
 
   }),
   mounted(){
       this.fetchContacts();
-      console.log(this.contacts[0].id);
+      Echo.private(`messages.${this.user.id}`).listen('ChatEvent',(e)=>{
+          this.handleNewMessage(e.message);
+      })
 
   },
-  methods:{
-      fetchContacts(){
+ methods:{
+    fetchContacts(){
           axios.get(
               '/fetch-contacts'
           ).then((res)=>{
@@ -52,7 +60,7 @@ export default {
              this.selectedContact(0,this.contacts[0]);
           }).catch((err)=>{console.log(err)});
       },
-      selectedContact(index,contact){
+    selectedContact(index,contact){
           this.selected=index;
           this.contact=contact;
 
@@ -62,11 +70,33 @@ export default {
               this.messages=res.data;
 
           }).catch((err)=>{concole.log(err)})
-
-
       },
+       sendMessage(e){
+          this.messages.push({
+              'body':e,
+                'to':this.contact.id
 
+          });
+           this.status="sending............"
+          axios.post('/message/send',{
+              body:e,
+              to:this.contact.id,
+          }).then((res)=>{
+              this.status="sent.......";
+              setTimeout(()=>{this.status=""},200);
+          }).catch((err)=>{
+              console.log(err);
+          })
+      },
+      handleNewMessage(message){
+      if(this.contact && message.from ==  this.contact.id){
+          this.messages.push(message);
+      }
   },
+
+
+ },
+
 
 }
 </script>

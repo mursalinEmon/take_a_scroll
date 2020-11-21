@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section( 'content')
 <div class="conatiner">
-    <chat-component></chat-component>
+    <chat-component :user="{{ auth()->user() }}"></chat-component>
 </div>
 @endsection

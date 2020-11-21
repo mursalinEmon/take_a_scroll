@@ -1,7 +1,7 @@
 <template>
-    <div class="feed"  v-chat-scroll="{always: false, smooth: true}">
+    <div class="feed"  v-chat-scroll="{always: false, smooth: true, scrollonremoved:true}">
         <ul v-if="contact">
-            <li v-for="(message,index) in messages" :key="index"><div :class="`message${message.to ==contact.id?' sent':' received'}`"><div class="text" >{{message.body}}</div></div></li>
+            <li v-for="(message,index) in messages" :key="index"><div :class="`message${message.to ==contact.id?' received':' sent'}`"><div class="text" >{{message.body}}</div></div></li>
         </ul>
     </div>
 </template>
@@ -16,7 +16,8 @@ export default {
         contact:{
             type:Object,
             default:null
-        }
+        },
+
     },
     data:()=>(
         {

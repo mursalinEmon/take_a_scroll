@@ -10,7 +10,8 @@ export default {
         message:""
     }),
     methods:{
-        sendMessage(){
+        sendMessage(e){
+            e.preventDefault();
             if (this.message == "")
             {
                 return;
