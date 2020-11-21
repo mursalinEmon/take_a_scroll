@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <textarea name="" class="form-control" placeholder="Type Message here....." v-model="message" rows="3"></textarea>
+        <textarea @keypress.enter="sendMessage" id="messagecomposer" class="form-control" placeholder="Type Message here....." v-model="message" rows="2"></textarea>
     </div>
 </template>
 
@@ -9,9 +9,22 @@ export default {
     data:()=>({
         message:""
     }),
+    methods:{
+        sendMessage(){
+            if (this.message == "")
+            {
+                return;
+            }
+            this.$emit('send',this.message);
+            this.message="";
+        }
+    },
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.messagecomposer{
+    margin-top:1rem!important;
+}
 
 </style>
