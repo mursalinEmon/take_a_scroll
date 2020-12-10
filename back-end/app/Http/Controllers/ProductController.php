@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.createProduct');
     }
 
     /**
@@ -81,5 +81,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+    public function store_product_image(Request $request){
+        dd($request);
     }
 }

@@ -140,7 +140,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper"  class="d-flex flex-column">
 
       <!-- Main Content -->
       <div id="content">
@@ -255,8 +255,9 @@
         <!-- End of Topbar -->
 
         <!-- Main Body -->
+        <div id="app">
         @yield('content')
-
+        </div>
       </div>
       <!-- End of Main Content -->
 

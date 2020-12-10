@@ -25,7 +25,8 @@ Route::get('/chat', 'HomeController@chat')->name('chat');
 Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
 Route::get('/messages/{id}','ChatController@fetchMessages')->name('chat.messages');
 Route::post('/message/send','ChatController@storeMessage')->name('chat.storemessage');
-
+Route::get('/create-product','ProductController@create')->name('product.create');
+Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
 
 
 Route::get('/logout', function () {
