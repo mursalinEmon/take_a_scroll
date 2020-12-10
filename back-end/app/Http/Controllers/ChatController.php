@@ -15,7 +15,15 @@ class ChatController extends Controller
         return response()->json($contacts);
     }
     public function fetchMessages($id){
-        $messages=Message::where('from',$id)->orWhere('to',$id)->get();
+        $messages=Message::where(function($q) use($id){
+            $q->where('from', auth()->user()->id);
+            $q->where('to',$id);
+        })->orWhere(
+            function($q)use($id){
+                $q->where('from',$id);
+                $q->where('to',auth()->user()->id);
+            }
+        )->get();
         return response()->json($messages);
     }
     public function storeMessage(Request $request){
