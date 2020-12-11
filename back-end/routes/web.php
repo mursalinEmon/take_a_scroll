@@ -30,6 +30,7 @@ Route::post('/create-product','ProductController@store')->name('product.create')
 Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
 Route::get('/categories','CategoryController@index')->name('product.categories');
 Route::get('/sub-category/{name}','CategoryController@fetch_sub_category')->name('product.sub-categories');
+Route::get('/test/{id}','ProductController@index');
 
 
 

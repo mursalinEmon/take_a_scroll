@@ -8,14 +8,16 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $pictures=Product::findOrFail($id);
+        dd($pictures);
     }
 
     /**
@@ -52,6 +54,7 @@ class ProductController extends Controller
             'product_rating'=>0,
             'brand_name'=>$request->brand,
             'product_tags'=>"none",
+            'product_pictures'=>[],
             'vendor_id'=>auth()->user()->id
         ]);
 
@@ -102,32 +105,46 @@ class ProductController extends Controller
     {
         //
     }
+
     public function store_product_image(Request $request ){
 
         $product=Product::findOrFail($request->product_id);
-       if ($product->product_pictures == null){
-        $images=[];
+         //image upload in the file system section
+         $imageName = time().'.'.$request->file->getClientOriginalExtension();
+         $request->file->move(public_path('images/'.auth()->user()->name.'/products/'.$request->product_id), $imageName);
 
+
+         $images=array();
+
+       if ($product->product_pictures ===[]){
+
+
+        array_push($images,'images/'.auth()->user()->name.'/prodects/'.$request->product_id.$imageName);
+
+            $product->update([
+                'product_pictures' =>$images,
+            ]);
+
+
+       }
+       else if(!is_string($product->product_pictures)){
+
+
+        $images=array_merge($images,$product->product_pictures);
+
+        array_push($images,'images/'.auth()->user()->name.'/prodects/'.$request->product_id.$imageName);
+           $product->update([
+            'product_pictures' =>$images,
+         ]);
        }
        else{
-        $images=$product->product_pictures;
 
-       }
-
-        //image upload in the file system section
-        $imageName = time().'.'.$request->file->getClientOriginalExtension();
-        $request->file->move(public_path('images/'.auth()->user()->name.'/products/'.$request->product_id), $imageName);
-        $image_path='images/'.auth()->user()->name.'/products/'.$request->product_id.$imageName;
-        if (!$images === null){
-            array_push($images,$image_path);
-         $product->update([
-            'product_pictures' => $images,
-         ]);
-        }
+        array_push($images,$product->product_pictures);
+        array_push($images,'images/'.auth()->user()->name.'/prodects/'.$request->product_id.$imageName);
         $product->update([
-            'product_pictures' =>$image_path,
-        ]);
-
-        return response(['message'=>'product created successfully']);
+         'product_pictures' => $images,
+      ]);
+       }
+        return response(['pic'=>$product->product_pictures]);
     }
 }

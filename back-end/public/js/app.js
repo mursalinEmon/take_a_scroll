@@ -2106,6 +2106,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2122,7 +2185,7 @@ __webpack_require__.r(__webpack_exports__);
       p_brand: "",
       p_price: 0.0,
       p_category: "",
-      p_category_id: '',
+      p_category_id: "",
       p_sub_category: "",
       p_description: "",
       p_warrenty: "",
@@ -2132,10 +2195,11 @@ __webpack_require__.r(__webpack_exports__);
       categories: [],
       sub_categories: [],
       dropzoneOptions: {
-        url: '/product-image',
+        url: "/product-image",
         autoProcessQueue: false,
         addRemoveLinks: true,
         ulpoadMultiple: true,
+        parallelUploads: 5,
         params: {
           product_id: ""
         },
@@ -2154,11 +2218,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     upload_image: function upload_image() {
       this.$refs.myVueDropzone.processQueue();
+      this.$refs.myVueDropzone.processingmultiple();
     },
     fetch_categories: function fetch_categories() {
       var _this = this;
 
-      axios.get('/categories').then(function (res) {
+      axios.get("/categories").then(function (res) {
         _this.categories = res.data.categories;
       })["catch"](function (err) {
         console.log(err);
@@ -2180,15 +2245,15 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log();
       var formData = new FormData();
-      formData.append('category_id', this.p_category_id);
-      formData.append('sub_cat_name', this.p_sub_category);
-      formData.append('name', this.p_name);
-      formData.append('brand', this.p_brand);
-      formData.append('price', this.p_price);
-      formData.append('warrenty', this.p_warrenty);
-      formData.append('stock', this.p_stock);
-      formData.append('descrption', this.p_description);
-      axios.post('/create-product', formData).then(function (res) {
+      formData.append("category_id", this.p_category_id);
+      formData.append("sub_cat_name", this.p_sub_category);
+      formData.append("name", this.p_name);
+      formData.append("brand", this.p_brand);
+      formData.append("price", this.p_price);
+      formData.append("warrenty", this.p_warrenty);
+      formData.append("stock", this.p_stock);
+      formData.append("descrption", this.p_description);
+      axios.post("/create-product", formData).then(function (res) {
         // console.log(res.data.product.id);
         _this3.product_id = res.data.product.id;
         _this3.dropzoneOptions.params.product_id = _this3.product_id;
@@ -45306,7 +45371,9 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _vm._v(
-                  "Upload Product Images For Product : " + _vm._s(_vm.p_name)
+                  "\n                    Upload Product Images For Product : " +
+                    _vm._s(_vm.p_name) +
+                    "\n                "
                 )
               ]),
               _vm._v(" "),
@@ -45332,7 +45399,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v(" ulpoad")]
+                [_vm._v("\n                    ulpoad\n                ")]
               )
             ])
           ])
