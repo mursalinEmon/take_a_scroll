@@ -37,6 +37,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+
         $sub_category=SubCategory::where('name',$request->sub_cat_name)->get('id')->first();
         $sub_category_id=$sub_category->id;
         $product=Product::create([
@@ -49,7 +50,7 @@ class ProductController extends Controller
             'product_stock'=>$request->stock,
             'sub_category_id'=>$sub_category_id,
             'product_rating'=>0,
-            'product_pictures'=>[],
+            'brand_name'=>$request->brand,
             'product_tags'=>"none",
             'vendor_id'=>auth()->user()->id
         ]);
@@ -101,7 +102,32 @@ class ProductController extends Controller
     {
         //
     }
-    public function store_product_image(Request $request){
-        dd($request);
+    public function store_product_image(Request $request ){
+
+        $product=Product::findOrFail($request->product_id);
+       if ($product->product_pictures == null){
+        $images=[];
+
+       }
+       else{
+        $images=$product->product_pictures;
+
+       }
+
+        //image upload in the file system section
+        $imageName = time().'.'.$request->file->getClientOriginalExtension();
+        $request->file->move(public_path('images/'.auth()->user()->name.'/products/'.$request->product_id), $imageName);
+        $image_path='images/'.auth()->user()->name.'/products/'.$request->product_id.$imageName;
+        if (!$images === null){
+            array_push($images,$image_path);
+         $product->update([
+            'product_pictures' => $images,
+         ]);
+        }
+        $product->update([
+            'product_pictures' =>$image_path,
+        ]);
+
+        return response(['message'=>'product created successfully']);
     }
 }

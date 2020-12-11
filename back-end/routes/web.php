@@ -33,6 +33,7 @@ Route::get('/sub-category/{name}','CategoryController@fetch_sub_category')->name
 
 
 
+
 Route::get('/logout', function () {
     //logout user
     Auth::logout();

@@ -2,7 +2,7 @@
  <div class="container">
 
     <!-- product add info start -->
-        <form @submit.prevent="addProduct()">
+        <form v-if="!product_id" @submit.prevent="addProduct()">
                <div class="row">
                     <div class="form-group col-md-6 col-sm-12 col-lg-6">
                         <label for="productName">Product Name</label>
@@ -33,13 +33,17 @@
                 </div>
                 <!-- warrenty , in stock amount -->
                  <div class="row">
-                      <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                      <div class="form-group col-md-4 col-sm-12 col-lg-4">
                         <label for="productName">Product Warrenty (Optonal)</label>
                         <input type="text" class="form-control" id="productName" v-model="p_warrenty" placeholder="put product warrenty">
                     </div>
-                    <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                    <div class="form-group col-md-4 col-sm-12 col-lg-4">
                         <label for="productName">Product Stock Amount</label>
                         <input type="number" class="form-control" id="productPrice" v-model="p_stock" placeholder="put product stock">
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12 col-lg-4">
+                        <label for="brandname">Product Brand</label>
+                        <input type="text" class="form-control" id="brandname" v-model="p_brand" placeholder="put product stock">
                     </div>
 
                 </div>
@@ -48,14 +52,14 @@
                     <label >Product Description</label>
                     <textarea placeholder="Put Product Descrption Here.." class="form-control" v-model="p_description" rows="3"></textarea>
                 </div>
-                <button type="submt" class="btn btn-primary">Create</button>
+                <button type="submt" class="btn btn-primary">Next</button>
         </form>
     <!-- product add info end -->
     <!-- image uploader started -->
-        <div class="row justify-content-center">
+        <div v-else class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Upload Product Images</div>
+                    <div class="card-header">Upload Product Images For Product : {{p_name}}</div>
                     <div class="card-body">
 
                         <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
@@ -81,16 +85,9 @@ components: {
       data: function () {
         return {
             // we will pass the pruduct id  in the url collected from the server response after the product creation and the add image as update value
-          dropzoneOptions: {
-              url: '/product-image',
-              autoProcessQueue:false,
-               addRemoveLinks: true,
-               ulpoadMultiple:true,
-              headers: {
-                "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
-               }
-          },
+
           p_name:"",
+          p_brand:"",
           p_price:0.0,
           p_category:"",
           p_category_id:'',
@@ -99,8 +96,22 @@ components: {
           p_warrenty:"",
           p_stock:0,
           p_tags:[],
+          product_id:"",
           categories:[],
           sub_categories:[],
+
+          dropzoneOptions: {
+              url: '/product-image',
+              autoProcessQueue:false,
+               addRemoveLinks: true,
+               ulpoadMultiple:true,
+                params: {
+                    product_id:""
+                     },
+              headers: {
+                "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+               }
+          },
         }
       },
        watch: {
@@ -113,12 +124,11 @@ components: {
       methods:{
           upload_image(){
               this.$refs.myVueDropzone.processQueue();
+
           },
+
           fetch_categories(){
               axios.get('/categories').then((res)=>{
-
-
-
                   this.categories=res.data.categories;
               }).catch((err)=>{console.log(err);})
           },
@@ -130,18 +140,22 @@ components: {
                   }).catch((err)=>{console.log(err);})
           },
          addProduct(){
-             console.log("i am ht");
+             console.log();
                 let formData = new FormData();
                 formData.append('category_id',this.p_category_id);
                 formData.append('sub_cat_name',this.p_sub_category);
                 formData.append('name',this.p_name);
+                formData.append('brand',this.p_brand);
                 formData.append('price',this.p_price);
                 formData.append('warrenty',this.p_warrenty);
                 formData.append('stock',this.p_stock);
-                formData.append('description',this.p_description);
+                formData.append('descrption',this.p_description);
 
                 axios.post('/create-product',formData).then((res)=>{
-                    console.log(res);
+                    // console.log(res.data.product.id);
+                    this.product_id=res.data.product.id;
+                    this.dropzoneOptions.params.product_id=this.product_id;
+
                 }).catch((err)=>{
                     console.log(err);
                 });
