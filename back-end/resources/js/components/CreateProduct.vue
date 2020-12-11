@@ -1,17 +1,70 @@
 <template>
  <div class="container">
+
+    <!-- product add info start -->
+        <form @submit.prevent="addProduct()">
+               <div class="row">
+                    <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                        <label for="productName">Product Name</label>
+                        <input type="text" class="form-control" id="productName" v-model="p_name" placeholder="put product name">
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                        <label for="productName">Product Price</label>
+                        <input type="number" class="form-control" id="productPrice" v-model="p_price" placeholder="put product Price">
+                    </div>
+               </div>
+                <div class="row">
+                    <!-- categories -->
+                    <div class="form-group col-md-6 col-sm-12 col-lg-12">
+                        <label>Product Category</label>
+                        <select class="form-control" ref="category" v-model="p_category" >
+                        <option class="text-center" value="" selected>-----Select-----</option>
+                         <option v-for="(category, index) in categories"  :key="index" >{{ category.name  }}</option>
+                        </select>
+                    </div>
+                    <!-- sub-categories -->
+                    <div v-if="p_category" class="form-group col-md-6 col-sm-12 col-lg-12">
+                        <label>Product Sub-Category</label>
+                        <select class="form-control" ref="sub_category" v-model="p_sub_category" >
+                        <option class="text-center" value="" selected>-----Select-----</option>
+                         <option v-for="(category, index) in  sub_categories"  :key="index" >{{ category.name  }}</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- warrenty , in stock amount -->
+                 <div class="row">
+                      <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                        <label for="productName">Product Warrenty (Optonal)</label>
+                        <input type="text" class="form-control" id="productName" v-model="p_warrenty" placeholder="put product warrenty">
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                        <label for="productName">Product Stock Amount</label>
+                        <input type="number" class="form-control" id="productPrice" v-model="p_stock" placeholder="put product stock">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label >Product Description</label>
+                    <textarea placeholder="Put Product Descrption Here.." class="form-control" v-model="p_description" rows="3"></textarea>
+                </div>
+                <button type="submt" class="btn btn-primary">Create</button>
+        </form>
+    <!-- product add info end -->
+    <!-- image uploader started -->
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">Upload Product Images</div>
                     <div class="card-body">
-                        I'm an example component.
+
                         <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
                     </div>
                     <button class="btn btn-success" @click="upload_image()"> ulpoad</button>
                 </div>
             </div>
         </div>
+    <!-- image uploader end    -->
     </div>
 </template>
 
@@ -21,6 +74,9 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 export default {
 components: {
         vueDropzone: vue2Dropzone
+      },
+      created(){
+          this.fetch_categories();
       },
       data: function () {
         return {
@@ -33,12 +89,64 @@ components: {
               headers: {
                 "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
                }
-          }
+          },
+          p_name:"",
+          p_price:0.0,
+          p_category:"",
+          p_category_id:'',
+          p_sub_category:"",
+          p_description:"",
+          p_warrenty:"",
+          p_stock:0,
+          p_tags:[],
+          categories:[],
+          sub_categories:[],
         }
       },
+       watch: {
+        // whenever question changes, this function will run
+        p_category: function (newCategory, oldCategory) {
+
+            this.fetch_sub_category( newCategory);
+        }
+    },
       methods:{
           upload_image(){
               this.$refs.myVueDropzone.processQueue();
+          },
+          fetch_categories(){
+              axios.get('/categories').then((res)=>{
+
+
+
+                  this.categories=res.data.categories;
+              }).catch((err)=>{console.log(err);})
+          },
+          fetch_sub_category( p_category){
+              axios.get(`/sub-category/${p_category}`).then((res)=>{
+                  console.log(res);
+                  this.sub_categories=res.data.sub_categories;
+                  this.p_category_id=res.data.category_id;
+                  }).catch((err)=>{console.log(err);})
+          },
+         addProduct(){
+             console.log("i am ht");
+                let formData = new FormData();
+                formData.append('category_id',this.p_category_id);
+                formData.append('sub_cat_name',this.p_sub_category);
+                formData.append('name',this.p_name);
+                formData.append('price',this.p_price);
+                formData.append('warrenty',this.p_warrenty);
+                formData.append('stock',this.p_stock);
+                formData.append('description',this.p_description);
+
+                axios.post('/create-product',formData).then((res)=>{
+                    console.log(res);
+                }).catch((err)=>{
+                    console.log(err);
+                });
+
+
           }
       }
 }

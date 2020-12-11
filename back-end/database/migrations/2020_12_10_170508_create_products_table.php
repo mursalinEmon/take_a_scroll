@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->double('price');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unsignedBigInteger('sub_category_id');
@@ -26,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->mediumText('product_review')->nullable();
             $table->unsignedBigInteger('product_stock');
             $table->double('product_rating');
-            $table->json('product_pictures');
+            $table->json('product_pictures')->nullable();
             $table->string('product_tags');
             $table->unsignedBigInteger('vendor_id');
             $table->foreign('vendor_id')->references('id')->on('users')->onDelete('cascade');
