@@ -14,10 +14,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $pictures=Product::findOrFail($id);
-        
+        // $pictures=Product::findOrFail($id);
+        $products=Product::all()->where('vendor_id',auth()->user()->id);
+
+        return view('product.showProducts',compact('products'));
+
     }
 
     /**
