@@ -17,7 +17,8 @@ class ProductController extends Controller
     public function index()
     {
         // $pictures=Product::findOrFail($id);
-        $products=Product::all()->where('vendor_id',auth()->user()->id);
+        $products=Product::where('vendor_id',auth()->user()->id)->paginate(5);
+        // dd($products);
 
         return view('product.showProducts',compact('products'));
 

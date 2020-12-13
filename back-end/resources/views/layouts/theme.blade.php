@@ -255,7 +255,7 @@
         <!-- End of Topbar -->
 
         <!-- Main Body -->
-        <div id="app">
+        <div id="app" >
         @yield('content')
         </div>
       </div>
