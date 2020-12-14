@@ -2,9 +2,15 @@
 
 @section('content')
 <div class="container">
-
+    @if(Session::has('message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ Session::get('message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+      @endif
         @forelse($products as $product)
-
         <div class="card m-4">
             <div class="card-header">{{ $product->name }}</div>
                 <div class="card-body">
@@ -12,11 +18,14 @@
                     <p class="text"><i>Price</i>: {{ $product->price }} </p>
                     <p class="text-muted"> <i>Description:</i> {{ $product->product_decription }} </p>
                     <div class="d-flex flex-row-reverse ">
-                        <a href="" class="btn btn-warning "> Edit </a>
-                        <a href="" class="btn btn-danger mr-3">Delete</a>
+                        <a href="{{ route('product.edit', $product->id) }}" class="btn btn-warning "> Edit </a>
+                        <form action="{{ route('product.delete',$product->id) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                        <button class="btn btn-danger mr-2">delete</button>
+                        </form>
                     </div>
                 </div>
-
         </div>
 
     @empty

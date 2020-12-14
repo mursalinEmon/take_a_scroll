@@ -84,7 +84,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        // dd($product);
+
+        return view('product.editProduct',compact('product'));
     }
 
     /**
@@ -107,7 +109,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+
+        // $product=Product::findOrFail($id);
+        $product->delete();
+        return redirect()->back()->with(['message'=>'deeleted successfully..']);
     }
 
     public function store_product_image(Request $request ){
@@ -115,7 +120,7 @@ class ProductController extends Controller
         $product=Product::findOrFail($request->product_id);
          //image upload in the file system section
          $imageName = time().'.'.$request->file->getClientOriginalExtension();
-         $request->file->move(public_path('images/'.auth()->user()->name.'/products/'.$request->product_id), $imageName);
+         $request->file->move(public_path('images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id), $imageName);
 
 
          $images=array();
@@ -123,7 +128,7 @@ class ProductController extends Controller
        if ($product->product_pictures ===[]){
 
 
-        array_push($images,'images/'.auth()->user()->name.'/prodects/'.$request->product_id.$imageName);
+        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.'/'.$imageName);
 
             $product->update([
                 'product_pictures' =>$images,
@@ -136,7 +141,7 @@ class ProductController extends Controller
 
         $images=array_merge($images,$product->product_pictures);
 
-        array_push($images,'images/'.auth()->user()->name.'/prodects/'.$request->product_id.$imageName);
+        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.$imageName);
            $product->update([
             'product_pictures' =>$images,
          ]);
@@ -144,7 +149,7 @@ class ProductController extends Controller
        else{
 
         array_push($images,$product->product_pictures);
-        array_push($images,'images/'.auth()->user()->name.'/prodects/'.$request->product_id.$imageName);
+        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.$imageName);
         $product->update([
          'product_pictures' => $images,
       ]);
