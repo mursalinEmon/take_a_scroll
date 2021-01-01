@@ -31,6 +31,7 @@ Route::post('/create-product','ProductController@store')->name('product.create')
 Route::get('/products','ProductController@index')->name('products.view');
 Route::delete('products/{product}','ProductController@destroy')->name('product.delete');
 Route::get('/products/{product}/edit','ProductController@edit')->name('product.edit');
+Route::post('/products/{product}/update','ProductController@update')->name('product.update');
 
 Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
 // category

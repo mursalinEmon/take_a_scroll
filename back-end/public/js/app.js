@@ -2411,12 +2411,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     product: {
       type: Object,
       "default": null
-    }
+    },
+    category_name: ""
   },
   watch: {
     // whenever question changes, this function will run
@@ -2447,7 +2453,7 @@ __webpack_require__.r(__webpack_exports__);
       product_pictures: [],
       p_stock: 0,
       p_warrenty: 0,
-      p_tags: [],
+      // p_tags:[],
       p_category_id: null,
       p_sub_category_id: null,
       categories: [],
@@ -2471,6 +2477,22 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
         _this2.sub_categories = res.data.sub_categories;
         _this2.p_category_id = res.data.category_id;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    updateProduct: function updateProduct() {
+      var formData = new FormData();
+      formData.append("category_id", this.n_category ? this.n_category_id : this.p_category_id);
+      formData.append("sub_cat", this.n_sub_category);
+      formData.append("name", this.p_name);
+      formData.append("price", this.p_price);
+      formData.append("price", this.p_price);
+      formData.append("product_barnd", this.p_brand);
+      formData.append("product_description", this.p_description); // formData.append("tags",this.tags);
+
+      axios.post("/products/".concat(this.product.id, "/update"), formData).then(function (res) {
+        console.log(res);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -45649,7 +45671,7 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.addProduct()
+            return _vm.updateProduct()
           }
         }
       },
@@ -45728,7 +45750,7 @@ var render = function() {
               _c("label", [
                 _vm._v(
                   "Product Category( Current: " +
-                    _vm._s(_vm.p_category_id) +
+                    _vm._s(_vm.category_name) +
                     " )"
                 )
               ]),
@@ -45966,10 +45988,12 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
+        _c("div"),
+        _vm._v(" "),
         _c(
           "button",
           { staticClass: "btn btn-primary", attrs: { type: "submt" } },
-          [_vm._v("Next")]
+          [_vm._v("Update")]
         )
       ]
     ),

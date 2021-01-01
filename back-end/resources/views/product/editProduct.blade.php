@@ -7,7 +7,8 @@
     @empty
 
     @endforelse --}}
-    <edit-product :product="{{ $product }}"></edit-product>
+    {{-- {{ dd($category_name) }} --}}
+    <edit-product :product="{{ $product}}" category_name={{ $category_name }}></edit-product>
 
 </div>
 @endsection

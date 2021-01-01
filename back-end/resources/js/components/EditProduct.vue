@@ -1,7 +1,7 @@
 <template>
   <div class="container">
         <!-- product add info start -->
-        <form  @submit.prevent="addProduct()">
+        <form  @submit.prevent="updateProduct()">
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12 col-lg-6">
                     <label for="productName">Product Name</label>
@@ -27,7 +27,7 @@
             <div class="row">
                 <!-- categories -->
                 <div class="form-group col-md-6 col-sm-12 col-lg-12">
-                    <label>Product Category( Current: {{ p_category_id }} )</label>
+                    <label>Product Category( Current: {{ category_name }} )</label>
                     <select
                         class="form-control"
                         ref="category"
@@ -108,7 +108,12 @@
                     rows="3"
                 ></textarea>
             </div>
-            <button type="submt" class="btn btn-primary">Next</button>
+                    <!-- for image -->
+            <div>
+
+            </div>
+
+            <button type="submt" class="btn btn-primary">Update</button>
         </form>
         <!-- product add info end -->
         <!-- image uploader started -->
@@ -142,7 +147,8 @@ props:{
  product:{
      type:Object,
      default:null,
- }
+ },
+category_name:"",
 },
  watch: {
         // whenever question changes, this function will run
@@ -161,7 +167,7 @@ created(){
         this.p_tags=this.product.product_tags;
         this.p_category_id=this.product.category_id;
         this.p_sub_category_id=this.product.sub_category_id;
-          this.fetch_categories();
+        this.fetch_categories();
 
 },
 data:()=>{
@@ -175,7 +181,7 @@ data:()=>{
         product_pictures:[],
         p_stock:0,
         p_warrenty:0,
-        p_tags:[],
+        // p_tags:[],
         p_category_id:null,
         p_sub_category_id:null,
         categories:[],
@@ -206,6 +212,25 @@ methods:{
                     console.log(err);
                 });
         },
+
+    updateProduct(){
+
+            let formData = new FormData();
+            formData.append("category_id", (this.n_category?this.n_category_id:this.p_category_id));
+            formData.append("sub_cat", this.n_sub_category);
+            formData.append("name",this.p_name);
+            formData.append("price",this.p_price);
+            formData.append("price",this.p_price);
+            formData.append("product_barnd",this.p_brand);
+            formData.append("product_description",this.p_description);
+            // formData.append("tags",this.tags);
+            axios.post(`/products/${this.product.id}/update`,formData).then((res)=>{
+                console.log(res);
+            }).catch((err)=>{console.log(err);});
+
+
+
+    }
 
 },
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Category;
 use App\SubCategory;
 use Illuminate\Http\Request;
 
@@ -86,7 +87,10 @@ class ProductController extends Controller
     {
         // dd($product);
 
-        return view('product.editProduct',compact('product'));
+        $category=Category::findOrFail($product->category_id);
+        $category_name=$category->name;
+
+        return view('product.editProduct',compact('product','category_name'));
     }
 
     /**
@@ -98,7 +102,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        dd($product,$request);
     }
 
     /**
