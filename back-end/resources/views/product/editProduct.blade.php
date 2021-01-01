@@ -2,11 +2,12 @@
 @section('content')
 <div class="container">
 
-    @forelse($product->product_pictures as $picture)
+    {{-- @forelse($product->product_pictures as $picture)
        <img src="{{ asset($picture) }}" alt="product-photo">
     @empty
 
-    @endforelse
+    @endforelse --}}
+    <edit-product :product="{{ $product }}"></edit-product>
 
 </div>
 @endsection

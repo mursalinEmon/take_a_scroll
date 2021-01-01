@@ -141,7 +141,7 @@ class ProductController extends Controller
 
         $images=array_merge($images,$product->product_pictures);
 
-        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.$imageName);
+        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.'/'.$imageName);
            $product->update([
             'product_pictures' =>$images,
          ]);
@@ -149,7 +149,7 @@ class ProductController extends Controller
        else{
 
         array_push($images,$product->product_pictures);
-        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.$imageName);
+        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.'/'.$imageName);
         $product->update([
          'product_pictures' => $images,
       ]);
