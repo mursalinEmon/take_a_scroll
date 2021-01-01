@@ -109,11 +109,20 @@
                 ></textarea>
             </div>
                     <!-- for image -->
-            <div>
 
+            <div class="container">
+                <div class="image-viewer">
+                     <div v-for="(photo,index) in product_pictures" :key="index" >
+                         <div class="image-box">
+                            <img class="image" :src="path_image + photo" alt="product-photo">
+                            <div class="badge badge-primary cross" @click="crossImage(index)">X</div>
+                         </div>
+                     <!-- <img src="../../../public/images/tahzdshuvo/products/65/1609477905.jpg" alt="static"> -->
+                    </div>
+                </div>
             </div>
 
-            <button type="submt" class="btn btn-primary">Update</button>
+            <button type="submt" class="btn btn-primary mt-4">Update</button>
         </form>
         <!-- product add info end -->
         <!-- image uploader started -->
@@ -131,7 +140,7 @@
                         ></vue-dropzone>
                     </div>
                     <button class="btn btn-success" @click="upload_image()">
-                        ulpoad
+                        upload
                     </button>
                 </div>
             </div>
@@ -172,6 +181,7 @@ created(){
 },
 data:()=>{
     return{
+        path_image:"/",
         n_category:"",
         n_sub_category:"",
         p_name:"",
@@ -227,16 +237,36 @@ methods:{
             axios.post(`/products/${this.product.id}/update`,formData).then((res)=>{
                 console.log(res);
             }).catch((err)=>{console.log(err);});
-
-
-
-    }
-
+    },
+    crossImage(index){
+        this.product_pictures.splice(index,1);
+    },
 },
 
 }
 </script>
 
-<style>
+<style lang="scss">
+    .image-viewer{
+        display:flex;
+        height: 25vh;
+        width: 60vw;
+        overflow-x: scroll;
+        display: flex;
+        justify-content:space-evenly;
 
+    }
+    .image{
+        height: 19vh;
+    }
+    .image-box{
+        margin: 1rem;
+    }
+    .cross{
+        margin-bottom:auto!important ;
+        position: absolute;
+        margin-left: -1.2rem;
+        margin-top: .3rem;
+
+    }
 </style>
