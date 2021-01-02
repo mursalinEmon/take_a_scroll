@@ -114,8 +114,9 @@
                 <div class="image-viewer">
                      <div v-for="(photo,index) in product_pictures" :key="index" >
                          <div class="image-box">
-                            <img class="image" :src="path_image + photo" alt="product-photo">
                             <div class="badge badge-primary cross" @click="crossImage(index)">X</div>
+                            <img class="image" :src="path_image + photo" alt="product-photo">
+
                          </div>
                      <!-- <img src="../../../public/images/tahzdshuvo/products/65/1609477905.jpg" alt="static"> -->
                     </div>
@@ -143,6 +144,9 @@
                     </div>
                     <button class="btn btn-success" @click="upload_image()">
                         upload
+                    </button>
+                     <button class="btn btn-secondary mt-3" @click="reload()">
+                        Refresh
                     </button>
                 </div>
             </div>
@@ -225,7 +229,10 @@ methods:{
      upload_image() {
             this.$refs.myVueDropzone.processQueue();
             this.$refs.myVueDropzone.processingmultiple();
-
+            this.reload();
+        },
+        reload(){
+               location.reload();
         },
     fetch_categories() {
             axios
@@ -254,10 +261,10 @@ methods:{
 
             let formData = new FormData();
             formData.append("category_id", (this.n_category?this.n_category_id:this.p_category_id));
-            formData.append("sub_cat", sthis.n_sub_category);
+            formData.append("sub_cat", this.n_sub_category);
             formData.append("name",this.p_name);
             formData.append("price",this.p_price);
-            formData.append("price",this.p_price);
+            formData.append("product_pictures",this.product_pictures);
             formData.append("product_barnd",this.p_brand);
             formData.append("product_description",this.p_description);
             // formData.append("tags",this.tags);
@@ -277,7 +284,7 @@ methods:{
     .image-viewer{
         display:flex;
         height: 25vh;
-        width: 60vw;
+        width: 80vw;
         overflow-x: scroll;
         display: flex;
         justify-content:space-evenly;
@@ -288,12 +295,14 @@ methods:{
     }
     .image-box{
         margin: 1rem;
+
+
     }
     .cross{
-        margin-bottom:auto!important ;
-        position: absolute;
-        margin-left: -1.2rem;
-        margin-top: .3rem;
+        // position: absolute;
+        margin-right: 3rem;
+        cursor: pointer;
+        // margin-top: -5rem;
 
     }
 </style>

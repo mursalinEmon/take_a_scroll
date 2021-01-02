@@ -102,7 +102,25 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        dd($product,$request);
+        // dd($request);
+        $pictures=explode(",",$request->product_pictures);
+        $sub_category_id=null;
+        if($request->sub_cat){
+            $sub_category=SubCategory::where('name',$request->sub_cat)->get('id')->first();
+            $sub_category_id=$sub_category->id;
+        }
+
+        $product->update([
+            'price' => $request->price,
+            'product_decription'=> $request->product_description,
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'product_pictures'=>$pictures,
+            'brand_name' => $request->product_barnd,
+            'sub_category_id' => $sub_category_id ? $sub_category_id: $product->sub_category_id,
+        ]);
+
+        return response(['message' => 'Product Updated Successfully..!!!']);
     }
 
     /**

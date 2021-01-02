@@ -2431,6 +2431,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2499,6 +2503,10 @@ __webpack_require__.r(__webpack_exports__);
     upload_image: function upload_image() {
       this.$refs.myVueDropzone.processQueue();
       this.$refs.myVueDropzone.processingmultiple();
+      this.reload();
+    },
+    reload: function reload() {
+      location.reload();
     },
     fetch_categories: function fetch_categories() {
       var _this = this;
@@ -2523,10 +2531,10 @@ __webpack_require__.r(__webpack_exports__);
     updateProduct: function updateProduct() {
       var formData = new FormData();
       formData.append("category_id", this.n_category ? this.n_category_id : this.p_category_id);
-      formData.append("sub_cat", sthis.n_sub_category);
+      formData.append("sub_cat", this.n_sub_category);
       formData.append("name", this.p_name);
       formData.append("price", this.p_price);
-      formData.append("price", this.p_price);
+      formData.append("product_pictures", this.product_pictures);
       formData.append("product_barnd", this.p_brand);
       formData.append("product_description", this.p_description); // formData.append("tags",this.tags);
 
@@ -7108,7 +7116,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".image-viewer {\n  display: flex;\n  height: 25vh;\n  width: 60vw;\n  overflow-x: scroll;\n  display: flex;\n  justify-content: space-evenly;\n}\n.image {\n  height: 19vh;\n}\n.image-box {\n  margin: 1rem;\n}\n.cross {\n  margin-bottom: auto !important;\n  position: absolute;\n  margin-left: -1.2rem;\n  margin-top: 0.3rem;\n}", ""]);
+exports.push([module.i, ".image-viewer {\n  display: flex;\n  height: 25vh;\n  width: 80vw;\n  overflow-x: scroll;\n  display: flex;\n  justify-content: space-evenly;\n}\n.image {\n  height: 19vh;\n}\n.image-box {\n  margin: 1rem;\n}\n.cross {\n  margin-right: 3rem;\n  cursor: pointer;\n}", ""]);
 
 // exports
 
@@ -46086,11 +46094,6 @@ var render = function() {
             _vm._l(_vm.product_pictures, function(photo, index) {
               return _c("div", { key: index }, [
                 _c("div", { staticClass: "image-box" }, [
-                  _c("img", {
-                    staticClass: "image",
-                    attrs: { src: _vm.path_image + photo, alt: "product-photo" }
-                  }),
-                  _vm._v(" "),
                   _c(
                     "div",
                     {
@@ -46102,7 +46105,12 @@ var render = function() {
                       }
                     },
                     [_vm._v("X")]
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("img", {
+                    staticClass: "image",
+                    attrs: { src: _vm.path_image + photo, alt: "product-photo" }
+                  })
                 ])
               ])
             }),
@@ -46162,6 +46170,19 @@ var render = function() {
                 }
               },
               [_vm._v("\n                      upload\n                  ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary mt-3",
+                on: {
+                  click: function($event) {
+                    return _vm.reload()
+                  }
+                }
+              },
+              [_vm._v("\n                      Refresh\n                  ")]
             )
           ]
         )
