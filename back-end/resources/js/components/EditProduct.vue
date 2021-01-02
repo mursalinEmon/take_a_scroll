@@ -122,17 +122,19 @@
                 </div>
             </div>
 
-            <button type="submt" class="btn btn-primary mt-4">Update</button>
+            <button type="submt" class="btn btn-primary mt-4">Update Info</button>
         </form>
         <!-- product add info end -->
         <!-- image uploader started -->
+        <h1 class="text text-center">Upload New Image For Product</h1>
         <div  class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card" style="margin-bottom:20vh;">
                     <div class="card-header">
                         Upload Product Images For Product : {{ p_name }}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="margin-top:20vh;">
+
                         <vue-dropzone
                             ref="myVueDropzone"
                             id="dropzone"
@@ -150,8 +152,12 @@
 </template>
 
 <script>
+import vue2Dropzone from "vue2-dropzone";
+import "vue2-dropzone/dist/vue2Dropzone.min.css";
 export default {
-
+ components: {
+        vueDropzone: vue2Dropzone
+    },
 props:{
  product:{
      type:Object,
@@ -177,6 +183,7 @@ created(){
         this.p_category_id=this.product.category_id;
         this.p_sub_category_id=this.product.sub_category_id;
         this.fetch_categories();
+        this.dropzoneOptions.params.product_id=this.product.id;
 
 },
 data:()=>{
@@ -196,10 +203,30 @@ data:()=>{
         p_sub_category_id:null,
         categories:[],
         sub_categories:[],
+        dropzoneOptions: {
+                url: "/product-image",
+                autoProcessQueue: false,
+                addRemoveLinks: true,
+                ulpoadMultiple: true,
+                parallelUploads: 5,
+                params: {
+                    product_id: ""
+                },
+                headers: {
+                    "X-CSRF-TOKEN": document.head.querySelector(
+                        "[name=csrf-token]"
+                    ).content
+                }
+            }
 
     }
 },
 methods:{
+     upload_image() {
+            this.$refs.myVueDropzone.processQueue();
+            this.$refs.myVueDropzone.processingmultiple();
+
+        },
     fetch_categories() {
             axios
                 .get("/categories")
@@ -227,7 +254,7 @@ methods:{
 
             let formData = new FormData();
             formData.append("category_id", (this.n_category?this.n_category_id:this.p_category_id));
-            formData.append("sub_cat", this.n_sub_category);
+            formData.append("sub_cat", sthis.n_sub_category);
             formData.append("name",this.p_name);
             formData.append("price",this.p_price);
             formData.append("price",this.p_price);

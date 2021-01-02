@@ -2274,6 +2274,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-dropzone */ "./node_modules/vue2-dropzone/dist/vue2Dropzone.js");
+/* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-dropzone/dist/vue2Dropzone.min.css */ "./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css");
+/* harmony import */ var vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2425,7 +2429,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   props: {
     product: {
       type: Object,
@@ -2450,6 +2461,7 @@ __webpack_require__.r(__webpack_exports__);
     this.p_category_id = this.product.category_id;
     this.p_sub_category_id = this.product.sub_category_id;
     this.fetch_categories();
+    this.dropzoneOptions.params.product_id = this.product.id;
   },
   data: function data() {
     return {
@@ -2467,10 +2479,27 @@ __webpack_require__.r(__webpack_exports__);
       p_category_id: null,
       p_sub_category_id: null,
       categories: [],
-      sub_categories: []
+      sub_categories: [],
+      dropzoneOptions: {
+        url: "/product-image",
+        autoProcessQueue: false,
+        addRemoveLinks: true,
+        ulpoadMultiple: true,
+        parallelUploads: 5,
+        params: {
+          product_id: ""
+        },
+        headers: {
+          "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+        }
+      }
     };
   },
   methods: {
+    upload_image: function upload_image() {
+      this.$refs.myVueDropzone.processQueue();
+      this.$refs.myVueDropzone.processingmultiple();
+    },
     fetch_categories: function fetch_categories() {
       var _this = this;
 
@@ -2494,7 +2523,7 @@ __webpack_require__.r(__webpack_exports__);
     updateProduct: function updateProduct() {
       var formData = new FormData();
       formData.append("category_id", this.n_category ? this.n_category_id : this.p_category_id);
-      formData.append("sub_cat", this.n_sub_category);
+      formData.append("sub_cat", sthis.n_sub_category);
       formData.append("name", this.p_name);
       formData.append("price", this.p_price);
       formData.append("price", this.p_price);
@@ -45697,7 +45726,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("\n                    ulpoad\n                ")]
+                [_vm._v("\n                    upload\n                ")]
               )
             ])
           ])
@@ -46084,47 +46113,58 @@ var render = function() {
         _c(
           "button",
           { staticClass: "btn btn-primary mt-4", attrs: { type: "submt" } },
-          [_vm._v("Update")]
+          [_vm._v("Update Info")]
         )
       ]
     ),
     _vm._v(" "),
+    _c("h1", { staticClass: "text text-center" }, [
+      _vm._v("Upload New Image For Product")
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v(
-              "\n                      Upload Product Images For Product : " +
-                _vm._s(_vm.p_name) +
-                "\n                  "
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "card-body" },
-            [
-              _c("vue-dropzone", {
-                ref: "myVueDropzone",
-                attrs: { id: "dropzone", options: _vm.dropzoneOptions }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success",
-              on: {
-                click: function($event) {
-                  return _vm.upload_image()
+        _c(
+          "div",
+          { staticClass: "card", staticStyle: { "margin-bottom": "20vh" } },
+          [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v(
+                "\n                      Upload Product Images For Product : " +
+                  _vm._s(_vm.p_name) +
+                  "\n                  "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "card-body",
+                staticStyle: { "margin-top": "20vh" }
+              },
+              [
+                _c("vue-dropzone", {
+                  ref: "myVueDropzone",
+                  attrs: { id: "dropzone", options: _vm.dropzoneOptions }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: {
+                  click: function($event) {
+                    return _vm.upload_image()
+                  }
                 }
-              }
-            },
-            [_vm._v("\n                      upload\n                  ")]
-          )
-        ])
+              },
+              [_vm._v("\n                      upload\n                  ")]
+            )
+          ]
+        )
       ])
     ])
   ])

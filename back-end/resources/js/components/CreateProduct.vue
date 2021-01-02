@@ -126,7 +126,7 @@
                         ></vue-dropzone>
                     </div>
                     <button class="btn btn-success" @click="upload_image()">
-                        ulpoad
+                        upload
                     </button>
                 </div>
             </div>
