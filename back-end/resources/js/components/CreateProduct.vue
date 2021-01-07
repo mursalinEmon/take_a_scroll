@@ -130,7 +130,10 @@
                     </button>
                 </div>
             </div>
+
         </div>
+            <button class="btn btn-primary float-right moving-button" @click="go_Back()">Go Back ></button>
+
         <!-- image uploader end    -->
     </div>
 </template>
@@ -214,6 +217,11 @@ export default {
                     console.log(err);
                 });
         },
+        go_Back(){
+        // console.log("im am hit");
+         location.replace("/dashboard");
+
+    },
         addProduct() {
 
             let formData = new FormData();
@@ -237,8 +245,18 @@ export default {
                     console.log(err);
                 });
         }
-    }
+    },
+
+
 };
 </script>
 
-<style></style>
+<style>
+.moving-button{
+
+
+
+    transform: translateY(20vh);
+}
+
+</style>

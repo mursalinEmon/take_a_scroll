@@ -258,7 +258,6 @@ methods:{
         },
 
     updateProduct(){
-
             let formData = new FormData();
             formData.append("category_id", (this.n_category?this.n_category_id:this.p_category_id));
             formData.append("sub_cat", this.n_sub_category);
@@ -295,7 +294,6 @@ methods:{
     }
     .image-box{
         margin: 1rem;
-
 
     }
     .cross{
