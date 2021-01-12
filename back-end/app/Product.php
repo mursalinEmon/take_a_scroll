@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Store;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -10,4 +11,7 @@ class Product extends Model
     protected $casts = [
         'product_pictures' => 'array',
     ];
+    public function store(){
+        return $this->belongsTo(Store::class);
+    }
 }

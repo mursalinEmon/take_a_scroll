@@ -4,7 +4,7 @@
     <div class="container">
 
         <div class="align-items-right mb-4">
-            <a href="{{ route('store.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Create A Store</a>
+            <a href="{{ route('product.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Create A Product</a>
           </div>
 
           <!-- Content Row -->
@@ -16,8 +16,8 @@
                 <div class="card-body" >
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Your Stores</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Your Products</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $product_count }}</div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>

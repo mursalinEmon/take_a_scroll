@@ -24,6 +24,10 @@ Auth::routes(['verify'=>true]);
 
 Route::middleware(['verified','vendor'])->group( function () {
     Route::get('/vendor-dashboard', 'HomeController@index')->name('dashboard');
+
+    //sore-routes
+    Route::get('/stores/create','StoreController@create')->name('store.create');
+
     // pruducts
     Route::get('/create-product','ProductController@create')->name('product.create');
     Route::post('/create-product','ProductController@store')->name('product.create');
@@ -31,7 +35,6 @@ Route::middleware(['verified','vendor'])->group( function () {
     Route::delete('products/{product}','ProductController@destroy')->name('product.delete');
     Route::get('/products/{product}/edit','ProductController@edit')->name('product.edit');
     Route::post('/products/{product}/update','ProductController@update')->name('product.update');
-
     Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
 });
 
