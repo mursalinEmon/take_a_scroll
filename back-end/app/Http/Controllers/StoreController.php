@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
 {
@@ -84,7 +85,8 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        dd($store);
+
+        return view('vendor.store.edit_store',compact('store'));
     }
 
     /**
@@ -96,7 +98,34 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        //
+
+
+        $banner=$store->banner;
+        $image="";
+        if($request->file('file')){
+
+            $image = $request->file;
+            $imagePath = $request->file('file');
+            $imageName= time().'.'.$imagePath->getClientOriginalExtension();
+            $image->move(public_path('image/'.auth()->user()->name.'/'.$store->name.'/'),$imageName);
+            Storage::delete(public_path($banner));
+            $banner='image/'.auth()->user()->name.'/'.$store->name.'/'.$imageName;
+        }
+        $store_name=$request->store_name ?$request->store_name:$store->store_name;
+        $physical_Address=$request->physical_Address?$request->physical_Address:$store->physical_Address;
+        $type=$request->type?$request->type:$store->type;
+        $vendor_NID=$request->vendor_NID?$request->vendor_NID:$store->vendor_NID;
+        $description=$request->description?$request->description:$store->description;
+        $store->update([
+            'name'=>  $store_name,
+            'vendor_id'=>auth()->user()->id,
+            'physical_Address'=>$physical_Address,
+            'type'=>$type,
+            'vendor_NID'=>$vendor_NID,
+            'description'=>  $description,
+            'banner'=>$banner,
+        ]);
+        return response(['message'=>'Info Updated Successfully']);
     }
 
     /**

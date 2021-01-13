@@ -30,6 +30,7 @@ Route::middleware(['verified','vendor'])->group( function () {
     Route::get('/stores','StoreController@index')->name('stores.index');
     Route::post('/stores','StoreController@store')->name('stores.store');
     Route::get('/stores/{store}','StoreController@show')->name('stores.show');
+    Route::post('/stores/{store}','StoreController@update')->name('stores.update');
     Route::get('/stores/{store}/edit','StoreController@edit')->name('stores.edit');
 
     Route::delete('/stores/{store}','StoreController@destroy')->name('stores.destroy');
