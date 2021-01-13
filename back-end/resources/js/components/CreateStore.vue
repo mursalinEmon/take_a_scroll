@@ -57,6 +57,7 @@
                     </div>
 
                 </div>
+                <button v-if="next" class="btn btn-success float-right mr-4 mt-4" @click="goBack()"> Go Back -></button>
             </div>
         </div>
     </div>
@@ -73,13 +74,14 @@ export default {
     data:()=>({
         file:"",
         store_name:"",
-        id: "",
+        next:false,
         type:"",
         physical_Address:"",
         vendor_NID:"",
         description:"",
         toggleButton: false,
         previewImage: null,
+        store:null,
     }),
 
     created(){
@@ -102,19 +104,15 @@ export default {
             )
         },
         submitFile(){
-
-
-            this.sub_category_id=parseInt( this.sub_category.split('.',1)[0]);
             let formData = new FormData();
-            formData.append('file', this.file);
-            formData.append('title', this.title);
-            formData.append('tags', JSON.stringify(this.tags));
-            formData.append('level', this.level);
-            formData.append('category_id',this.category_id);
-            formData.append('sub_category_id',this.sub_category_id);
-            // formData.append('level', this.level);
 
-            axios.post( '/course-create',
+            formData.append('file', this.file);
+            formData.append('store_name', this.store_name);
+            formData.append('type', this.type);
+            formData.append('physical_Address',this.physical_Address);
+            formData.append('vendor_NID',this.vendor_NID);
+            formData.append('description',this.description);
+            axios.post( '/stores',
                 formData,
                 {
                 headers: {
@@ -123,23 +121,23 @@ export default {
               }
             ).then((res)=>{
 
-
-              this.level="";
-              this.tags=[];
+                console.log(res);
+              this.store=res.data.store;
               this.file="";
+              this.store_name="";
+              this.type="";
+              this.physical_Address="";
+              this.vendor_NID="";
+              this.description="";
               this.previewImage = null;
               this.$alert(
               res.data.message,
               "",
               "success"
             );
-
-            this.course_id=res.data.course_id;
-            if (res.data.course_id){
-                   this.next='true';
-            }
-
+            this.next=true;
             }).catch();
+
 
         },
       removeImage(){
@@ -149,6 +147,9 @@ export default {
 
 
       },
+      goBack(){
+          location.replace('/vendor-dashboard');
+      }
     },
 }
 </script>

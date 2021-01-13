@@ -26,7 +26,9 @@ Route::middleware(['verified','vendor'])->group( function () {
     Route::get('/vendor-dashboard', 'HomeController@index')->name('dashboard');
 
     //sore-routes
-    Route::get('/stores/create','StoreController@create')->name('store.create');
+    Route::get('/stores/create','StoreController@create')->name('stores.create');
+    Route::get('/stores','StoreController@index')->name('stores.index');
+    Route::post('/stores','StoreController@store')->name('stores.store');
 
     // pruducts
     Route::get('/create-product','ProductController@create')->name('product.create');

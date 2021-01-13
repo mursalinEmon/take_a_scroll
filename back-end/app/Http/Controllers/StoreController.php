@@ -14,7 +14,9 @@ class StoreController extends Controller
      */
     public function index()
     {
-        //
+        $stores=Store::all()->where('vendor_id',auth()->user()->id);
+
+        return view('vendor.store.store_list',compact('stores'));
     }
 
     /**
@@ -33,9 +35,34 @@ class StoreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    // $table->string('banner');
+
     public function store(Request $request)
     {
-        //
+        $image="";
+        $store=Store::create([
+            'name'=>$request->store_name,
+            'vendor_id'=>auth()->user()->id,
+            'physical_Address'=>$request->physical_Address,
+            'type'=>$request->type,
+            'vendor_NID'=>$request->vendor_NID,
+            'description'=>$request->description,
+            'banner'=>$image,
+        ]);
+
+        if($request->file('file')){
+            $image = $request->file;
+            $imagePath = $request->file('file');
+            $imageName= time().'.'.$imagePath->getClientOriginalExtension();
+            $image->move(public_path('image/'.auth()->user()->name.'/'.$store->name.'/'),$imageName);
+        }
+
+
+        $store->update([
+            'banner'=>'image/'.auth()->user()->name.'/'.$store->name.'/'.$imageName,
+        ]);
+        return response(['message'=>'Store Created Successfully..!!!','store'=>$store]);
     }
 
     /**

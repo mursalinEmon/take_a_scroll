@@ -2347,19 +2347,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   data: function data() {
     return {
       file: "",
       store_name: "",
-      id: "",
+      next: false,
       type: "",
       physical_Address: "",
       vendor_NID: "",
       description: "",
       toggleButton: false,
-      previewImage: null
+      previewImage: null,
+      store: null
     };
   },
   created: function created() {},
@@ -2380,38 +2382,40 @@ __webpack_require__.r(__webpack_exports__);
     submitFile: function submitFile() {
       var _this2 = this;
 
-      this.sub_category_id = parseInt(this.sub_category.split('.', 1)[0]);
       var formData = new FormData();
       formData.append('file', this.file);
-      formData.append('title', this.title);
-      formData.append('tags', JSON.stringify(this.tags));
-      formData.append('level', this.level);
-      formData.append('category_id', this.category_id);
-      formData.append('sub_category_id', this.sub_category_id); // formData.append('level', this.level);
-
-      axios.post('/course-create', formData, {
+      formData.append('store_name', this.store_name);
+      formData.append('type', this.type);
+      formData.append('physical_Address', this.physical_Address);
+      formData.append('vendor_NID', this.vendor_NID);
+      formData.append('description', this.description);
+      axios.post('/stores', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (res) {
-        _this2.level = "";
-        _this2.tags = [];
+        console.log(res);
+        _this2.store = res.data.store;
         _this2.file = "";
+        _this2.store_name = "";
+        _this2.type = "";
+        _this2.physical_Address = "";
+        _this2.vendor_NID = "";
+        _this2.description = "";
         _this2.previewImage = null;
 
         _this2.$alert(res.data.message, "", "success");
 
-        _this2.course_id = res.data.course_id;
-
-        if (res.data.course_id) {
-          _this2.next = 'true';
-        }
+        _this2.next = true;
       })["catch"]();
     },
     removeImage: function removeImage() {
       this.previewImage = null;
       this.file = null;
       this.$refs.file.value = "";
+    },
+    goBack: function goBack() {
+      location.replace('/vendor-dashboard');
     }
   }
 });
@@ -49183,7 +49187,22 @@ var render = function() {
                 ]
               )
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _vm.next
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-success float-right mr-4 mt-4",
+                  on: {
+                    click: function($event) {
+                      return _vm.goBack()
+                    }
+                  }
+                },
+                [_vm._v(" Go Back ->")]
+              )
+            : _vm._e()
         ])
       ])
     ])
