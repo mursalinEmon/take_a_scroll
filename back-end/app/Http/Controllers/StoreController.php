@@ -74,7 +74,8 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        dd($store);
+        // dd($store);
+        return view('vendor.store.store_dashboard',compact('store'));
     }
 
     /**

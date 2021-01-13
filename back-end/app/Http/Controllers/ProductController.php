@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Store;
 use App\Product;
 use App\Category;
 use App\SubCategory;
@@ -15,11 +16,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Store $store)
     {
+
         // $pictures=Product::findOrFail($id);
+
         if (auth()->user()){
-            $products=Product::where('vendor_id',auth()->user()->id)->paginate(5);
+            $products=Product::where('store_id',$store->id)->paginate(5);
             // dd($products);
 
             return view('product.showProducts',compact('products'));
@@ -35,9 +38,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Store $store)
     {
-        return view('product.createProduct');
+        // dd($store);
+
+        return view('product.createProduct',compact('store'));
     }
 
     /**
@@ -46,7 +51,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Store $store, Request $request)
     {
 
 
@@ -65,7 +70,7 @@ class ProductController extends Controller
             'brand_name'=>$request->brand,
             'product_tags'=>"none",
             'product_pictures'=>[],
-            'vendor_id'=>auth()->user()->id
+            'store_id'=>$store->id,
         ]);
 
         return response(['product'=>$product]);
@@ -143,11 +148,11 @@ class ProductController extends Controller
     }
 
     public function store_product_image(Request $request ){
-
+        // dd($request);
         $product=Product::findOrFail($request->product_id);
          //image upload in the file system section
          $imageName = time().'.'.$request->file->getClientOriginalExtension();
-         $request->file->move(public_path('images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id), $imageName);
+         $request->file->move(public_path('images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id), $imageName);
 
 
          $images=array();
@@ -155,7 +160,7 @@ class ProductController extends Controller
        if ($product->product_pictures ===[]){
 
 
-        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.'/'.$imageName);
+        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
 
             $product->update([
                 'product_pictures' =>$images,
@@ -168,7 +173,7 @@ class ProductController extends Controller
 
         $images=array_merge($images,$product->product_pictures);
 
-        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.'/'.$imageName);
+        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
            $product->update([
             'product_pictures' =>$images,
          ]);
@@ -176,7 +181,7 @@ class ProductController extends Controller
        else{
 
         array_push($images,$product->product_pictures);
-        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/products/'.$request->product_id.'/'.$imageName);
+        array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
         $product->update([
          'product_pictures' => $images,
       ]);

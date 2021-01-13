@@ -142,16 +142,24 @@
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 export default {
+
     components: {
         vueDropzone: vue2Dropzone
     },
+    props:{
+        store:{
+            type:Object,
+            default:null
+        }
+    },
     created() {
         this.fetch_categories();
+        this.store_id=this.store.id;
     },
     data: function() {
         return {
             // we will pass the pruduct id  in the url collected from the server response after the product creation and the add image as update value
-
+            store_id:'',
             p_name: "",
             p_brand: "",
             p_price: 0.0,
@@ -173,7 +181,8 @@ export default {
                 ulpoadMultiple: true,
                 parallelUploads: 5,
                 params: {
-                    product_id: ""
+                    product_id: "",
+                    store_id:"",
                 },
                 headers: {
                     "X-CSRF-TOKEN": document.head.querySelector(
@@ -193,6 +202,7 @@ export default {
         upload_image() {
             this.$refs.myVueDropzone.processQueue();
             this.$refs.myVueDropzone.processingmultiple();
+
         },
 
         fetch_categories() {
@@ -219,7 +229,7 @@ export default {
         },
         go_Back(){
         // console.log("im am hit");
-         location.replace("/dashboard");
+         location.replace("/vendor-dashboard");
 
     },
         addProduct() {
@@ -235,11 +245,12 @@ export default {
             formData.append("descrption", this.p_description);
 
             axios
-                .post("/create-product", formData)
+                .post(`/stores/${this.store_id}/products`, formData)
                 .then(res => {
                     // console.log(res.data.product.id);
                     this.product_id = res.data.product.id;
                     this.dropzoneOptions.params.product_id = this.product_id;
+                    this.dropzoneOptions.params.store_id=this.store_id;
                 })
                 .catch(err => {
                     console.log(err);

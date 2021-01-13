@@ -2178,12 +2178,20 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default.a
   },
+  props: {
+    store: {
+      type: Object,
+      "default": null
+    }
+  },
   created: function created() {
     this.fetch_categories();
+    this.store_id = this.store.id;
   },
   data: function data() {
     return {
       // we will pass the pruduct id  in the url collected from the server response after the product creation and the add image as update value
+      store_id: '',
       p_name: "",
       p_brand: "",
       p_price: 0.0,
@@ -2204,7 +2212,8 @@ __webpack_require__.r(__webpack_exports__);
         ulpoadMultiple: true,
         parallelUploads: 5,
         params: {
-          product_id: ""
+          product_id: "",
+          store_id: ""
         },
         headers: {
           "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
@@ -2245,7 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     go_Back: function go_Back() {
       // console.log("im am hit");
-      location.replace("/dashboard");
+      location.replace("/vendor-dashboard");
     },
     addProduct: function addProduct() {
       var _this3 = this;
@@ -2259,10 +2268,11 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("warrenty", this.p_warrenty);
       formData.append("stock", this.p_stock);
       formData.append("descrption", this.p_description);
-      axios.post("/create-product", formData).then(function (res) {
+      axios.post("/stores/".concat(this.store_id, "/products"), formData).then(function (res) {
         // console.log(res.data.product.id);
         _this3.product_id = res.data.product.id;
         _this3.dropzoneOptions.params.product_id = _this3.product_id;
+        _this3.dropzoneOptions.params.store_id = _this3.store_id;
       })["catch"](function (err) {
         console.log(err);
       });
