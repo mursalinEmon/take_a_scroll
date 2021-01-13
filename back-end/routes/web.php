@@ -26,14 +26,14 @@ Route::middleware(['verified','vendor'])->group( function () {
     Route::get('/vendor-dashboard', 'HomeController@index')->name('dashboard');
 
     //sore-routes
-    Route::get('/stores/create','StoreController@create')->name('stores.create');
-    Route::get('/stores','StoreController@index')->name('stores.index');
-    Route::post('/stores','StoreController@store')->name('stores.store');
-    Route::get('/stores/{store}','StoreController@show')->name('stores.show');
+    Route::resource('stores', StoreController::class)->except('stores.update');
+    // Route::get('/stores/create','StoreController@create')->name('stores.create');
+    // Route::get('/stores','StoreController@index')->name('stores.index');
+    // Route::post('/stores','StoreController@store')->name('stores.store');
+    // Route::get('/stores/{store}','StoreController@show')->name('stores.show');
     Route::post('/stores/{store}','StoreController@update')->name('stores.update');
-    Route::get('/stores/{store}/edit','StoreController@edit')->name('stores.edit');
-
-    Route::delete('/stores/{store}','StoreController@destroy')->name('stores.destroy');
+    // Route::get('/stores/{store}/edit','StoreController@edit')->name('stores.edit');
+    // Route::delete('/stores/{store}','StoreController@destroy')->name('stores.destroy');
 
     // pruducts
     Route::get('/create-product','ProductController@create')->name('product.create');
