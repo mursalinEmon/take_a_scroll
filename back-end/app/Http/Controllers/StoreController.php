@@ -73,7 +73,7 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        //
+        dd($store);
     }
 
     /**
@@ -84,7 +84,7 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        //
+        dd($store);
     }
 
     /**
@@ -107,6 +107,7 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
-        //
+        $store->delete();
+        return back()->with(['message'=>'Store Deleted Sucesfully..!']);
     }
 }
