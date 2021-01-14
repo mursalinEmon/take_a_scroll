@@ -21,20 +21,36 @@ Route::get('/', function () {
 
 
 Auth::routes(['verify'=>true]);
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+Route::middleware(['verified','vendor'])->group( function () {
+    Route::get('/vendor-dashboard', 'HomeController@index')->name('dashboard');
+
+    //sore-routes
+    Route::resource('stores', StoreController::class)->except('stores.update');
+    // Route::get('/stores/create','StoreController@create')->name('stores.create');
+    // Route::get('/stores','StoreController@index')->name('stores.index');
+    // Route::post('/stores','StoreController@store')->name('stores.store');
+    // Route::get('/stores/{store}','StoreController@show')->name('stores.show');
+    Route::post('/stores/{store}','StoreController@update')->name('stores.update');
+    // Route::get('/stores/{store}/edit','StoreController@edit')->name('stores.edit');
+    // Route::delete('/stores/{store}','StoreController@destroy')->name('stores.destroy');
+
+    // pruducts
+    Route::get('stores/{store}/product/create','ProductController@create')->name('product.create');
+    Route::post('/stores/{store}/products','ProductController@store')->name('product.store');
+    Route::get('stores/{store}/products','ProductController@index')->name('products.view');
+    Route::delete('products/{product}','ProductController@destroy')->name('product.delete');
+    Route::get('/products/{product}/edit','ProductController@edit')->name('product.edit');
+    Route::post('/products/{product}/update','ProductController@update')->name('product.update');
+    Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
+});
+
+
 Route::get('/chat', 'HomeController@chat')->name('chat');
 Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
 Route::get('/messages/{id}','ChatController@fetchMessages')->name('chat.messages');
 Route::post('/message/send','ChatController@storeMessage')->name('chat.storemessage');
-// pruducts
-Route::get('/create-product','ProductController@create')->name('product.create');
-Route::post('/create-product','ProductController@store')->name('product.create');
-Route::get('/products','ProductController@index')->name('products.view');
-Route::delete('products/{product}','ProductController@destroy')->name('product.delete');
-Route::get('/products/{product}/edit','ProductController@edit')->name('product.edit');
-Route::post('/products/{product}/update','ProductController@update')->name('product.update');
 
-Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
 // category
 Route::get('/categories','CategoryController@index')->name('product.categories');
 Route::get('/sub-category/{name}','CategoryController@fetch_sub_category')->name('product.sub-categories');
