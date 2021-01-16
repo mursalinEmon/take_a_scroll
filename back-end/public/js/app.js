@@ -7561,7 +7561,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.moving-button{\n\n\n\n    transform: translateY(20vh);\n}\n\n", ""]);
+exports.push([module.i, "\n.moving-button{\r\n\r\n\r\n\r\n    transform: translateY(20vh);\n}\r\n\r\n", ""]);
 
 // exports
 
