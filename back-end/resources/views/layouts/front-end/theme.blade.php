@@ -27,6 +27,7 @@
 
     <!-- Modernizer JS -->
     <script src={{ asset("js/vendor/modernizr-2.8.3.min.js") }}></script>
+
 </head>
 
 <body>
@@ -165,7 +166,7 @@
                         <!-- Wishlist -->
                         <a href="wishlist.html" class="header-wishlist"><i class="ti-heart"></i> <span class="number">3</span></a>
                         <!-- Cart -->
-                        <a href="cart.html" class="header-cart"><i class="ti-shopping-cart"></i> <span class="number">3</span></a>
+                        <a href="{{ route('cart.view') }}" class=""><i class="ti-shopping-cart"></i> <span class="number">3</span></a>
 
                     </div><!-- Header Shop Links End -->
                 </div>

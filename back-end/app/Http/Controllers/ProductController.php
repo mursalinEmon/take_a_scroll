@@ -30,7 +30,6 @@ class ProductController extends Controller
        else{
            return back();
        }
-
     }
 
     /**
