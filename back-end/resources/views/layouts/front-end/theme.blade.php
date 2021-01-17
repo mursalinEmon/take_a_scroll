@@ -73,7 +73,11 @@
                     <!-- Header Account Links Start -->
                     <div class="header-account-links">
                         <a href="register.html"><i class="icofont icofont-user-alt-7"></i> <span>my account</span></a>
-                        <a href="login.html"><i class="icofont icofont-login d-none"></i> <span>Login</span></a>
+                        @if(!auth()->user())
+                        <a href="{{ route('login')}}"><i class="icofont icofont-login d-none"></i> <span>Login</span></a>
+                        @else
+                        <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                        @endif
                     </div><!-- Header Account Links End -->
                 </div>
 
