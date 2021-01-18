@@ -58,7 +58,7 @@ Route::get('/sub-category/{name}','CategoryController@fetch_sub_category')->name
 Route::get('/test/{id}','ProductController@index');
 
 //cart
-Route::get('/cart','CartController@index')->name('cart.view');
+Route::get('/cart','CartController@index')->name('cart.index');
 
 
 
