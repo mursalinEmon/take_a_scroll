@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>E&E - Electronics eCommerce Bootstrap4 HTML Template</title>
+    <title>Take a Scroll</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -94,8 +94,9 @@
                     <!-- Logo Start -->
                     <div class="header-logo">
                         <a href="index.html">
-                            <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
-                            <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                            <h1>Take A Scroll</h1>
+                            {{-- <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                            <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template"> --}}
                         </a>
                     </div><!-- Logo End -->
                 </div>
@@ -120,33 +121,22 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children"><a href="#">PAGES</a>
+                                <li class="menu-item-has-children"><a href="#">Categories</a>
                                     <ul class="mega-menu three-column">
-                                        <li><a href="#">Column One</a>
-                                            <ul>
-                                                <li><a href="about-us.html">About us</a></li>
-                                                <li><a href="best-deals.html">Best Deals</a></li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Column Two</a>
-                                            <ul>
-                                                <li><a href="compare.html">Compare</a></li>
-                                                <li><a href="faq.html">Faq</a></li>
-                                                <li><a href="feature.html">Feature</a></li>
-                                                <li><a href="login.html">Login</a></li>
-                                                <li><a href="register.html">Register</a></li>
-                                                <li><a href="store.html">Store</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Column Three</a>
-                                            <ul>
-                                                <li><a href="terms-conditions.html">Terms & Conditions</a></li>
-                                                <li><a href="track-order.html">Track Order</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                            </ul>
-                                        </li>
+                                        @forelse ($categories as $cat)
+                                            <li><a href="#">{{ $cat->name }}</a>
+                                                <ul>
+                                                    @forelse ($cat->subCategories as $sub_cat)
+                                                        <li><a href="about-us.html">{{ $sub_cat->name }}</a></li>
+                                                    @empty
+                                                        <h1 class="text text-danger"> NO Data Found...!!</h1>
+                                                    @endforelse
+                                                </ul>
+                                            </li>
+                                        @empty
+                                            <h1 class="text text-danger"> NO Data Found...!!</h1>
+                                        @endforelse
+
                                     </ul>
                                 </li>
                                 <li class="menu-item-has-children"><a href="blog-1-column-left-sidebar.html">BLOG</a>
@@ -234,10 +224,10 @@
             <div class="row">
                 <div class="col mb-90">
                     <div class="footer-widget text-center">
-                        <div class="footer-logo">
+                        {{-- <div class="footer-logo">
                             <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
                             <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
-                        </div>
+                        </div> --}}
                         <p>Electronics product actual teachings of  he great explorer of the truth, the malder of human happiness. No one rejects</p>
                     </div>
                 </div>

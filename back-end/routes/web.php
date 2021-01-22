@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,4 +69,13 @@ Route::get('/logout', function () {
     Auth::logout();
     // redirect to homepage
     return redirect('/');
+});
+
+
+
+View::composer(['*'], function ($view) {
+
+    $categories=Category::all();
+
+    $view->with('categories',$categories);
 });

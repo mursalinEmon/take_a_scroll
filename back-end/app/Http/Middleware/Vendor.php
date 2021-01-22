@@ -13,8 +13,10 @@ class Vendor
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request,  Closure $next)
     {
+
+
         // dd(auth()->user()->type == "vendor");
         if (auth()->user()->type == "vendor"){
             return $next($request);
