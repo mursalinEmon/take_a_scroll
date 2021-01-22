@@ -62,6 +62,10 @@ Route::get('/test/{id}','ProductController@index');
 Route::get('/cart','CartController@index')->name('cart.index');
 
 
+//sub actegory or products
+
+
+Route::get('categories/{category}/{sub_cat_name}/{sub_cat}','SubCategoryController@index')->name('category.products.index');
 
 
 Route::get('/logout', function () {

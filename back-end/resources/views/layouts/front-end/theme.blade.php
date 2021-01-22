@@ -32,7 +32,7 @@
 
 <body>
 
-<!-- Header Section Start -->
+<!-- Ft -->
 <div class="header-section section">
 
     <!-- Header Top Start -->
@@ -43,8 +43,8 @@
                 <div class="col mt-10 mb-10">
                     <!-- Header Links Start -->
                     <div class="header-links">
-                        <a href="track-order.html"><img src="assets/images/icons/car.png" alt="Car Icon"> <span>Track your order</span></a>
-                        <a href="store.html"><img src="assets/images/icons/marker.png" alt="Car Icon"> <span>Locate Store</span></a>
+                        <a href="track-order.html"><img src="{{ asset('assets/images/icons/car.png') }}" alt="Car Icon"> <span>Track your order</span></a>
+                        <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a>
                     </div><!-- Header Links End -->
                 </div>
 
@@ -127,7 +127,7 @@
                                             <li><a href="#">{{ $cat->name }}</a>
                                                 <ul>
                                                     @forelse ($cat->subCategories as $sub_cat)
-                                                        <li><a href="about-us.html">{{ $sub_cat->name }}</a></li>
+                                                        <li><a href="{{ route('category.products.index',['category'=>$cat->id,'sub_cat_name'=>$sub_cat->name,'sub_cat'=>$sub_cat->id]) }}">{{ $sub_cat->name }}</a></li>
                                                     @empty
                                                         <h1 class="text text-danger"> NO Data Found...!!</h1>
                                                     @endforelse
@@ -391,6 +391,11 @@
 
 <!-- Main JS -->
 <script src={{ asset("js/main.js") }}></script>
+
+
+
+
+
 
 </body>
 
