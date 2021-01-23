@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>E&E - Electronics eCommerce Bootstrap4 HTML Template</title>
+    <title>Take a Scroll</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -32,7 +32,7 @@
 
 <body>
 
-<!-- Header Section Start -->
+<!-- Ft -->
 <div class="header-section section">
 
     <!-- Header Top Start -->
@@ -43,8 +43,8 @@
                 <div class="col mt-10 mb-10">
                     <!-- Header Links Start -->
                     <div class="header-links">
-                        <a href="track-order.html"><img src="assets/images/icons/car.png" alt="Car Icon"> <span>Track your order</span></a>
-                        <a href="store.html"><img src="assets/images/icons/marker.png" alt="Car Icon"> <span>Locate Store</span></a>
+                        <a href="track-order.html"><img src="{{ asset('assets/images/icons/car.png') }}" alt="Car Icon"> <span>Track your order</span></a>
+                        <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a>
                     </div><!-- Header Links End -->
                 </div>
 
@@ -94,8 +94,9 @@
                     <!-- Logo Start -->
                     <div class="header-logo">
                         <a href="index.html">
-                            <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
-                            <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                            <h1>Take A Scroll</h1>
+                            {{-- <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                            <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template"> --}}
                         </a>
                     </div><!-- Logo End -->
                 </div>
@@ -120,39 +121,22 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children"><a href="#">PAGES</a>
+                                <li class="menu-item-has-children"><a href="#">Categories</a>
                                     <ul class="mega-menu three-column">
-                                        <li><a href="#">Column One</a>
-                                            <ul>
-                                                <li><a href="about-us.html">About us</a></li>
-                                                <li><a href="best-deals.html">Best Deals</a></li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Column Two</a>
-                                            <ul>
-                                                <li><a href="compare.html">Compare</a></li>
-                                                <li><a href="faq.html">Faq</a></li>
-                                                <li><a href="feature.html">Feature</a></li>
-                                                <li><a href="login.html">Login</a></li>
-                                                <li><a href="register.html">Register</a></li>
-                                                <li><a href="store.html">Store</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Column Three</a>
-                                            <ul>
-                                                <li><a href="terms-conditions.html">Terms & Conditions</a></li>
-                                                <li><a href="track-order.html">Track Order</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="blog-1-column-left-sidebar.html">BLOG</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-1-column-left-sidebar.html">Blog 1 Column Left Sidebar</a></li>
-                                        <li><a href="single-blog-left-sidebar.html">Single Blog Left Sidebar</a></li>
+                                        @forelse ($categories as $cat)
+                                            <li><a href="#">{{ $cat->name }}</a>
+                                                <ul>
+                                                    @forelse ($cat->subCategories as $sub_cat)
+                                                        <li><a href="{{ route('category.products.index',['category'=>$cat->id,'sub_cat_name'=>$sub_cat->name,'sub_cat'=>$sub_cat->id]) }}">{{ $sub_cat->name }}</a></li>
+                                                    @empty
+                                                        <h1 class="text text-danger"> NO Data Found...!!</h1>
+                                                    @endforelse
+                                                </ul>
+                                            </li>
+                                        @empty
+                                            <h1 class="text text-danger"> NO Data Found...!!</h1>
+                                        @endforelse
+
                                     </ul>
                                 </li>
                                 <li><a href="contact.html">CONTACT</a></li>
@@ -234,10 +218,10 @@
             <div class="row">
                 <div class="col mb-90">
                     <div class="footer-widget text-center">
-                        <div class="footer-logo">
+                        {{-- <div class="footer-logo">
                             <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
                             <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
-                        </div>
+                        </div> --}}
                         <p>Electronics product actual teachings of  he great explorer of the truth, the malder of human happiness. No one rejects</p>
                     </div>
                 </div>
@@ -348,43 +332,7 @@
 
 </div><!-- Footer Section End -->
 
-<!-- Popup Subscribe Section Start -->
-<div class="popup-subscribe-section section bg-gray pt-55 pb-55" data-modal="popup-modal">
 
-    <!-- Popup Subscribe Wrap Start -->
-    <div class="popup-subscribe-wrap">
-
-        <button class="close-popup">X</button>
-
-        <!-- Popup Subscribe Banner -->
-        <div class="popup-subscribe-banner banner">
-            <a href="#"><img src="assets/images/banner/banner-7.jpg" alt="Banner"></a>
-        </div>
-
-        <!-- Popup Subscribe Form Wrap Start -->
-        <div class="popup-subscribe-form-wrap">
-
-            <h1>SUBSCRIBE <br>OUR NEWSLETTER</h1>
-            <h4>Get latest product update...</h4>
-
-            <!-- Newsletter Form -->
-            <form action="#" method="post" class="popup-subscribe-form validate" target="_blank" novalidate>
-                <div id="mc_embed_signup_scroll">
-                    <label for="popup_subscribe" class="d-none">Subscribe to our mailing list</label>
-                    <input type="email" value="" name="EMAIL" class="email" id="popup_subscribe" placeholder="Enter your email here" required>
-                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                    <button type="submit" name="subscribe" id="" class="button">subscribe</button>
-                </div>
-            </form>
-
-            <p>Be the first in the by getting special deals and offers send directly to your inbox.</p>
-
-        </div><!-- Popup Subscribe Form Wrap End -->
-
-    </div><!-- Popup Subscribe Wrap End -->
-
-</div><!-- Popup Subscribe Section End -->
 
 
 <!-- JS
@@ -401,6 +349,11 @@
 
 <!-- Main JS -->
 <script src={{ asset("js/main.js") }}></script>
+
+
+
+
+
 
 </body>
 

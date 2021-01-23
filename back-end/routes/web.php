@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,11 @@ Route::get('/test/{id}','ProductController@index');
 Route::get('/cart','CartController@index')->name('cart.index');
 
 
+//sub actegory or products
+
+
+Route::get('categories/{category}/{sub_cat_name}/{sub_cat}','SubCategoryController@index')->name('category.products.index');
+Route::get('categories/{category}/{sub_cat_name}/{sub_cat}/products/{product}','SubCategoryController@show')->name('category.products.show');
 
 
 Route::get('/logout', function () {
@@ -68,4 +74,13 @@ Route::get('/logout', function () {
     Auth::logout();
     // redirect to homepage
     return redirect('/');
+});
+
+
+
+View::composer(['*'], function ($view) {
+
+    $categories=Category::all();
+
+    $view->with('categories',$categories);
 });
