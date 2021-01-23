@@ -109,12 +109,17 @@
 
                         <div class="tags">
 
-                            <h5>Tags:</h5>
-                            <a href="#">Electronic</a>
-                            <a href="#">Smartphone</a>
-                            <a href="#">Phone</a>
-                            <a href="#">Charger</a>
-                            <a href="#">Powerbank</a>
+
+                            @if($product->product_tags)
+                                @forelse($product->product_tags as $value)
+                                <h5>Tags:</h5>
+                                    <a href="#">{{ $value }}</a>
+                                @empty
+
+                                @endforelse
+                            @endif
+
+
 
                         </div>
 

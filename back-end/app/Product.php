@@ -12,6 +12,7 @@ class Product extends Model
     protected $guarded=[];
     protected $casts = [
         'product_pictures' => 'array',
+        'product_tags' => 'array'
     ];
     public function store(){
         return $this->belongsTo(Store::class);
