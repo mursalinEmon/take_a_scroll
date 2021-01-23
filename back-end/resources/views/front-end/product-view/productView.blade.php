@@ -15,11 +15,9 @@
 
                     <div class="tab-content">
                         {{-- product images --}}
-                       @forelse($variable as $key => $value)
-                            <div id="single-image-{{ $ }}" class="tab-pane fade show active big-image-slider">
-                                <div class="big-image"><img src="assets/images/single-product/big-1.png" alt="Big Image"><a href="assets/images/single-product/big-1.png" class="big-image-popup"><i class="fa fa-search-plus"></i></a></div>
-                                <div class="big-image"><img src="assets/images/single-product/big-2.png" alt="Big Image"><a href="assets/images/single-product/big-2.png" class="big-image-popup"><i class="fa fa-search-plus"></i></a></div>
-                                <div class="big-image"><img src="assets/images/single-product/big-3.png" alt="Big Image"><a href="assets/images/single-product/big-3.png" class="big-image-popup"><i class="fa fa-search-plus"></i></a></div>
+                       @forelse($product->product_pictures as $key => $value)
+                            <div id="single-image-{{ $key}}" class="tab-pane fade show active big-image-slider">
+                                <div class="big-image"><img src="{{ asset($value) }}" alt="Big Image"><a href="{{ asset($value) }}"  class="big-image-popup"><i class="fa fa-search-plus"></i></a></div>
                             </div>
                        @empty
                            <h1 class="text text-danger">No Images Found ...!!1</h1>
@@ -28,9 +26,13 @@
                     </div>
                     {{-- thumb nails --}}
                     <div class="thumb-image-slider nav" data-vertical="true">
-                        <a class="thumb-image active" data-toggle="tab" href="#single-image-1"><img src="assets/images/single-product/thumb-1.png" alt="Thumbnail Image"></a>
-                        <a class="thumb-image" data-toggle="tab" href="#single-image-2"><img src="assets/images/single-product/thumb-2.png" alt="Thumbnail Image"></a>
-                        <a class="thumb-image" data-toggle="tab" href="#single-image-3"><img src="assets/images/single-product/thumb-3.png" alt="Thumbnail Image"></a>
+                        @forelse($product->product_pictures as $key => $value)
+                            <a class="thumb-image active" data-toggle="tab" href="#single-image-{{ $key}}"><img src="{{ asset($value) }}" alt="Thumbnail Image"></a>
+                        @empty
+
+                        @endforelse
+
+
                     </div>
 
                 </div>
@@ -65,7 +67,7 @@
                         </div>
 
                         <div class="desc">
-                            <p>{{ $product->product_description }}</p>
+                            <p>{{ $product->product_decription }}</p>
                         </div>
 
                         <span class="availability">Availability:
@@ -150,7 +152,7 @@
                         <div class="row">
                             <div class="single-product-description-content col-lg-8 col-12">
                                <p>
-                                   {{ $product->product_description }}
+                                   {{ $product->product_decription }}
                                </p>
                             </div>
                             <div class="single-product-description-image col-lg-4 col-12">
