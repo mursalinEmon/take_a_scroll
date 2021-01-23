@@ -49,9 +49,9 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category,$sub_cat_name,$sub_cat,Product $product)
     {
-        //
+        return view('front-end.product-view.productView',compact('product','sub_cat_name'));
     }
 
     /**

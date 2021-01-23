@@ -66,6 +66,7 @@ Route::get('/cart','CartController@index')->name('cart.index');
 
 
 Route::get('categories/{category}/{sub_cat_name}/{sub_cat}','SubCategoryController@index')->name('category.products.index');
+Route::get('categories/{category}/{sub_cat_name}/{sub_cat}/products/{product}','SubCategoryController@show')->name('category.products.show');
 
 
 Route::get('/logout', function () {

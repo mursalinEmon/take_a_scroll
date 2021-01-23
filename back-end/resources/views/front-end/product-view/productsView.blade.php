@@ -61,13 +61,14 @@
 
                     <div class="row">
                         @forelse ($products as $product)
-                             <!-- Product Start -->
+
+                            <!-- Product Start -->
                         <div class="ee-product col-xl-3 col-lg-4 col-md-6 col-12 pb-30 pt-10 ">
 
                             <!-- Image -->
                             <div class="image">
 
-                                <a href="single-product.html" class="img"><img src="{{ asset($product->product_pictures[0]) }}" alt="Product Image"></a>
+                                <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{ asset($product->product_pictures[0]) }}" alt="Product Image"></a>
 
                                 <div class="wishlist-compare">
                                     <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
@@ -84,8 +85,8 @@
                                 <!-- Category & Title -->
                                 <div class="category-title">
 
-                                    <a href="#" class="cat">{{ $sub_cat_name }}</a>
-                                    <h5 class="title"><a href="single-product.html">{{ $product->name }}</a></h5>
+                                    <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="cat">{{ $sub_cat_name }}</a>
+                                    <h5 class="title"><a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}">{{ $product->name }}</a></h5>
 
                                 </div>
 
@@ -105,7 +106,9 @@
 
                             </div>
 
-                        </div><!-- Product End -->
+                        </div>
+                        <!-- Product End -->
+
                         @empty
                             <h1 class="text text-danger">NO Products ..!!</h1>
                         @endforelse

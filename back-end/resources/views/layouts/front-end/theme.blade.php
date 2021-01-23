@@ -139,12 +139,6 @@
 
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children"><a href="blog-1-column-left-sidebar.html">BLOG</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-1-column-left-sidebar.html">Blog 1 Column Left Sidebar</a></li>
-                                        <li><a href="single-blog-left-sidebar.html">Single Blog Left Sidebar</a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="contact.html">CONTACT</a></li>
                             </ul>
                         </nav>
