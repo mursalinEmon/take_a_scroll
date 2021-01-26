@@ -52,7 +52,7 @@
                             <h5 class="title">{{ $product->name }}</h5>
                         </div>
 
-                        <h5 class="price">${{ $product->price }}</h5>
+                        <h5 class="price">৳{{ $product->price }}</h5>
 
                     </div>
 
@@ -84,7 +84,7 @@
                                 <div class="pro-qty"><input type="text" value="1"></div>
                             </div>
 
-                            <div class="colors">
+                            {{-- <div class="colors">
                                 <h5>Color</h5>
                                 <select class="nice-select">
                                     <option>red</option>
@@ -92,7 +92,7 @@
                                     <option>yellow</option>
                                     <option>grey</option>
                                 </select>
-                            </div>
+                            </div> --}}
 
                         </div>
 

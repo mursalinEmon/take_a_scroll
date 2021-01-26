@@ -93,7 +93,7 @@
                                 <!-- Price & Ratting -->
                                 <div class="price-ratting">
 
-                                    <h5 class="price">${{ $product->price }}</h5>
+                                    <h5 class="price">৳{{ $product->price }}</h5>
                                     <div class="ratting">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
