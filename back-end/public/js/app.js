@@ -2268,14 +2268,19 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("warrenty", this.p_warrenty);
       formData.append("stock", this.p_stock);
       formData.append("descrption", this.p_description);
-      axios.post("/stores/".concat(this.store_id, "/products"), formData).then(function (res) {
-        // console.log(res.data.product.id);
-        _this3.product_id = res.data.product.id;
-        _this3.dropzoneOptions.params.product_id = _this3.product_id;
-        _this3.dropzoneOptions.params.store_id = _this3.store_id;
-      })["catch"](function (err) {
-        console.log(err);
-      });
+
+      if (this.p_category_id === "" || this.p_sub_category === "" || this.p_name === "" || this.p_brand === "" || this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" || this.p_description === "") {
+        this.$alert(res.data.message, "", "Fill all The Form Fields ");
+      } else {
+        axios.post("/stores/".concat(this.store_id, "/products"), formData).then(function (res) {
+          console.log(res);
+          _this3.product_id = res.data.product.id;
+          _this3.dropzoneOptions.params.product_id = _this3.product_id;
+          _this3.dropzoneOptions.params.store_id = _this3.store_id;
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     }
   }
 });
@@ -2445,6 +2450,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-dropzone/dist/vue2Dropzone.min.css */ "./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css");
 /* harmony import */ var vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue2_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-editor */ "./node_modules/vue2-editor/dist/vue2-editor.esm.js");
 //
 //
 //
@@ -2597,16 +2603,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default.a
+    vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default.a,
+    components: {
+      VueEditor: vue2_editor__WEBPACK_IMPORTED_MODULE_2__["VueEditor"]
+    }
   },
   props: {
     product: {
@@ -62696,7 +62701,7 @@ var render = function() {
                     attrs: {
                       type: "text",
                       id: "brandname",
-                      placeholder: "put product stock"
+                      placeholder: "put product brand"
                     },
                     domProps: { value: _vm.p_brand },
                     on: {
@@ -63426,31 +63431,24 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("Product Description")]),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [_vm._v("Product Description")]),
+            _vm._v(" "),
+            _c("vue-editor", {
+              model: {
                 value: _vm.p_description,
+                callback: function($$v) {
+                  _vm.p_description = $$v
+                },
                 expression: "p_description"
               }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "Put Product Descrption Here..", rows: "3" },
-            domProps: { value: _vm.p_description },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.p_description = $event.target.value
-              }
-            }
-          })
-        ]),
+            })
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "container" }, [
           _c(

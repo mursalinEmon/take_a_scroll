@@ -94,7 +94,7 @@
                         class="form-control"
                         id="brandname"
                         v-model="p_brand"
-                        placeholder="put product stock"
+                        placeholder="put product brand"
                     />
                 </div>
             </div>
@@ -240,11 +240,18 @@ export default {
             formData.append("warrenty", this.p_warrenty);
             formData.append("stock", this.p_stock);
             formData.append("descrption", this.p_description);
+            if(this.p_category_id === "" || this.p_sub_category === "" || this.p_name==="" || this.p_brand ==="" ||  this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" ||  this.p_description === ""){
 
-            axios
+                        this.$alert(
+                        res.data.message,
+                        "",
+                        "Fill all The Form Fields "
+                        );
+            }else{
+                axios
                 .post(`/stores/${this.store_id}/products`, formData)
                 .then(res => {
-                    // console.log(res.data.product.id);
+                    console.log(res);
                     this.product_id = res.data.product.id;
                     this.dropzoneOptions.params.product_id = this.product_id;
                     this.dropzoneOptions.params.store_id=this.store_id;
@@ -252,6 +259,8 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
+            }
+
         }
     },
 
