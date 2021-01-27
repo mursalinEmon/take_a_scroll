@@ -93,7 +93,7 @@
                                 <!-- Price & Ratting -->
                                 <div class="price-ratting">
 
-                                    <h5 class="price">${{ $product->price }}</h5>
+                                    <h5 class="price">৳{{ $product->price }}</h5>
                                     <div class="ratting">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -142,7 +142,7 @@
                                         <h5 class="title"><a href="single-product.html">Zeon Zen 4 Pro</a></h5>
                                     </div>
 
-                                    <h5 class="price">$295.00</h5>
+                                    <h5 class="price">৳295.00</h5>
 
                                 </div>
 
