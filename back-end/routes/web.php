@@ -46,6 +46,12 @@ Route::middleware(['verified','vendor'])->group( function () {
     Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
 });
 
+// customer routes
+
+Route::get('/customer-dashboard','CustomerProfileController@index')->name('customer.dashboard');
+
+
+
 
 Route::get('/chat', 'HomeController@chat')->name('chat');
 Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
