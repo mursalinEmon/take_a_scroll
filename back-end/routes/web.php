@@ -47,12 +47,11 @@ Route::middleware(['verified','vendor'])->group( function () {
 });
 
 // customer routes
-
-Route::get('/customer-dashboard','CustomerProfileController@index')->name('customer.dashboard');
-
-
-
-
+Route::middleware(['verified','customer'])->group( function () {
+    Route::get('/customer-dashboard','CustomerProfileController@index')->name('customer.dashboard');
+    //cart
+    Route::get('/cart','CartController@index')->name('cart.index');
+});
 Route::get('/chat', 'HomeController@chat')->name('chat');
 Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
 Route::get('/messages/{id}','ChatController@fetchMessages')->name('chat.messages');
@@ -64,8 +63,7 @@ Route::get('/sub-category/{name}','CategoryController@fetch_sub_category')->name
 
 Route::get('/test/{id}','ProductController@index');
 
-//cart
-Route::get('/cart','CartController@index')->name('cart.index');
+
 
 
 //sub actegory or products
