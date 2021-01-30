@@ -554,6 +554,15 @@
         //     .catch(err => {
         //         console.log(err);
         //     });
+
+        $.ajax({
+            method: "GET",
+            url: `/cart/products/${para2}/add`
+            // data: { name: "John", location: "Boston" }
+        }).done(function(res) {
+            alert(res.data.message);
+        });
+
         if ($(this).hasClass("added")) {
             $(this)
                 .removeClass("added")

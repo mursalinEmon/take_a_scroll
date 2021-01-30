@@ -84,6 +84,7 @@ class CartController extends Controller
         //
     }
     public function add_to_cart(Product $product){
+        // dd($product);
         $product=[
             'id' => $product->id,
             'name' => $product->name,
@@ -94,6 +95,7 @@ class CartController extends Controller
     $cartItem=Cart::add($product);
     $cartItem->associate('Product');
     $cart=Cart::content();
-        dd($cart);
+
+    return response(['message' => "product added to the cart"]);
     }
 }
