@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use Cart;
+use App\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -81,5 +82,18 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         //
+    }
+    public function add_to_cart(Product $product){
+        $product=[
+            'id' => $product->id,
+            'name' => $product->name,
+            'qty' => 1,
+            'price' => $product->price,
+            'weight' => 550,
+        ];
+    $cartItem=Cart::add($product);
+    $cartItem->associate('Product');
+    $cart=Cart::content();
+        dd($cart);
     }
 }

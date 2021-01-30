@@ -51,6 +51,8 @@ Route::middleware(['verified','customer'])->group( function () {
     Route::get('/customer-dashboard','CustomerProfileController@index')->name('customer.dashboard');
     //cart
     Route::get('/cart','CartController@index')->name('cart.index');
+    Route::get('/cart/products/{product}/add','CartController@add_to_cart')->name('cart.add');
+
 });
 Route::get('/chat', 'HomeController@chat')->name('chat');
 Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
@@ -85,6 +87,7 @@ Route::get('/logout', function () {
 View::composer(['*'], function ($view) {
 
     $categories=Category::all();
+    $cart=Cart::count();
 
-    $view->with('categories',$categories);
+    $view->with(['categories'=>$categories,'cart'=>$cart]);
 });
