@@ -38,7 +38,7 @@ return [
 
     'database' => [
 
-        'connection' => 'mysql',
+        'connection' => null,
 
         'table' => 'shoppingcart',
 

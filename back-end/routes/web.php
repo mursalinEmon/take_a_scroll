@@ -52,6 +52,7 @@ Route::middleware(['verified','customer'])->group( function () {
     //cart
     Route::get('/cart','CartController@index')->name('cart.index');
     Route::get('/cart/products/{product}/add','CartController@add_to_cart')->name('cart.add');
+    Route::get('/cart-restore','CartController@restore');
 
 });
 Route::get('/chat', 'HomeController@chat')->name('chat');

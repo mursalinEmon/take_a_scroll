@@ -15,7 +15,12 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart.cart_view');
+        $cart=Cart::content();
+        // $cart=Cart::instance(auth()->user()->id);
+        // dd($cart->model);
+
+        return view('cart.cart_view',compact('cart'));
+        // return view('cart.cart_view','cart');
     }
 
     /**
@@ -37,6 +42,10 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
+    }
+    public function restore(){
+
+        Cart::destroy();
     }
 
     /**
@@ -93,8 +102,10 @@ class CartController extends Controller
             'weight' => 550,
         ];
     $cartItem=Cart::add($product);
-    $cartItem->associate('Product');
-    $cart=Cart::content();
+    $cartItem->associate('App\Product');
+
+    // $cart=Cart::content();
+    Cart::store(auth()->user()->id);
 
     return response(['message' => "product added to the cart"]);
     }

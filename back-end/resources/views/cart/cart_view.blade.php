@@ -110,38 +110,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="assets/images/product/product-1.png" alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Zeon Zen 4 Pro</a></td>
-                                    <td class="pro-price"><span>$295.00</span></td>
-                                    <td class="pro-quantity"><div class="pro-qty"><input type="text" value="1"></div></td>
-                                    <td class="pro-subtotal"><span>$295.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="assets/images/product/product-2.png" alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Aquet Drone D 420</a></td>
-                                    <td class="pro-price"><span>$275.00</span></td>
-                                    <td class="pro-quantity"><div class="pro-qty"><input type="text" value="2"></div></td>
-                                    <td class="pro-subtotal"><span>$550.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="assets/images/product/product-3.png" alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Game Station X 22</a></td>
-                                    <td class="pro-price"><span>$295.00</span></td>
-                                    <td class="pro-quantity"><div class="pro-qty"><input type="text" value="1"></div></td>
-                                    <td class="pro-subtotal"><span>$295.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="assets/images/product/product-4.png" alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Roxxe Headphone Z 75 </a></td>
-                                    <td class="pro-price"><span>$110.00</span></td>
-                                    <td class="pro-quantity"><div class="pro-qty"><input type="text" value="1"></div></td>
-                                    <td class="pro-subtotal"><span>$110.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
+                                @forelse(Cart::content() as $row)
+                                    <tr>
+                                        <td class="pro-thumbnail"><a href="#"><img src="{{  asset($row->model->product_pictures[0])  }}" alt="Product"></a></td>
+                                        <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
+                                        <td class="pro-price"><span>${{ $row->price }}</span></td>
+                                        <td class="pro-quantity"><div class="pro-qty"><input type="text" value="{{ $row->qty }}"></div></td>
+                                        {{-- <td class="pro-subtotal"><span>$295.00</span></td> --}}
+                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                    </tr>
+                                @empty
+                                    <h1 class="text text-danger">Empty Cart ....!!</h1>
+                                @endforelse
+
+
                             </tbody>
                         </table>
                     </div>

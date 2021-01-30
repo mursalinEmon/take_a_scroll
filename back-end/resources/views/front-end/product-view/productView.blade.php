@@ -98,10 +98,10 @@
 
                         <div class="actions">
 
-                            <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+                            <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><i class="ti-shopping-cart" ></i><span>ADD TO CART</span></a>
 
                             <div class="wishlist-compare">
-                                <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
+                                {{-- <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a> --}}
                                 <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
                             </div>
 
