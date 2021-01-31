@@ -116,8 +116,8 @@
                                         <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
                                         <td class="pro-price"><span>${{ $row->price }}</span></td>
                                         <td class="pro-quantity"><div class="pro-qty"><input type="text" value="{{ $row->qty }}"></div></td>
-                                        {{-- <td class="pro-subtotal"><span>$295.00</span></td> --}}
-                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                        <td class="pro-subtotal"><span>${{ Cart::subtotal() }}</span></td>
+                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o remove-cart" data-rowid="{{ $row->rowId }}"></i></a></td>
                                     </tr>
                                 @empty
                                     <h1 class="text text-danger">Empty Cart ....!!</h1>
@@ -273,5 +273,7 @@
 
 <!-- JS
 ============================================ -->
+
+
 
 @endsection

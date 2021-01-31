@@ -581,7 +581,25 @@
                 .text("added");
         }
     });
+
+    // remove item from cart
+    $(".remove-cart").on("click", function(e) {
+        e.preventDefault();
+        console.log("hit");
+        var id = this.dataset["rowid"];
+        $.ajax({
+            method: "GET",
+            url: `/cart/remove/product/${id}`
+            // data: { name: "John", location: "Boston" }
+        }).done(function(res) {
+            location.reload();
+            alert(res.data.message);
+        });
+    });
     /*--
+
+
+
 	Wishlist & Compare
 ------------------------*/
     $(".wishlist-compare a").on("click", function(e) {

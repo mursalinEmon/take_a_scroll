@@ -17,7 +17,7 @@ class CartController extends Controller
     {
         $cart=Cart::content();
         // $cart=Cart::instance(auth()->user()->id);
-        // dd($cart->model);
+        // dd($cart);
 
         return view('cart.cart_view',compact('cart'));
         // return view('cart.cart_view','cart');
@@ -108,5 +108,10 @@ class CartController extends Controller
     Cart::store(auth()->user()->id);
 
     return response(['message' => "product added to the cart"]);
+    }
+
+    public function remove_item($id){
+        Cart::remove($id);
+        return response(['message' => "Product removed from the cart"]);
     }
 }
