@@ -2,7 +2,7 @@
 @section('section')
 
 <!-- Mini Cart Wrap Start -->
-<div class="mini-cart-wrap">
+{{-- <div class="mini-cart-wrap">
 
     <!-- Mini Cart Top -->
     <div class="mini-cart-top">
@@ -53,12 +53,12 @@
 
     </div>
 
-</div><!-- Mini Cart Wrap End -->
+</div><!-- Mini Cart Wrap End --> --}}
 
 <!-- Cart Overlay -->
-<div class="cart-overlay"></div>
+{{-- <div class="cart-overlay"></div> --}}
 
-<!-- Page Banner Section Start -->
+{{-- <!-- Page Banner Section Start -->
 <div class="page-banner-section section">
     <div class="page-banner-wrap row row-0 d-flex align-items-center ">
 
@@ -88,7 +88,7 @@
         </div>
 
     </div>
-</div><!-- Page Banner Section End -->
+</div><!-- Page Banner Section End --> --}}
 
 <!-- Cart Page Start -->
 <div class="page-section section pt-90 pb-50">
@@ -121,6 +121,7 @@
                                     </tr>
                                 @empty
                                     <h1 class="text text-danger">Empty Cart ....!!</h1>
+                                    <br>
                                 @endforelse
 
 
