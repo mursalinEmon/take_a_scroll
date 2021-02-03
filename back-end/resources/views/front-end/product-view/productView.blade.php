@@ -5,7 +5,11 @@
 <!-- Single Product Section Start -->
 <div class="product-section section mt-90 mb-90">
     <div class="container">
-
+        @if(Session::has('message'))
+            <div  class="alert alert-danger">
+                <h1 >{{ Session::get('message') }}</h1>
+            </div>
+        @endif
         <div class="row mb-90">
 
             <div class="col-lg-6 col-12 mb-50">
