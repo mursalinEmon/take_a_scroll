@@ -545,16 +545,7 @@
         e.preventDefault();
         // console.log(e);
         var para2 = this.dataset["para2"];
-        console.log(para2);
-        // axios
-        //     .get(`/cart/products/${para2}/add`)
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     });
-
+        // console.log(para2);
         $.ajax({
             method: "GET",
             url: `/cart/products/${para2}/add`
@@ -735,16 +726,36 @@
             var newVal = parseFloat(oldValue) + 1;
         } else {
             // Don't allow decrementing below zero
-            if (oldValue > 0) {
+            if (oldValue > 0 && oldValue != 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
         $button
             .parent()
             .find("input")
             .val(newVal);
+    });
+
+    // qty increment
+    var counter = 1;
+    var total = 0;
+    var price_unit = document.getElementById("item-price").value;
+    $(".inc").on("click", function() {
+        counter++;
+        total = price_unit * counter;
+        document.getElementById("item-price").value = total;
+        console.log(total, counter);
+    });
+
+    $(".dec").on("click", function() {
+        counter--;
+        counter <= 1 ? (counter = 1) : counter;
+
+        total = price_unit * counter;
+        document.getElementById("item-price").value = total;
+        console.log(total, counter);
     });
 
     /*-----

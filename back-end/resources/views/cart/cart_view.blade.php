@@ -115,8 +115,11 @@
                                         <td class="pro-thumbnail"><a href="#"><img src="{{  asset($row->model->product_pictures[0])  }}" alt="Product"></a></td>
                                         <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
                                         <td class="pro-price"><span>${{ $row->price }}</span></td>
-                                        <td class="pro-quantity"><div class="pro-qty"><input type="text" value="{{ $row->qty }}"></div></td>
-                                        <td class="pro-subtotal">$<input  id="product-price" value={{ $row->price }} size="5" disabled ></td>
+
+                                        <td class="pro-quantity"><div class="pro-qty"><input  type="text" value="{{ $row->qty }}"></div></td>
+
+                                        <td class="pro-subtotal">$<input id="item-price" id="product-price" value={{ $row->price }} size="5"  disabled ></td>
+
                                         <td class="pro-remove"><a href="#"><i class="fa fa-trash-o remove-cart" data-rowid="{{ $row->rowId }}"></i></a></td>
                                     </tr>
                                 @empty
