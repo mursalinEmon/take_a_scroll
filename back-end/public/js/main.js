@@ -576,7 +576,7 @@
     // remove item from cart
     $(".remove-cart").on("click", function(e) {
         e.preventDefault();
-        console.log("hit");
+        // console.log("hit");
         var id = this.dataset["rowid"];
         $.ajax({
             method: "GET",
@@ -714,8 +714,7 @@
     /*-----
 	Quantity
 --------------------------------*/
-    $(".pro-qty").prepend('<span class="dec qtybtn">-</span>');
-    $(".pro-qty").append('<span class="inc qtybtn">+</span>');
+
     $(".qtybtn").on("click", function() {
         var $button = $(this);
         var oldValue = $button
@@ -741,21 +740,35 @@
     // qty increment
     var counter = 1;
     var total = 0;
-    var price_unit = document.getElementById("item-price").value;
-    $(".inc").on("click", function() {
+    var price_unit = 0;
+    $(".inc").on("click", function(e) {
+        var i = e.target.id;
+        var id = "item-price-" + i;
+        if (counter == 1) {
+            price_unit = document.getElementById(id).value;
+        }
         counter++;
+
         total = price_unit * counter;
-        document.getElementById("item-price").value = total;
-        console.log(total, counter);
+
+        document.getElementById(id).value = total;
+        // console.log(id);
     });
 
-    $(".dec").on("click", function() {
+    $(".dec").on("click", function(e) {
+        var i = e.target.id;
+        var id = "item-price-" + i;
+        if (counter == 1) {
+            price_unit = document.getElementById(id).value;
+        }
+        // console.log("item-price-" + e.target.id);
         counter--;
         counter <= 1 ? (counter = 1) : counter;
 
         total = price_unit * counter;
-        document.getElementById("item-price").value = total;
-        console.log(total, counter);
+
+        document.getElementById(id).value = total;
+        // console.log(total, counter);
     });
 
     /*-----

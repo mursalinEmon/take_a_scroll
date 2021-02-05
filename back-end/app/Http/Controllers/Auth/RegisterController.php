@@ -37,7 +37,7 @@ class RegisterController extends Controller
             case $user->type=='vendor':
                 return '/vendor-dashboard';
             case $user->type=='customer':
-                return '/customer-dashboard';
+                return '/';
             default:
                 return '/';
         }
