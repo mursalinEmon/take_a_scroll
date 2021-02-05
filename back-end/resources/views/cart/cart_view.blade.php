@@ -114,11 +114,11 @@
                                     <tr>
                                         <td class="pro-thumbnail"><a href="#"><img src="{{  asset($row->model->product_pictures[0])  }}" alt="Product"></a></td>
                                         <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
-                                        <td class="pro-price"><span>${{ $row->price }}</span></td>
+                                        <td class="pro-price"><span> ৳{{ $row->price }}</span></td>
 
                                         <td class="pro-quantity"><div class="pro-qty"><span id="{{ $row->rowId }}" class="dec qtybtn">-</span><input  type="text" value="{{ $row->qty }}"><span id="{{ $row->rowId }}" class="inc qtybtn">+</span></div></td>
 
-                                        <td class="pro-subtotal">$<input id="item-price-{{ $row->rowId }}"  value={{ $row->price }} size="5"  disabled ></td>
+                                        <td class="pro-subtotal"> ৳<input id="item-price-{{ $row->rowId }}"  value={{ $row->price }} size="5"  disabled ></td>
 
                                         <td class="pro-remove"><a href="#"><i class="fa fa-trash-o remove-cart" data-rowid="{{ $row->rowId }}"></i></a></td>
                                     </tr>
@@ -172,7 +172,7 @@
                     </div> --}}
 
                     <!-- Cart Summary -->
-                    <div class="col-lg-6 col-12 mb-40 d-flex">
+                    {{-- <div class="col-lg-6 col-12 mb-40 d-flex">
                         <div class="cart-summary">
                             <div class="cart-summary-wrap">
                                 <h4>Cart Summary</h4>
@@ -185,7 +185,7 @@
                                 <button class="update-btn">Update Cart</button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
 

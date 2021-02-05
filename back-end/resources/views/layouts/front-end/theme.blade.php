@@ -44,7 +44,7 @@
                     <!-- Header Links Start -->
                     <div class="header-links">
                         <a href="track-order.html"><img src="{{ asset('assets/images/icons/car.png') }}" alt="Car Icon"> <span>Track your order</span></a>
-                        <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a>
+                        {{-- <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a> --}}
                     </div><!-- Header Links End -->
                 </div>
 
@@ -111,7 +111,7 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li class="active"><a href="index.html">HOME</a></li>
+                                <li class="active"><a href="{{ url('/') }}">HOME</a></li>
                                 <li class="menu-item-has-children"><a href="shop-grid.html">Shop</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item-has-children"><a href="shop-grid.html">shop grid</a>
@@ -155,7 +155,7 @@
                     <div class="header-shop-links">
 
                         <!-- Compare -->
-                        <a href="compare.html" class="header-compare"><i class="ti-control-shuffle"></i></a>
+                        {{-- <a href="compare.html" class="header-compare"><i class="ti-control-shuffle"></i></a> --}}
                         <!-- Wishlist -->
                         <a href="wishlist.html" class="header-wishlist"><i class="ti-heart"></i> <span class="number">3</span></a>
                         <!-- Cart -->
@@ -188,13 +188,13 @@
 
                         <!-- Category Menu -->
                         <nav class="category-menu">
-                            <ul>
-                                <li><a href="category-1.html">Tv & Audio System</a></li>
+                            <ul style="border-bottom:1px solid black;">
+                                {{-- <li><a href="category-1.html">Tv & Audio System</a></li>
                                 <li><a href="category-2.html">Computer & Laptop</a></li>
                                 <li><a href="category-3.html">Phones & Tablets</a></li>
                                 <li><a href="category-1.html">Home Appliances</a></li>
                                 <li><a href="category-2.html">Kitchen appliances</a></li>
-                                <li><a href="category-3.html">Accessories</a></li>
+                                <li><a href="category-3.html">Accessories</a></li> --}}
                             </ul>
                         </nav>
 
@@ -313,25 +313,6 @@
 
             </div>
 
-        </div>
-    </div><!-- Footer Bottom Section Start -->
-
-    <!-- Footer Bottom Section Start -->
-    <div class="footer-bottom-section section">
-        <div class="container">
-            <div class="row">
-
-                <!-- Footer Copyright -->
-                <div class="col-lg-6 col-12">
-                    <div class="footer-copyright"><p>&copy; Copyright, 2018 All Rights Reserved by <a href="https://freethemescloud.com/">Free themes Cloud</a></p></div>
-                </div>
-
-                <!-- Footer Payment Support -->
-                <div class="col-lg-6 col-12">
-                    <div class="footer-payments-image"><img src="assets/images/payment-support.png" alt="Payment Support Image"></div>
-                </div>
-
-            </div>
         </div>
     </div><!-- Footer Bottom Section Start -->
 
