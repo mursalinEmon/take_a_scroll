@@ -103,7 +103,7 @@
                 <label>Product Description</label>
                  <vue-editor   v-model="p_description" />
             </div>
-            <button type="submt" class="btn btn-primary">Next</button>
+            <button type="submit" class="btn btn-primary">Next</button>
         </form>
         <!-- product add info end -->
         <!-- image uploader started -->
