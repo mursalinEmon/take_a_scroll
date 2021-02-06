@@ -27,9 +27,9 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Category $category)
     {
-        //
+        return view('admin.create_subcategory',compact('category'));
     }
 
     /**
@@ -38,9 +38,15 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Category $category, Request $request)
     {
-        //
+        SubCategory::create([
+            "name"=>$request->sub_cat_name,
+            "decsription"=>$request->sub_cat_description,
+            "category_id"=>$category->id
+        ]);
+
+        return response(["message"=>"SubCategory created succesfully!"]);
     }
 
     /**

@@ -2171,7 +2171,7 @@
 </div><!-- New Arrival Product Section End -->
 
 <!-- Banner Section Start -->
-<div class="banner-section section mb-60">
+{{-- <div class="banner-section section mb-60">
     <div class="container">
         <div class="row">
 
@@ -2192,10 +2192,10 @@
 
         </div>
     </div>
-</div><!-- Banner Section End -->
+</div><!-- Banner Section End --> --}}
 
 <!-- Brands Section Start -->
-<div class="brands-section section mb-90">
+{{-- <div class="brands-section section mb-90">
     <div class="container">
         <div class="row">
 
@@ -2210,10 +2210,10 @@
 
         </div>
     </div>
-</div><!-- Brands Section End -->
+</div><!-- Brands Section End --> --}}
 
 <!-- Subscribe Section Start -->
-<div class="subscribe-section section bg-gray pt-55 pb-55">
+{{-- <div class="subscribe-section section bg-gray pt-55 pb-55">
     <div class="container">
         <div class="row align-items-center">
 
@@ -2244,7 +2244,7 @@
 
         </div>
     </div>
-</div><!-- Subscribe Section End -->
+</div><!-- Subscribe Section End --> --}}
 
 <!-- Popup Subscribe Section Start -->
 <div class="popup-subscribe-section section bg-gray pt-55 pb-55" data-modal="popup-modal">

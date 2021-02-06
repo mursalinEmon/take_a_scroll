@@ -44,7 +44,7 @@
                     <!-- Header Links Start -->
                     <div class="header-links">
                         <a href="track-order.html"><img src="{{ asset('assets/images/icons/car.png') }}" alt="Car Icon"> <span>Track your order</span></a>
-                        <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a>
+                        {{-- <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a> --}}
                     </div><!-- Header Links End -->
                 </div>
 
@@ -76,7 +76,12 @@
                         @if(!auth()->user())
                         <a href="{{ route('login')}}"><i class="icofont icofont-login d-none"></i> <span>Login</span></a>
                         @else
-                        <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                            @if(auth()->user()->type === 'vendor')
+                            <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                            @else
+                            <a href="{{ route('customer.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                            @endif
+
                         @endif
                     </div><!-- Header Account Links End -->
                 </div>
@@ -93,7 +98,7 @@
                 <div class="col mt-15 mb-15">
                     <!-- Logo Start -->
                     <div class="header-logo">
-                        <a href="index.html">
+                        <a href="{{ url('/') }}">
                             <h1>Take A Scroll</h1>
                             {{-- <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
                             <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template"> --}}
@@ -106,22 +111,50 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li class="active"><a href="index.html">HOME</a></li>
-                                <li class="menu-item-has-children"><a href="shop-grid.html">Shop</a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item-has-children"><a href="shop-grid.html">shop grid</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="shop-grid.html">shop grid</a></li>
+                                <li class="active"><a href="{{ url('/') }}">HOME</a></li>
+                                <li class="menu-item-has-children"><a href="javascript:void(0)">Shops</a>
+                                   <ul class="mega-menu three-column ">
+                                        <li>
+                                           <ul>
+                                                <li><strong>Electronics</strong></li>
+                                                @forelse($Electronics as $shop)
+                                                    <li style="margin-left: -1rem;"><a  href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
+                                                    </li>
+                                                @empty
+                                                    <h1 class="text text-danger">No Shops available...!!</h1>
+                                                @endforelse
+                                           </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <li><strong>Realestate</strong></li>
+                                                @forelse($Realestate as $shop)
+                                                    <li style="margin-left: -1rem;"><a  href="javascript:void(0)">{{ $shop->name }}</a>
+                                                    </li>
+                                                @empty
+                                                    <li class="text text-danger">No Shops available...!!</li>
+                                                @endforelse
                                             </ul>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="single-product.html">Single Product</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="single-product.html">Single Product 1</a></li>
-                                            </ul>
+                                        <li>
+                                           <ul>
+                                                <li><strong>Cars</strong></li>
+                                                @forelse($Cars as $shop)
+                                                    <li style="margin-left: -1rem;"><a  href="javascript:void(0)">{{ $shop->name }}</a>
+                                                    </li>
+                                                @empty
+                                                    <li class="text text-danger">No Shops available...!!</li>
+                                                @endforelse
+                                           </ul>
+                                            {{-- <li class="menu-item-has-children"><a href="single-product.html">Single Product</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="single-product.html">Single Product 1</a></li>
+                                                </ul>
+                                            </li> --}}
                                         </li>
-                                    </ul>
+                                   </ul>
                                 </li>
-                                <li class="menu-item-has-children"><a href="#">Categories</a>
+                                <li class="menu-item-has-children"><a href="javascript:void(0)">Categories</a>
                                     <ul class="mega-menu three-column">
                                         @forelse ($categories as $cat)
                                             <li><a href="#">{{ $cat->name }}</a>
@@ -150,11 +183,11 @@
                     <div class="header-shop-links">
 
                         <!-- Compare -->
-                        <a href="compare.html" class="header-compare"><i class="ti-control-shuffle"></i></a>
+                        {{-- <a href="compare.html" class="header-compare"><i class="ti-control-shuffle"></i></a> --}}
                         <!-- Wishlist -->
                         <a href="wishlist.html" class="header-wishlist"><i class="ti-heart"></i> <span class="number">3</span></a>
                         <!-- Cart -->
-                        <a href="{{ route('cart.index') }}" class=""><i class="ti-shopping-cart"></i> <span class="number">3</span></a>
+                        <a href="{{ route('cart.index') }}" class=""><i class="ti-shopping-cart"></i> <span class="number">{{ $cart }}</span></a>
 
                     </div><!-- Header Shop Links End -->
                 </div>
@@ -183,13 +216,13 @@
 
                         <!-- Category Menu -->
                         <nav class="category-menu">
-                            <ul>
-                                <li><a href="category-1.html">Tv & Audio System</a></li>
+                            <ul style="border-bottom:1px solid black;">
+                                {{-- <li><a href="category-1.html">Tv & Audio System</a></li>
                                 <li><a href="category-2.html">Computer & Laptop</a></li>
                                 <li><a href="category-3.html">Phones & Tablets</a></li>
                                 <li><a href="category-1.html">Home Appliances</a></li>
                                 <li><a href="category-2.html">Kitchen appliances</a></li>
-                                <li><a href="category-3.html">Accessories</a></li>
+                                <li><a href="category-3.html">Accessories</a></li> --}}
                             </ul>
                         </nav>
 
@@ -308,25 +341,6 @@
 
             </div>
 
-        </div>
-    </div><!-- Footer Bottom Section Start -->
-
-    <!-- Footer Bottom Section Start -->
-    <div class="footer-bottom-section section">
-        <div class="container">
-            <div class="row">
-
-                <!-- Footer Copyright -->
-                <div class="col-lg-6 col-12">
-                    <div class="footer-copyright"><p>&copy; Copyright, 2018 All Rights Reserved by <a href="https://freethemescloud.com/">Free themes Cloud</a></p></div>
-                </div>
-
-                <!-- Footer Payment Support -->
-                <div class="col-lg-6 col-12">
-                    <div class="footer-payments-image"><img src="assets/images/payment-support.png" alt="Payment Support Image"></div>
-                </div>
-
-            </div>
         </div>
     </div><!-- Footer Bottom Section Start -->
 

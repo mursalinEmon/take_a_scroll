@@ -48,6 +48,8 @@ class LoginController extends Controller
         switch(true) {
             case $user->type=='vendor':
                 return '/vendor-dashboard';
+            case $user->type=='customer':
+                return '/';
             default:
                 return '/';
         }

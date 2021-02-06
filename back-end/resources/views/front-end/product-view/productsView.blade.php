@@ -4,6 +4,13 @@
 @section('section')
 <div class="product-section section mt-90 mb-90">
     <div class="container">
+        @if(Session::has('message'))
+            <div  class="alert alert-danger">
+                <h1 >{{ Session::get('message') }}</h1>
+            </div>
+        @endif
+
+
         <div class="row">
 
             <div class="col-12">
@@ -70,12 +77,12 @@
 
                                 <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{ asset($product->product_pictures[0]) }}" alt="Product Image"></a>
 
-                                <div class="wishlist-compare">
+                                {{-- <div class="wishlist-compare">
                                     <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                     <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
-                                </div>
+                                </div> --}}
 
-                                <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+                                <a href="{{ route('cart.add',$product->id) }}" data-para2="{{$product->id}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
 
                             </div>
 
@@ -93,7 +100,7 @@
                                 <!-- Price & Ratting -->
                                 <div class="price-ratting">
 
-                                    <h5 class="price">${{ $product->price }}</h5>
+                                    <h5 class="price">৳{{ $product->price }}</h5>
                                     <div class="ratting">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -142,7 +149,7 @@
                                         <h5 class="title"><a href="single-product.html">Zeon Zen 4 Pro</a></h5>
                                     </div>
 
-                                    <h5 class="price">$295.00</h5>
+                                    <h5 class="price">৳295.00</h5>
 
                                 </div>
 

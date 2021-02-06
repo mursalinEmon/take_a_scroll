@@ -140,4 +140,7 @@ class StoreController extends Controller
         $store->delete();
         return back()->with(['message'=>'Store Deleted Sucesfully..!']);
     }
+    public function show_customer(Store $store){
+        return view('front-end.store.show',compact('store'));
+    }
 }

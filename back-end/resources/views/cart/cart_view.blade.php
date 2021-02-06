@@ -2,7 +2,7 @@
 @section('section')
 
 <!-- Mini Cart Wrap Start -->
-<div class="mini-cart-wrap">
+{{-- <div class="mini-cart-wrap">
 
     <!-- Mini Cart Top -->
     <div class="mini-cart-top">
@@ -53,12 +53,12 @@
 
     </div>
 
-</div><!-- Mini Cart Wrap End -->
+</div><!-- Mini Cart Wrap End --> --}}
 
 <!-- Cart Overlay -->
-<div class="cart-overlay"></div>
+{{-- <div class="cart-overlay"></div> --}}
 
-<!-- Page Banner Section Start -->
+{{-- <!-- Page Banner Section Start -->
 <div class="page-banner-section section">
     <div class="page-banner-wrap row row-0 d-flex align-items-center ">
 
@@ -88,7 +88,7 @@
         </div>
 
     </div>
-</div><!-- Page Banner Section End -->
+</div><!-- Page Banner Section End --> --}}
 
 <!-- Cart Page Start -->
 <div class="page-section section pt-90 pb-50">
@@ -110,38 +110,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="assets/images/product/product-1.png" alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Zeon Zen 4 Pro</a></td>
-                                    <td class="pro-price"><span>$295.00</span></td>
-                                    <td class="pro-quantity"><div class="pro-qty"><input type="text" value="1"></div></td>
-                                    <td class="pro-subtotal"><span>$295.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="assets/images/product/product-2.png" alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Aquet Drone D 420</a></td>
-                                    <td class="pro-price"><span>$275.00</span></td>
-                                    <td class="pro-quantity"><div class="pro-qty"><input type="text" value="2"></div></td>
-                                    <td class="pro-subtotal"><span>$550.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="assets/images/product/product-3.png" alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Game Station X 22</a></td>
-                                    <td class="pro-price"><span>$295.00</span></td>
-                                    <td class="pro-quantity"><div class="pro-qty"><input type="text" value="1"></div></td>
-                                    <td class="pro-subtotal"><span>$295.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="assets/images/product/product-4.png" alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Roxxe Headphone Z 75 </a></td>
-                                    <td class="pro-price"><span>$110.00</span></td>
-                                    <td class="pro-quantity"><div class="pro-qty"><input type="text" value="1"></div></td>
-                                    <td class="pro-subtotal"><span>$110.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                </tr>
+                                @forelse(Cart::content() as $row)
+                                    <tr>
+                                        <td class="pro-thumbnail"><a href="#"><img src="{{  asset($row->model->product_pictures[0])  }}" alt="Product"></a></td>
+                                        <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
+                                        <td class="pro-price"><span> ৳{{ $row->price }}</span></td>
+
+                                        <td class="pro-quantity"><div class="pro-qty"><span id="{{ $row->rowId }}" class="dec qtybtn">-</span><input  type="text" value="{{ $row->qty }}"><span id="{{ $row->rowId }}" class="inc qtybtn">+</span></div></td>
+
+                                        <td class="pro-subtotal"> ৳<input id="item-price-{{ $row->rowId }}"  value={{ $row->price }} size="5"  disabled ></td>
+
+                                        <td class="pro-remove"><a href="#"><i class="fa fa-trash-o remove-cart" data-rowid="{{ $row->rowId }}"></i></a></td>
+                                    </tr>
+                                @empty
+                                    <h1 class="text text-danger">Empty Cart ....!!</h1>
+                                    <br>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -150,7 +134,7 @@
 
                 <div class="row">
 
-                    <div class="col-lg-6 col-12 mb-15">
+                    {{-- <div class="col-lg-6 col-12 mb-15">
                         <!-- Calculate Shipping -->
                         <div class="calculate-shipping">
                             <h4>Calculate Shipping</h4>
@@ -184,23 +168,11 @@
                             </form>
                         </div>
                         <!-- Discount Coupon -->
-                        <div class="discount-coupon">
-                            <h4>Discount Coupon Code</h4>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <input type="text" placeholder="Coupon Code">
-                                    </div>
-                                    <div class="col-md-6 col-12 mb-25">
-                                        <input type="submit" value="Apply Code">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+
+                    </div> --}}
 
                     <!-- Cart Summary -->
-                    <div class="col-lg-6 col-12 mb-40 d-flex">
+                    {{-- <div class="col-lg-6 col-12 mb-40 d-flex">
                         <div class="cart-summary">
                             <div class="cart-summary-wrap">
                                 <h4>Cart Summary</h4>
@@ -213,7 +185,7 @@
                                 <button class="update-btn">Update Cart</button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
 
@@ -223,73 +195,11 @@
 </div>
 <!-- Cart Page End -->
 
-<!-- Banner Section Start -->
-<div class="banner-section section mb-90">
-    <div class="container">
-        <div class="row">
 
-            <!-- Banner -->
-            <div class="col-12">
-                <div class="banner"><a href="#"><img src="assets/images/banner/banner-10.jpg" alt="Banner"></a></div>
-            </div>
-
-        </div>
-    </div>
-</div><!-- Banner Section End -->
-
-<!-- Brands Section Start -->
-<div class="brands-section section mb-90">
-    <div class="container">
-        <div class="row">
-
-            <!-- Brand Slider Start -->
-            <div class="brand-slider col">
-                <div class="brand-item col"><img src="assets/images/brands/brand-1.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-2.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-3.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-4.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-5.png" alt="Brands"></div>
-            </div><!-- Brand Slider End -->
-
-        </div>
-    </div>
-</div><!-- Brands Section End -->
-
-<!-- Subscribe Section Start -->
-<div class="subscribe-section section bg-gray pt-55 pb-55">
-    <div class="container">
-        <div class="row align-items-center">
-
-            <!-- Mailchimp Subscribe Content Start -->
-            <div class="col-lg-6 col-12 mb-15 mt-15">
-                <div class="subscribe-content">
-                    <h2>SUBSCRIBE <span>OUR NEWSLETTER</span></h2>
-                    <h2><span>TO GET LATEST</span> PRODUCT UPDATE</h2>
-                </div>
-            </div><!-- Mailchimp Subscribe Content End -->
-
-
-            <!-- Mailchimp Subscribe Form Start -->
-            <div class="col-lg-6 col-12 mb-15 mt-15">
-
-				<form class="subscribe-form" action="#">
-					<input type="email" autocomplete="off" placeholder="Enter your email here" />
-					<button >subscribe</button>
-				</form>
-				<!-- mailchimp-alerts Start -->
-				<div class="mailchimp-alerts text-centre">
-					<div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-					<div class="mailchimp-success"></div><!-- mailchimp-success end -->
-					<div class="mailchimp-error"></div><!-- mailchimp-error end -->
-				</div><!-- mailchimp-alerts end -->
-
-            </div><!-- Mailchimp Subscribe Form End -->
-
-        </div>
-    </div>
-</div><!-- Subscribe Section End -->
 
 <!-- JS
 ============================================ -->
+
+
 
 @endsection
