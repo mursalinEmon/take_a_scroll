@@ -75,6 +75,28 @@ class ProductController extends Controller
         return response(['product'=>$product]);
     }
 
+    public function store_cars(Store $store, Request $request){
+        $sub_category=SubCategory::where('name',$request->sub_cat_name)->get('id')->first();
+        $sub_category_id=$sub_category->id;
+        $product=Product::create([
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'slug'=>$request->name.'-'.'vendor'.auth()->user()->id,
+            'product_decription'=>$request->descrption,
+            'category_id'=>$request->category_id,
+            'product_warranty'=>$request->used,
+            'product_stock'=>$request->stock,
+            'sub_category_id'=>$sub_category_id,
+            'product_rating'=>0,
+            'brand_name'=>$request->brand,
+            'product_tags'=>"none",
+            'product_pictures'=>[],
+            'store_id'=>$store->id,
+        ]);
+
+        return response(['product'=>$product]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -186,5 +208,9 @@ class ProductController extends Controller
       ]);
        }
         return response(['pic'=>$product->product_pictures]);
+    }
+
+    public function car_create(Store $store){
+        return view('product.cars.createCar',compact('store'));
     }
 }

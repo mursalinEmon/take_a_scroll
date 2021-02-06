@@ -41,14 +41,20 @@ Route::middleware(['verified','vendor'])->group( function () {
     Route::post('/stores/{store}','StoreController@update')->name('stores.update');
 
 
-    // pruducts
+    // electronics pruducts
     Route::get('stores/{store}/product/create','ProductController@create')->name('product.create');
     Route::post('/stores/{store}/products','ProductController@store')->name('product.store');
+    Route::post('/stores/{store}/products/cars','ProductController@store_cars')->name('product.store.cars');
+
     Route::get('stores/{store}/products','ProductController@index')->name('products.view');
     Route::delete('products/{product}','ProductController@destroy')->name('product.delete');
     Route::get('/products/{product}/edit','ProductController@edit')->name('product.edit');
     Route::post('/products/{product}/update','ProductController@update')->name('product.update');
     Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
+
+    // car products
+    Route::get('stores/{store}/product/create-car','ProductController@car_create')->name('cars.product.create');
+
 });
 
 // customer routes
@@ -75,6 +81,8 @@ Route::post('/message/send','ChatController@storeMessage')->name('chat.storemess
 
 // category
 Route::get('/categories','CategoryController@index')->name('product.categories');
+Route::get('/categories/cars','CategoryController@cars')->name('product.categories.car');
+
 Route::get('/sub-category/{name}','CategoryController@fetch_sub_category')->name('product.sub-categories');
 
 Route::get('/test/{id}','ProductController@index');

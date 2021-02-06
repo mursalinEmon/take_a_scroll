@@ -11,6 +11,10 @@ class CategoryController extends Controller
         $categories=Category::all();
         return response(['categories'=>$categories]);
     }
+    public function cars(){
+        $categories=Category::all()->where('categoryType','cars');
+        return response(['categories'=>$categories]);
+    }
     public function create(){
         return view('admin.create_category');
     }
@@ -18,7 +22,8 @@ class CategoryController extends Controller
 
         $category = Category::create([
             "name"=>$request->cat_name,
-            "description"=>$request->cat_description
+            "description"=>$request->cat_description,
+            "categoryType"=>$request->category_type,
         ]);
         return response(['message'=>'Category created successfully!','category'=> $category]);
     }

@@ -54,7 +54,7 @@ export default {
             formData.append("sub_cat_description",this.sub_category_description);
 
             axios.post(`/categories/${this.category.id}/subcategory/create`,formData).then((res)=>{
-                console.log(res);
+                // console.log(res);
                 this.$alert(
                         res.data.message,
                         "",
