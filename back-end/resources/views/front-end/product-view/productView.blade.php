@@ -5,7 +5,11 @@
 <!-- Single Product Section Start -->
 <div class="product-section section mt-90 mb-90">
     <div class="container">
-
+        @if(Session::has('message'))
+            <div  class="alert alert-danger">
+                <h1 >{{ Session::get('message') }}</h1>
+            </div>
+        @endif
         <div class="row mb-90">
 
             <div class="col-lg-6 col-12 mb-50">
@@ -98,10 +102,10 @@
 
                         <div class="actions">
 
-                            <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+                            <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><i class="ti-shopping-cart" ></i><span>ADD TO CART</span></a>
 
                             <div class="wishlist-compare">
-                                <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
+                                {{-- <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a> --}}
                                 <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
                             </div>
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd6b7808ac7cf509d7513c7dc429f911",
+    "content-hash": "92107f0ecc8d48cb903e4601b49822a1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -120,16 +120,16 @@
         },
         {
             "name": "bumbummen99/shoppingcart",
-            "version": "3.2.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bumbummen99/LaravelShoppingcart.git",
-                "reference": "786477b54f637a57a80b3de387fb3dcdba5dd940"
+                "reference": "f2c763e311b0fc58b2dfdfa2c41c6318a7c884e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bumbummen99/LaravelShoppingcart/zipball/786477b54f637a57a80b3de387fb3dcdba5dd940",
-                "reference": "786477b54f637a57a80b3de387fb3dcdba5dd940",
+                "url": "https://api.github.com/repos/bumbummen99/LaravelShoppingcart/zipball/f2c763e311b0fc58b2dfdfa2c41c6318a7c884e1",
+                "reference": "f2c763e311b0fc58b2dfdfa2c41c6318a7c884e1",
                 "shasum": ""
             },
             "require": {
@@ -185,9 +185,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bumbummen99/LaravelShoppingcart/issues",
-                "source": "https://github.com/bumbummen99/LaravelShoppingcart/tree/3.2.0"
+                "source": "https://github.com/bumbummen99/LaravelShoppingcart/tree/4.0.0"
             },
-            "time": "2020-12-27T20:13:34+00:00"
+            "time": "2021-01-18T23:55:30+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

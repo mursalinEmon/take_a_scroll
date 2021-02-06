@@ -10,7 +10,12 @@
             </div>
         @endif
 
-
+        <div class="banner">
+            <img class="img-fluid" style="height: 40vh;width:100%;" src="{{ asset('/'.$store->banner) }}" alt="">
+        </div>
+        <h1 class="text m-4 text-center"><strong>{{ $store->name }}</strong></h1>
+        <hr>
+        <br>
         <div class="row">
 
             <div class="col-12">
@@ -67,7 +72,7 @@
                 <div class="shop-product-wrap grid row">
 
                     <div class="row">
-                        @forelse ($products as $product)
+                        @forelse ($store->products as $product)
 
                             <!-- Product Start -->
                         <div class="ee-product col-xl-3 col-lg-4 col-md-6 col-12 pb-30 pt-10 ">
@@ -92,7 +97,7 @@
                                 <!-- Category & Title -->
                                 <div class="category-title">
 
-                                    <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="cat">{{ $sub_cat_name }}</a>
+                                    <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="cat"></a>
                                     <h5 class="title"><a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}">{{ $product->name }}</a></h5>
 
                                 </div>

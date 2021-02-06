@@ -1,5 +1,6 @@
 <?php
 
+use App\Store;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,22 @@ Route::middleware(['verified','vendor'])->group( function () {
     Route::post('/product-image','ProductController@store_product_image')->name('prodevt.image_upload');
 });
 
+// customer routes
+Route::middleware(['verified','customer'])->group( function () {
+    Route::get('/customer-dashboard','CustomerProfileController@index')->name('customer.dashboard');
+    //cart
+    Route::get('/cart','CartController@index')->name('cart.index');
+    Route::get('/cart/products/{product}/add','CartController@add_to_cart')->name('cart.add');
+    Route::get('/cart/remove/product/{id}','CartController@remove_item')->name('cart.remove');
+    Route::get('/cart-restore','CartController@restore');
+
+});
+
+
+// store routes for customer
+Route::get('/stores/{store}/view','StoreController@show_customer')->name('customer.shop.show');
+
+
 
 Route::get('/chat', 'HomeController@chat')->name('chat');
 Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
@@ -58,8 +75,7 @@ Route::get('/sub-category/{name}','CategoryController@fetch_sub_category')->name
 
 Route::get('/test/{id}','ProductController@index');
 
-//cart
-Route::get('/cart','CartController@index')->name('cart.index');
+
 
 
 //sub actegory or products
@@ -81,6 +97,11 @@ Route::get('/logout', function () {
 View::composer(['*'], function ($view) {
 
     $categories=Category::all();
-
-    $view->with('categories',$categories);
+    $cart=Cart::count();
+    $electronics_shops=Store::where('type','electronics')->get();
+    $realestate_shops=Store::where('type','realestate')->get();
+    $cars_shops=Store::where('type','cars')->get();
+    // $shops=array(['Electronics'=>$electronics_shops,'Realestate'=>$realestate_shops,'Cars'=>$cars_shops]);
+// dd($shops);
+    $view->with(['categories'=>$categories,'cart'=>$cart,'Electronics'=>$electronics_shops,'Realestate'=>$realestate_shops,'Cars'=>$cars_shops]);
 });
