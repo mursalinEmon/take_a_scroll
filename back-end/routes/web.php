@@ -1,5 +1,6 @@
 <?php
 
+use App\Store;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,13 @@ Route::middleware(['verified','customer'])->group( function () {
     Route::get('/cart-restore','CartController@restore');
 
 });
+
+
+// store routes for customer
+Route::get('/stores/{store}/view','StoreController@show_customer')->name('customer.shop.show');
+
+
+
 Route::get('/chat', 'HomeController@chat')->name('chat');
 Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
 Route::get('/messages/{id}','ChatController@fetchMessages')->name('chat.messages');
@@ -90,6 +98,10 @@ View::composer(['*'], function ($view) {
 
     $categories=Category::all();
     $cart=Cart::count();
-
-    $view->with(['categories'=>$categories,'cart'=>$cart]);
+    $electronics_shops=Store::where('type','electronics')->get();
+    $realestate_shops=Store::where('type','realestate')->get();
+    $cars_shops=Store::where('type','cars')->get();
+    // $shops=array(['Electronics'=>$electronics_shops,'Realestate'=>$realestate_shops,'Cars'=>$cars_shops]);
+// dd($shops);
+    $view->with(['categories'=>$categories,'cart'=>$cart,'Electronics'=>$electronics_shops,'Realestate'=>$realestate_shops,'Cars'=>$cars_shops]);
 });

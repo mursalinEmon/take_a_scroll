@@ -98,7 +98,7 @@
                 <div class="col mt-15 mb-15">
                     <!-- Logo Start -->
                     <div class="header-logo">
-                        <a href="index.html">
+                        <a href="{{ url('/') }}">
                             <h1>Take A Scroll</h1>
                             {{-- <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
                             <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template"> --}}
@@ -112,21 +112,49 @@
                         <nav>
                             <ul>
                                 <li class="active"><a href="{{ url('/') }}">HOME</a></li>
-                                <li class="menu-item-has-children"><a href="shop-grid.html">Shop</a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item-has-children"><a href="shop-grid.html">shop grid</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="shop-grid.html">shop grid</a></li>
+                                <li class="menu-item-has-children"><a href="javascript:void(0)">Shops</a>
+                                   <ul class="mega-menu three-column ">
+                                        <li>
+                                           <ul>
+                                                <li><strong>Electronics</strong></li>
+                                                @forelse($Electronics as $shop)
+                                                    <li style="margin-left: -1rem;"><a  href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
+                                                    </li>
+                                                @empty
+                                                    <h1 class="text text-danger">No Shops available...!!</h1>
+                                                @endforelse
+                                           </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <li><strong>Realestate</strong></li>
+                                                @forelse($Realestate as $shop)
+                                                    <li style="margin-left: -1rem;"><a  href="javascript:void(0)">{{ $shop->name }}</a>
+                                                    </li>
+                                                @empty
+                                                    <li class="text text-danger">No Shops available...!!</li>
+                                                @endforelse
                                             </ul>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="single-product.html">Single Product</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="single-product.html">Single Product 1</a></li>
-                                            </ul>
+                                        <li>
+                                           <ul>
+                                                <li><strong>Cars</strong></li>
+                                                @forelse($Cars as $shop)
+                                                    <li style="margin-left: -1rem;"><a  href="javascript:void(0)">{{ $shop->name }}</a>
+                                                    </li>
+                                                @empty
+                                                    <li class="text text-danger">No Shops available...!!</li>
+                                                @endforelse
+                                           </ul>
+                                            {{-- <li class="menu-item-has-children"><a href="single-product.html">Single Product</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="single-product.html">Single Product 1</a></li>
+                                                </ul>
+                                            </li> --}}
                                         </li>
-                                    </ul>
+                                   </ul>
                                 </li>
-                                <li class="menu-item-has-children"><a href="#">Categories</a>
+                                <li class="menu-item-has-children"><a href="javascript:void(0)">Categories</a>
                                     <ul class="mega-menu three-column">
                                         @forelse ($categories as $cat)
                                             <li><a href="#">{{ $cat->name }}</a>
