@@ -129,7 +129,7 @@
                                             <ul>
                                                 <li><strong>Realestate</strong></li>
                                                 @forelse($Realestate as $shop)
-                                                    <li style="margin-left: -1rem;"><a  href="javascript:void(0)">{{ $shop->name }}</a>
+                                                    <li style="margin-left: -1rem;"><a  href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
                                                     </li>
                                                 @empty
                                                     <li class="text text-danger">No Shops available...!!</li>
@@ -140,7 +140,7 @@
                                            <ul>
                                                 <li><strong>Cars</strong></li>
                                                 @forelse($Cars as $shop)
-                                                    <li style="margin-left: -1rem;"><a  href="javascript:void(0)">{{ $shop->name }}</a>
+                                                    <li style="margin-left: -1rem;"><a href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
                                                     </li>
                                                 @empty
                                                     <li class="text text-danger">No Shops available...!!</li>
