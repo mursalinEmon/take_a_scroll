@@ -113,7 +113,8 @@ View::composer(['*'], function ($view) {
     $electronics_shops=Store::where('type','electronics')->get();
     $realestate_shops=Store::where('type','realestate')->get();
     $cars_shops=Store::where('type','cars')->get();
+    $category_type=['Electronics','Cars','Realestate'];
     // $shops=array(['Electronics'=>$electronics_shops,'Realestate'=>$realestate_shops,'Cars'=>$cars_shops]);
 // dd($shops);
-    $view->with(['categories'=>$categories,'cart'=>$cart,'Electronics'=>$electronics_shops,'Realestate'=>$realestate_shops,'Cars'=>$cars_shops]);
+    $view->with(['categories'=>$categories,'cart'=>$cart,'Electronics'=>$electronics_shops,'Realestate'=>$realestate_shops,'Cars'=>$cars_shops,'category_type']);
 });
