@@ -8370,7 +8370,12 @@ Buffer.compare = function compare (a, b) {
     throw new TypeError('Arguments must be Buffers')
   }
 
+<<<<<<< HEAD
+// module
+exports.push([module.i, "\n.moving-button{\r\n\r\n\r\n\r\n    transform: translateY(20vh);\n}\r\n\r\n", ""]);
+=======
   if (a === b) return 0
+>>>>>>> 4ad32f4b71609ab2fd90f20967e56376b27493c5
 
   var x = a.length
   var y = b.length
@@ -78689,8 +78694,8 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
-  key: "3921f05a9e8200124c98",
-  cluster: "ap2",
+  key: "",
+  cluster: "mt1",
   forceTLS: true
 });
 
@@ -79617,8 +79622,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Shuvo\Desktop\client_projects\Tamjid\take_a_scroll\back-end\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Shuvo\Desktop\client_projects\Tamjid\take_a_scroll\back-end\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Mursalin\take_a_scroll\back-end\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Mursalin\take_a_scroll\back-end\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
