@@ -55,6 +55,11 @@ Route::middleware(['verified','vendor'])->group( function () {
     // car products
     Route::get('stores/{store}/product/create-car','ProductController@car_create')->name('cars.product.create');
 
+    //realestate products
+
+    Route::get('stores/{store}/realestate-product/create','ProductController@create_realestate_products')->name('product.realestate.create');
+
+
 });
 
 // customer routes

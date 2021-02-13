@@ -44,6 +44,9 @@ class ProductController extends Controller
         return view('product.createProduct',compact('store'));
     }
 
+    public function create_realestate_products(Store $store){
+        return view('product.realestate.createRealestae',compact('store'));
+    }
     /**
      * Store a newly created resource in storage.
      *
