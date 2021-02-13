@@ -58,6 +58,7 @@ Route::middleware(['verified','vendor'])->group( function () {
     //realestate products
 
     Route::get('stores/{store}/realestate-product/create','ProductController@create_realestate_products')->name('product.realestate.create');
+    Route::post('stores/{store}/realestate-product/store','ProductController@store_realestate_products')->name('product.realestate.store');
 
 
 });

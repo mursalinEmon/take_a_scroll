@@ -10,7 +10,7 @@
                         class="form-control"
                         id="productName"
                         v-model="p_section"
-                        placeholder="put product warrenty"
+                        placeholder=""
                     />
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-lg-6">
@@ -186,12 +186,16 @@ export default {
             // we will pass the pruduct id  in the url collected from the server response after the product creation and the add image as update value
             store_id:'',
             p_district: "Dhaka",
-            p_brand: "",
+            p_section: "",
+            p_area: "",
             p_price: 0.0,
             p_category: "Ralestate",
             p_category_id: "",
             p_sub_category: "",
             p_description: "",
+            p_bed:null,
+            p_bath:null,
+            p_space:null,
             areas:["Bashundhara R-A",
                     "Uttara",
                     "Mirpur",
@@ -210,8 +214,7 @@ export default {
                     "Kathalbagan",
                     "Shyamoli",
                     "Paribagh"],
-            section: "",
-            p_stock: 0,
+
             p_tags: [],
             product_id: "",
             categories: [],
@@ -270,22 +273,19 @@ export default {
             let formData = new FormData();
             formData.append("category_id", this.p_category_id);
             formData.append("sub_cat_name", this.p_sub_category);
-            formData.append("name", this.p_name);
-            formData.append("brand", this.p_brand);
             formData.append("price", this.p_price);
-            formData.append("used", this.p_used);
-            formData.append("stock", this.p_stock);
-            formData.append("descrption", this.p_description);
-            if(this.p_category_id === "" || this.p_sub_category === "" || this.p_name==="" || this.p_brand ==="" ||  this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" ||  this.p_description === ""){
+            formData.append("p_description", this.p_description);
+            formData.append("p_district", this.p_district);
+            formData.append("p_section", this.p_section);
+            formData.append("p_section", this.p_section);
+            formData.append("p_area", this.p_area);
+            formData.append("p_bed", this.p_bed);
+            formData.append("p_bath", this.p_bath);
+            formData.append("p_space", this.p_space);
 
-                        this.$alert(
-                        res.data.message,
-                        "",
-                        "Fill all The Form Fields "
-                        );
-            }else{
+
                 axios
-                .post(`/stores/${this.store_id}/products/cars`, formData)
+                .post(`/stores/${this.store_id}/realestate-product/store`, formData)
                 .then(res => {
                     console.log(res);
                     this.product_id = res.data.product.id;
@@ -295,7 +295,7 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
-            }
+
 
         }
     },

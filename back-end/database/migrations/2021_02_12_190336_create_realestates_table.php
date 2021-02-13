@@ -15,7 +15,7 @@ class CreateRealestatesTable extends Migration
     {
         Schema::create('realestates', function (Blueprint $table) {
             $table->id();
-            $table->json('images');
+            $table->json('images')->nullable();
             $table->double('price');
             $table->string('bath')->nullable();
             $table->string('bed')->nullable();

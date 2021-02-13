@@ -2847,15 +2847,17 @@ __webpack_require__.r(__webpack_exports__);
       // we will pass the pruduct id  in the url collected from the server response after the product creation and the add image as update value
       store_id: '',
       p_district: "Dhaka",
-      p_brand: "",
+      p_section: "",
+      p_area: "",
       p_price: 0.0,
       p_category: "Ralestate",
       p_category_id: "",
       p_sub_category: "",
       p_description: "",
+      p_bed: null,
+      p_bath: null,
+      p_space: null,
       areas: ["Bashundhara R-A", "Uttara", "Mirpur", "Gulshan", "Dhanmondi", "Mirpur DOHS", "Mohammadpur", "Banasree", "Banani", "Aftab Nagar", "Badda", "Motijheel", "Tejgaon", "Kalabagan", "Lalmatia", "Kathalbagan", "Shyamoli", "Paribagh"],
-      section: "",
-      p_stock: 0,
       p_tags: [],
       product_id: "",
       categories: [],
@@ -2908,25 +2910,23 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append("category_id", this.p_category_id);
       formData.append("sub_cat_name", this.p_sub_category);
-      formData.append("name", this.p_name);
-      formData.append("brand", this.p_brand);
       formData.append("price", this.p_price);
-      formData.append("used", this.p_used);
-      formData.append("stock", this.p_stock);
-      formData.append("descrption", this.p_description);
-
-      if (this.p_category_id === "" || this.p_sub_category === "" || this.p_name === "" || this.p_brand === "" || this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" || this.p_description === "") {
-        this.$alert(res.data.message, "", "Fill all The Form Fields ");
-      } else {
-        axios.post("/stores/".concat(this.store_id, "/products/cars"), formData).then(function (res) {
-          console.log(res);
-          _this2.product_id = res.data.product.id;
-          _this2.dropzoneOptions.params.product_id = _this2.product_id;
-          _this2.dropzoneOptions.params.store_id = _this2.store_id;
-        })["catch"](function (err) {
-          console.log(err);
-        });
-      }
+      formData.append("p_description", this.p_description);
+      formData.append("p_district", this.p_district);
+      formData.append("p_section", this.p_section);
+      formData.append("p_section", this.p_section);
+      formData.append("p_area", this.p_area);
+      formData.append("p_bed", this.p_bed);
+      formData.append("p_bath", this.p_bath);
+      formData.append("p_space", this.p_space);
+      axios.post("/stores/".concat(this.store_id, "/realestate-product/store"), formData).then(function (res) {
+        console.log(res);
+        _this2.product_id = res.data.product.id;
+        _this2.dropzoneOptions.params.product_id = _this2.product_id;
+        _this2.dropzoneOptions.params.store_id = _this2.store_id;
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -64274,11 +64274,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "productName",
-                      placeholder: "put product warrenty"
-                    },
+                    attrs: { type: "text", id: "productName", placeholder: "" },
                     domProps: { value: _vm.p_section },
                     on: {
                       input: function($event) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Store;
 use App\Product;
 use App\Category;
+use App\Realestate;
 use App\SubCategory;
 use Illuminate\Http\Request;
 
@@ -76,6 +77,27 @@ class ProductController extends Controller
         ]);
 
         return response(['product'=>$product]);
+    }
+    public function store_realestate_products(Store $store, Request $request){
+
+
+
+        $sub_cat=SubCategory::where('name',$request->sub_cat_name)->first();
+
+        $product=Realestate::create([
+            'images'=>[],
+            'price'=>$request->price,
+            'bath'=>$request->p_bath ?? null,
+            'bed'=>$request->p_bed??null,
+            'space_area'=>$request->p_space,
+            'description'=>$request->p_district,
+            'category_id'=>$request->category_id,
+            'sub_category_id'=> $sub_cat,
+            'district'=>$request->p_district,
+            'area'=>$request->p_section,
+            'sub_area'=>$request->p_area
+        ]);
+        dd($product);
     }
 
     public function store_cars(Store $store, Request $request){
