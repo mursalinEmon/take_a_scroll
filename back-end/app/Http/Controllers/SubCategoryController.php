@@ -17,10 +17,21 @@ class SubCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Category $category , $sub_cat_name,$sub_cat)
-    {
-        $products=Product::all()->where('sub_category_id',$sub_cat);
 
-        return view('front-end.product-view.productsView',compact('products','sub_cat_name'));
+    {
+        if($category->categoryType==="realestate"){
+            $products=Realestate::all()->where('sub_category_id',$sub_cat);
+            return view('front-end.product-view.realestateProductsView',compact('products','sub_cat_name'));
+
+        }
+        else{
+            $products=Product::all()->where('sub_category_id',$sub_cat);
+            return view('front-end.product-view.productsView',compact('products','sub_cat_name'));
+
+
+        }
+        // dd($products);
+
     }
 
     /**

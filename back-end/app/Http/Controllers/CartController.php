@@ -110,6 +110,26 @@ class CartController extends Controller
     return response(['message' => "product added to the cart"]);
     }
 
+
+    // public function add_to_cart_realestate(Realestate $realestate){
+    //     // dd($product);
+    //     $product=[
+    //         'id' => $product->id,
+    //         'name' => $product->name,
+    //         'qty' => 1,
+    //         'price' => $product->price,
+    //         'weight' => 550,
+    //     ];
+    // $cartItem=Cart::add($product);
+    // $cartItem->associate('App\Product');
+
+    // // $cart=Cart::content();
+    // Cart::store(auth()->user()->id);
+
+    // return response(['message' => "product added to the cart"]);
+    // }
+
+
     public function remove_item($id){
         Cart::remove($id);
         return response(['message' => "Product removed from the cart"]);
