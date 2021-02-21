@@ -18,23 +18,43 @@
                 <div class="single-product-image thumb-right">
 
                     <div class="tab-content">
-                        {{-- product images --}}
-                       @forelse($product->product_pictures as $key => $value)
+                       @if($product->category->categoryType=='realestate')
+                             {{-- product images --}}
+                            @forelse($product->images as $key => $value)
                             <div id="single-image-{{ $key}}" class="tab-pane fade show active big-image-slider">
                                 <div class="big-image"><img src="{{ asset($value) }}" alt="Big Image"><a href="{{ asset($value) }}"  class="big-image-popup"><i class="fa fa-search-plus"></i></a></div>
                             </div>
-                       @empty
-                           <h1 class="text text-danger">No Images Found ...!!1</h1>
-                       @endforelse
+                                @empty
+                                    <h1 class="text text-danger">No Images Found ...!!1</h1>
+                                @endforelse
+                       @else
+                             {{-- product images --}}
+                        @forelse($product->product_pictures as $key => $value)
+                        <div id="single-image-{{ $key}}" class="tab-pane fade show active big-image-slider">
+                            <div class="big-image"><img src="{{ asset($value) }}" alt="Big Image"><a href="{{ asset($value) }}"  class="big-image-popup"><i class="fa fa-search-plus"></i></a></div>
+                        </div>
+                            @empty
+                                <h1 class="text text-danger">No Images Found ...!!1</h1>
+                            @endforelse
+                       @endif
 
                     </div>
                     {{-- thumb nails --}}
                     <div class="thumb-image-slider nav" data-vertical="true">
+                    @if($product->category->categoryType=='realestate')
+
+                        @forelse($product->images as $key => $value)
+                        <a class="thumb-image active" data-toggle="tab" href="#single-image-{{ $key}}"><img src="{{ asset($value) }}" alt="Thumbnail Image"></a>
+                        @empty
+                        @endforelse
+                    @else
                         @forelse($product->product_pictures as $key => $value)
-                            <a class="thumb-image active" data-toggle="tab" href="#single-image-{{ $key}}"><img src="{{ asset($value) }}" alt="Thumbnail Image"></a>
+                        <a class="thumb-image active" data-toggle="tab" href="#single-image-{{ $key}}"><img src="{{ asset($value) }}" alt="Thumbnail Image"></a>
                         @empty
 
                         @endforelse
+
+                    @endif
 
 
                     </div>
