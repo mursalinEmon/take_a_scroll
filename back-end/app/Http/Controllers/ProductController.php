@@ -94,7 +94,7 @@ class ProductController extends Controller
             'bath'=> $bath ,
             'bed'=> $bed ,
             'space_area'=> $space_are,
-            'description'=>$request->p_district,
+            'description'=>$request->p_description,
             'category_id'=>$request->category_id,
             'sub_category_id'=> $sub_cat->id,
             'district'=>$request->p_district,

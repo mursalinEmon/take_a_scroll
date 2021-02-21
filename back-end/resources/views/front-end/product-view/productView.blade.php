@@ -122,7 +122,11 @@
 
                         <div class="actions">
 
-                            <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><i class="ti-shopping-cart" ></i><span>ADD TO CART</span></a>
+                           @if($product->category->categoryType=='realestate')
+
+                           @else
+                                 <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><i class="ti-shopping-cart" ></i><span>ADD TO CART</span></a>
+                           @endif
 
                             <div class="wishlist-compare">
                                 {{-- <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a> --}}
@@ -180,9 +184,15 @@
 
                         <div class="row">
                             <div class="single-product-description-content col-lg-8 col-12">
-                               <p>
-                                   {{ $product->product_decription }}
-                               </p>
+                              @if($product->category->categoryType=='realestate')
+                              <h3>Location:</h3>
+                                    <h4> {{ $product->sub_area }} ,{{ $product->area }} ,{{ $product->district }}</h4>
+                                     {{ $product->description }}
+                              @else
+                                <p>
+                                    {{ $product->product_decription }}
+                                </p>
+                              @endif
                             </div>
                             <div class="single-product-description-image col-lg-4 col-12">
                                 <img src="assets/images/single-product/description.png" alt="description">
