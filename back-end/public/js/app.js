@@ -2849,14 +2849,14 @@ __webpack_require__.r(__webpack_exports__);
       p_district: "Dhaka",
       p_section: "",
       p_area: "",
-      p_price: 0.0,
+      p_price: 0,
       p_category: "Ralestate",
       p_category_id: "",
       p_sub_category: "",
       p_description: "",
-      p_bed: null,
-      p_bath: null,
-      p_space: null,
+      p_bed: 0,
+      p_bath: 0,
+      p_space: 0,
       areas: ["Bashundhara R-A", "Uttara", "Mirpur", "Gulshan", "Dhanmondi", "Mirpur DOHS", "Mohammadpur", "Banasree", "Banani", "Aftab Nagar", "Badda", "Motijheel", "Tejgaon", "Kalabagan", "Lalmatia", "Kathalbagan", "Shyamoli", "Paribagh"],
       p_tags: [],
       product_id: "",
@@ -2907,14 +2907,15 @@ __webpack_require__.r(__webpack_exports__);
     addProduct: function addProduct() {
       var _this2 = this;
 
-      var formData = new FormData();
+      var formData = new FormData(); // this.price= this.price.toFixed(2);
+
       formData.append("category_id", this.p_category_id);
       formData.append("sub_cat_name", this.p_sub_category);
       formData.append("price", this.p_price);
       formData.append("p_description", this.p_description);
       formData.append("p_district", this.p_district);
-      formData.append("p_section", this.p_section);
-      formData.append("p_section", this.p_section);
+      formData.append("p_section", this.p_section); // formData.append("p_section", this.p_section);
+
       formData.append("p_area", this.p_area);
       formData.append("p_bed", this.p_bed);
       formData.append("p_bath", this.p_bath);
