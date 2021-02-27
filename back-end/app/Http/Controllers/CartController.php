@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Cart;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class CartController extends Controller
 {
@@ -105,33 +107,25 @@ class CartController extends Controller
     $cartItem->associate('App\Product');
 
     // $cart=Cart::content();
-    Cart::store(auth()->user()->id);
+    $indentity=auth()->user()->name.auth()->user()->id;
+
+    Cart::store( $indentity);
 
     return response(['message' => "product added to the cart"]);
     }
 
-
-    // public function add_to_cart_realestate(Realestate $realestate){
-    //     // dd($product);
-    //     $product=[
-    //         'id' => $product->id,
-    //         'name' => $product->name,
-    //         'qty' => 1,
-    //         'price' => $product->price,
-    //         'weight' => 550,
-    //     ];
-    // $cartItem=Cart::add($product);
-    // $cartItem->associate('App\Product');
-
-    // // $cart=Cart::content();
-    // Cart::store(auth()->user()->id);
-
-    // return response(['message' => "product added to the cart"]);
-    // }
-
-
     public function remove_item($id){
         Cart::remove($id);
         return response(['message' => "Product removed from the cart"]);
+    }
+
+    public function checkout(){
+         $indentity=auth()->user()->name.auth()->user()->id;
+
+        // $cart=Cart::instance($indentity);
+        // $user = DB::table('shoppingcart')->where('identifier',$indentity)->first();
+        //  $cart=Cart::restore('3');
+        $cart=Cart::stored_data($indentity);
+        dd( $cart);
     }
 }

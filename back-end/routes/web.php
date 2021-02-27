@@ -73,6 +73,9 @@ Route::middleware(['verified','customer'])->group( function () {
 
     Route::get('/cart/remove/product/{id}','CartController@remove_item')->name('cart.remove');
     Route::get('/cart-restore','CartController@restore');
+    Route::get('/cart-checkout','CartController@checkout');
+
+
 
 });
 
