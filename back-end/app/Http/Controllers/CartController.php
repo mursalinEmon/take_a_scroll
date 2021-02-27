@@ -130,7 +130,7 @@ class CartController extends Controller
     public function update_cart($item,$qty){
             // dd($item,$qty);
         Cart::update($item, $qty);
-        dd(Cart::content());
+        // dd(Cart::content());
         return response(['message'=>'Product Quantity Updated']);
     }
 }

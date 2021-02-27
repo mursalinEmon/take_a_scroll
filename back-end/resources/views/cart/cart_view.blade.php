@@ -122,6 +122,9 @@
 
                                         <td class="pro-remove"><a href="#"><i class="fa fa-trash-o remove-cart" data-rowid="{{ $row->rowId }}"></i></a></td>
                                     </tr>
+                                    <tr>
+                                        <a  href="{{ route('cart.checkout') }}" class="btn btn-success float-right mr-4 pr-4 mt-4 mb-4"><span class="text text-white">Check-Out</span></a>
+                                    </tr>
                                 @empty
                                     <h1 class="text text-danger">Empty Cart ....!!</h1>
                                     <br>
