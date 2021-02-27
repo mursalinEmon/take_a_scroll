@@ -120,12 +120,17 @@ class CartController extends Controller
     }
 
     public function checkout(){
-         $indentity=auth()->user()->name.auth()->user()->id;
-
-        // $cart=Cart::instance($indentity);
-        // $user = DB::table('shoppingcart')->where('identifier',$indentity)->first();
-        //  $cart=Cart::restore('3');
+        $indentity=auth()->user()->name.auth()->user()->id;
         $cart=Cart::stored_data($indentity);
-        dd( $cart);
+        $cart=Cart::content();
+
+        dd($cart);
+    }
+
+    public function update_cart($item,$qty){
+            // dd($item,$qty);
+        Cart::update($item, $qty);
+        dd(Cart::content());
+        return response(['message'=>'Product Quantity Updated']);
     }
 }

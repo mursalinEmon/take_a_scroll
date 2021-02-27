@@ -116,7 +116,7 @@
                                         <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
                                         <td class="pro-price"><span> ৳{{ $row->price }}</span></td>
 
-                                        <td class="pro-quantity"><div class="pro-qty"><span id="{{ $row->rowId }}" class="dec qtybtn">-</span><input  type="text" value="{{ $row->qty }}"><span id="{{ $row->rowId }}" class="inc qtybtn">+</span></div></td>
+                                        <td class="pro-quantity"><div class="pro-qty"><span id="{{ $row->rowId }}"  class="dec qtybtn">-</span><input  type="text" value="{{ $row->qty }}"><span id="{{ $row->rowId }}" class="inc qtybtn">+</span></div></td>
 
                                         <td class="pro-subtotal"> ৳<input id="item-price-{{ $row->rowId }}"  value={{ $row->price }} size="5"  disabled ></td>
 
