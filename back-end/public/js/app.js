@@ -8370,12 +8370,7 @@ Buffer.compare = function compare (a, b) {
     throw new TypeError('Arguments must be Buffers')
   }
 
-<<<<<<< HEAD
-// module
-exports.push([module.i, "\n.moving-button{\r\n\r\n\r\n\r\n    transform: translateY(20vh);\n}\r\n\r\n", ""]);
-=======
   if (a === b) return 0
->>>>>>> 4ad32f4b71609ab2fd90f20967e56376b27493c5
 
   var x = a.length
   var y = b.length
@@ -9975,7 +9970,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.moving-button{\n\n\n\n    transform: translateY(20vh);\n}\n\n", ""]);
+exports.push([module.i, "\n.moving-button{\r\n\r\n\r\n\r\n    transform: translateY(20vh);\n}\r\n\r\n", ""]);
 
 // exports
 
