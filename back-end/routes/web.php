@@ -2,6 +2,7 @@
 
 use App\Store;
 use App\Category;
+// use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

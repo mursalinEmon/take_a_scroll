@@ -202,7 +202,8 @@ class ProductController extends Controller
 
     public function store_product_image(Request $request ){
         // dd($request);
-        $product=Realestate::findOrFail($request->product_id);
+        $product=Product::findOrFail($request->product_id);
+
          //image upload in the file system section
          $imageName = time().'.'.$request->file->getClientOriginalExtension();
          $request->file->move(public_path('images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id), $imageName);
@@ -216,7 +217,7 @@ class ProductController extends Controller
         array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
 
             $product->update([
-                'images' =>$images,
+                'product_pictures'=>$images,
             ]);
 
 
@@ -224,22 +225,22 @@ class ProductController extends Controller
        else if(!is_string($product->images)){
 
 
-        $images=array_merge($images,$product->images);
+        $images=array_merge($images,$product->product_pictures);
 
         array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
            $product->update([
-            'images' =>$images,
+            'product_pictures'=>$images,
          ]);
        }
        else{
 
-        array_push($images,$product->images);
+        array_push($images,$product->product_pictures);
         array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
         $product->update([
-         'images' => $images,
+         'product_pictures'=>$images,
       ]);
        }
-        return response(['pic'=>$product->images]);
+        return response(['pic'=>$product->product_pictures]);
     }
 
     public function car_create(Store $store){
