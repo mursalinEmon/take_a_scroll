@@ -22,9 +22,15 @@ class ProductController extends Controller
 
         // $pictures=Product::findOrFail($id);
 
-        if (auth()->user()){
+        if (auth()->user()  && $store->type !="realestate"){
             $products=Product::where('store_id',$store->id)->paginate(5);
-            // dd($products);
+
+
+            return view('product.showProducts',compact('products'));
+        }
+        elseif(auth()->user() && $store->type =="realestate"){
+            $products=Realestate::where('store_id',$store->id)->paginate(5);
+
 
             return view('product.showProducts',compact('products'));
         }
@@ -214,7 +220,7 @@ class ProductController extends Controller
 
          $images=[];
 
-       if ($product->images ===[]){
+       if ($product->product_pictures ===[]){
 
 
         array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
@@ -225,7 +231,7 @@ class ProductController extends Controller
 
 
        }
-       else if(!is_string($product->images)){
+       else if(!is_string($product->product_pictures)){
 
 
         $images=array_merge($images,$product->product_pictures);
@@ -244,6 +250,47 @@ class ProductController extends Controller
       ]);
        }
         return response(['pic'=>$product->product_pictures]);
+        }
+        else{
+            $product=Realestate::findOrFail($request->product_id);
+
+            //image upload in the file system section
+            $imageName = time().'.'.$request->file->getClientOriginalExtension();
+            $request->file->move(public_path('images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id), $imageName);
+
+
+            $images=[];
+
+          if ($product->images ===[]){
+
+
+           array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
+
+               $product->update([
+                   'images'=>$images,
+               ]);
+
+
+          }
+          else if(!is_string($product->images)){
+
+
+           $images=array_merge($images,$product->images);
+
+           array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
+              $product->update([
+               'images'=>$images,
+            ]);
+          }
+          else{
+
+           array_push($images,$product->images);
+           array_push($images,'images/'.str_replace(' ', '',auth()->user()->name).'/'.$request->store_id.'/products/'.$request->product_id.'/'.$imageName);
+           $product->update([
+            'images'=>$images,
+         ]);
+          }
+           return response(['pic'=>$product->images]);
         }
     }
 
