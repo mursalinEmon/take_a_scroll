@@ -202,7 +202,10 @@ class ProductController extends Controller
 
     public function store_product_image(Request $request ){
         // dd($request);
-        $product=Product::findOrFail($request->product_id);
+        $store=Store::findOrFail($request->store_id);
+
+        if($store->type !== "realestate"){
+            $product=Product::findOrFail($request->product_id);
 
          //image upload in the file system section
          $imageName = time().'.'.$request->file->getClientOriginalExtension();
@@ -241,6 +244,7 @@ class ProductController extends Controller
       ]);
        }
         return response(['pic'=>$product->product_pictures]);
+        }
     }
 
     public function car_create(Store $store){

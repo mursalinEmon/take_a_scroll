@@ -3413,6 +3413,7 @@ __webpack_require__.r(__webpack_exports__);
     this.p_sub_category_id = this.product.sub_category_id;
     this.fetch_categories();
     this.dropzoneOptions.params.product_id = this.product.id;
+    this.dropzoneOptions.params.store_id = this.product.store_id;
   },
   data: function data() {
     return {
@@ -3438,7 +3439,8 @@ __webpack_require__.r(__webpack_exports__);
         ulpoadMultiple: true,
         parallelUploads: 5,
         params: {
-          product_id: ""
+          product_id: "",
+          store_id: ""
         },
         headers: {
           "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
