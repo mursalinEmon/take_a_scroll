@@ -185,6 +185,8 @@ created(){
         this.p_sub_category_id=this.product.sub_category_id;
         this.fetch_categories();
         this.dropzoneOptions.params.product_id=this.product.id;
+        this.dropzoneOptions.params.store_id=this.product.store_id;
+
 
 },
 data:()=>{
@@ -211,7 +213,9 @@ data:()=>{
                 ulpoadMultiple: true,
                 parallelUploads: 5,
                 params: {
-                    product_id: ""
+                    product_id: "",
+                    store_id:""
+
                 },
                 headers: {
                     "X-CSRF-TOKEN": document.head.querySelector(

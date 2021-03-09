@@ -2,6 +2,7 @@
 
 use App\Store;
 use App\Category;
+// use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -132,3 +133,20 @@ View::composer(['*'], function ($view) {
 // dd($shops);
     $view->with(['categories'=>$categories,'cart'=>$cart,'Electronics'=>$electronics_shops,'Realestate'=>$realestate_shops,'Cars'=>$cars_shops,'category_type']);
 });
+
+
+
+
+// SSLCOMMERZ Start
+Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout');
+Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
+
+Route::post('/pay', 'SslCommerzPaymentController@index');
+Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
+
+Route::post('/success', 'SslCommerzPaymentController@success');
+Route::post('/fail', 'SslCommerzPaymentController@fail');
+Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+
+Route::post('/ipn', 'SslCommerzPaymentController@ipn');
+//SSLCOMMERZ END
