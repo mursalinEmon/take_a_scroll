@@ -71,11 +71,13 @@ class SubCategoryController extends Controller
     public function show(Category $category,$sub_cat_name,$sub_cat,Product $product)
     {
 
+
         return view('front-end.product-view.productView',compact('product','sub_cat_name'));
     }
     public function show_realestate(Category $category,$sub_cat_name,$sub_cat,Realestate $realestate)
     {
                 $product=$realestate;
+
 
         return view('front-end.product-view.productView',compact('product','sub_cat_name'));
     }

@@ -18,7 +18,7 @@
                 <div class="single-product-image thumb-right">
 
                     <div class="tab-content">
-                       @if($product->category->categoryType=='realestate')
+                       @if($product->category->categoryType=='RealEstate')
                              {{-- product images --}}
                             @forelse($product->images as $key => $value)
                             <div id="single-image-{{ $key}}" class="tab-pane fade show active big-image-slider">
@@ -41,7 +41,7 @@
                     </div>
                     {{-- thumb nails --}}
                     <div class="thumb-image-slider nav" data-vertical="true">
-                    @if($product->category->categoryType=='realestate')
+                    @if($product->category->categoryType=='RealEstate')
 
                         @forelse($product->images as $key => $value)
                         <a class="thumb-image active" data-toggle="tab" href="#single-image-{{ $key}}"><img src="{{ asset($value) }}" alt="Thumbnail Image"></a>
@@ -122,8 +122,10 @@
 
                         <div class="actions">
 
-                           @if($product->category->categoryType=='realestate')
-
+                           @if($product->category->categoryType=='RealEstate'  )
+                                <a href="{{ route('contact.mail',$product->store_id) }}"  ><i class="ti-shopping-cart" ></i><button class="btn btn-success"></button>Contact</button></a>
+                           @elseif ($product->category->categoryType=='cars' )
+                                <a href="{{ route('contact.mail',$product->store_id) }}" ><i class="ti-shopping-cart" ></i><button class="btn btn-success">Contact</button></a>
                            @else
                                  <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><i class="ti-shopping-cart" ></i><span>ADD TO CART</span></a>
                            @endif
@@ -138,14 +140,14 @@
                         <div class="tags">
 
 
-                            @if($product->product_tags)
+                            {{-- @if($product->product_tags)
                                 @forelse($product->product_tags as $value)
                                 <h5>Tags:</h5>
                                     <a href="#">{{ $value }}</a>
                                 @empty
 
                                 @endforelse
-                            @endif
+                            @endif --}}
 
 
 

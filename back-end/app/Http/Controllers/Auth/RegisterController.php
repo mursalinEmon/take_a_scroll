@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Vendor;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -33,8 +34,10 @@ class RegisterController extends Controller
 
     public function redirectTo() {
         $user = Auth::user();
+
         switch(true) {
             case $user->type=='vendor':
+
                 return '/vendor-dashboard';
             case $user->type=='customer':
                 return '/';
@@ -76,12 +79,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'type' => $data['type'],
             'contact_no' => $data['contact_no'],
             'password' => Hash::make($data['password']),
-        ]);
+            ]);
+            if( $data['type'] == "vendor"){
+                Vendor::create([
+                    'user_id'=>$user->id,
+                    'name'=>$user->name,
+                    ]);
+            }
+            return $user;
+
     }
 }
