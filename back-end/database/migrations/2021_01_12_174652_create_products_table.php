@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('product_stock');
             $table->double('product_rating');
             $table->json('product_pictures')->nullable();
-            $table->string('product_tags');
+            $table->string('product_tags')->nullable();
             // $table->unsignedBigInteger('vendor_id');
             // $table->foreign('vendor_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');

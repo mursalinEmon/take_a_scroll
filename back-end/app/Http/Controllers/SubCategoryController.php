@@ -19,8 +19,9 @@ class SubCategoryController extends Controller
     public function index(Category $category , $sub_cat_name,$sub_cat)
 
     {
-        if($category->categoryType==="realestate"){
+        if($category->categoryType==="RealEstate"){
             $products=Realestate::all()->where('sub_category_id',$sub_cat);
+
             return view('front-end.product-view.realestateProductsView',compact('products','sub_cat_name'));
 
         }
