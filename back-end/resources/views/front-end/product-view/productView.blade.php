@@ -123,9 +123,9 @@
                         <div class="actions">
 
                            @if($product->category->categoryType=='RealEstate'  )
-                                <a href="{{ route('contact.mail',$product->store_id) }}"  ><i class="ti-shopping-cart" ></i><button class="btn btn-success"></button>Contact</button></a>
+                           <a href="{{ route('contact.mail',['store_id'=>$product->store_id,'product_id'=>$product->id]) }}"  ><i class="ti-shopping-cart" ></i><button class="btn btn-success">Contact</button></a>
                            @elseif ($product->category->categoryType=='cars' )
-                                <a href="{{ route('contact.mail',$product->store_id) }}" ><i class="ti-shopping-cart" ></i><button class="btn btn-success">Contact</button></a>
+                                <a href="{{ route('contact.mail',['store_id'=>$product->store_id,'product_id'=>$product->id]) }}"  ><i class="ti-shopping-cart" ></i><button class="btn btn-success">Contact</button></a>
                            @else
                                  <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><i class="ti-shopping-cart" ></i><span>ADD TO CART</span></a>
                            @endif

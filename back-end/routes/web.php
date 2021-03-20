@@ -79,7 +79,7 @@ Route::middleware(['verified','customer'])->group( function () {
     Route::get('/cart-checkout','CartController@checkout')->name('cart.checkout');
     Route::get('/cart/{item}/update/{qty}','CartController@update_cart');
 
-    Route::get('/send-mail/{store_id}', 'MailController@send_contact_request')->name('contact.mail');
+    Route::get('/send-mail/{store_id}/{product_id}', 'MailController@send_contact_request')->name('contact.mail');
 
 
 });
