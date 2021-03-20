@@ -123,17 +123,25 @@
                         <div class="actions">
 
                            @if($product->category->categoryType=='RealEstate'  )
-                           <a href="{{ route('contact.mail',['store_id'=>$product->store_id,'product_id'=>$product->id]) }}"  ><i class="ti-shopping-cart" ></i><button class="btn btn-success">Contact</button></a>
+                           <a href="{{ route('contact.mail',['store_id'=>$product->store_id,'product_id'=>$product->id]) }}"  ><button class="btn btn-success">Contact</button></a>
                            @elseif ($product->category->categoryType=='cars' )
-                                <a href="{{ route('contact.mail',['store_id'=>$product->store_id,'product_id'=>$product->id]) }}"  ><i class="ti-shopping-cart" ></i><button class="btn btn-success">Contact</button></a>
+                                <a href="{{ route('contact.mail',['store_id'=>$product->store_id,'product_id'=>$product->id]) }}"  ><button class="btn btn-success">Contact</button></a>
                            @else
-                                 <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><i class="ti-shopping-cart" ></i><span>ADD TO CART</span></a>
+                                 <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><span>ADD TO CART</span></a>
                            @endif
 
+                           @if($product->category->categoryType=='RealEstate'  )
+
+                           @elseif ($product->category->categoryType=='cars' )
+
+                           @else
                             <div class="wishlist-compare">
                                 {{-- <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a> --}}
-                                <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
+                                    <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
                             </div>
+                           @endif
+
+
 
                         </div>
 
