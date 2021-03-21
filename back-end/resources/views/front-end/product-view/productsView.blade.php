@@ -77,12 +77,14 @@
 
                                 <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{ asset($product->product_pictures[0]) }}" alt="Product Image"></a>
 
-                                {{-- <div class="wishlist-compare">
-                                    <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
-                                    <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
-                                </div> --}}
 
+                                @if ($product->category->categoryType=='cars' )
+
+                                @else
                                 <a href="{{ route('cart.add',$product->id) }}" data-para2="{{$product->id}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+                                @endif
+
+
 
                             </div>
 
@@ -169,8 +171,11 @@
 
                                     <div class="actions">
 
-                                        <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+                                        @if ($product->category->categoryType=='cars' )
 
+                                        @else
+                                        <a href="{{ route('cart.add',$product->id) }}" data-para2="{{$product->id}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+                                        @endif
                                         <div class="wishlist-compare">
                                             <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
                                             <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>

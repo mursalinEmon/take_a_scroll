@@ -179,7 +179,7 @@ export default {
     created() {
 
         this.store_id=this.store.id;
-         this.fetch_sub_category( "Ralestate");
+         this.fetch_sub_category( "RealEstate");
     },
     data: function() {
         return {
@@ -189,7 +189,7 @@ export default {
             p_section: "",
             p_area: "",
             p_price: 0,
-            p_category: "Ralestate",
+            p_category: "RealEstate",
             p_category_id: "",
             p_sub_category: "",
             p_description: "",

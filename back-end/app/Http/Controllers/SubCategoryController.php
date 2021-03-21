@@ -19,8 +19,9 @@ class SubCategoryController extends Controller
     public function index(Category $category , $sub_cat_name,$sub_cat)
 
     {
-        if($category->categoryType==="realestate"){
+        if($category->categoryType==="RealEstate"){
             $products=Realestate::all()->where('sub_category_id',$sub_cat);
+
             return view('front-end.product-view.realestateProductsView',compact('products','sub_cat_name'));
 
         }
@@ -70,11 +71,13 @@ class SubCategoryController extends Controller
     public function show(Category $category,$sub_cat_name,$sub_cat,Product $product)
     {
 
+
         return view('front-end.product-view.productView',compact('product','sub_cat_name'));
     }
     public function show_realestate(Category $category,$sub_cat_name,$sub_cat,Realestate $realestate)
     {
                 $product=$realestate;
+
 
         return view('front-end.product-view.productView',compact('product','sub_cat_name'));
     }

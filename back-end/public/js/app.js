@@ -2887,7 +2887,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.store_id = this.store.id;
-    this.fetch_sub_category("Ralestate");
+    this.fetch_sub_category("RealEstate");
   },
   data: function data() {
     return {
@@ -2897,7 +2897,7 @@ __webpack_require__.r(__webpack_exports__);
       p_section: "",
       p_area: "",
       p_price: 0,
-      p_category: "Ralestate",
+      p_category: "RealEstate",
       p_category_id: "",
       p_sub_category: "",
       p_description: "",

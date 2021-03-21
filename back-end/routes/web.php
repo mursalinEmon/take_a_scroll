@@ -60,6 +60,8 @@ Route::middleware(['verified','vendor'])->group( function () {
 
     Route::get('stores/{store}/realestate-product/create','ProductController@create_realestate_products')->name('product.realestate.create');
     Route::post('stores/{store}/realestate-product/store','ProductController@store_realestate_products')->name('product.realestate.store');
+    // Route::get('categories/{category}/{sub_cat_name}/{sub_cat}','SubCategoryController@index')->name('category.realestate.index');
+
 
 
 });
@@ -77,7 +79,7 @@ Route::middleware(['verified','customer'])->group( function () {
     Route::get('/cart-checkout','CartController@checkout')->name('cart.checkout');
     Route::get('/cart/{item}/update/{qty}','CartController@update_cart');
 
-
+    Route::get('/send-mail/{store_id}/{product_id}', 'MailController@send_contact_request')->name('contact.mail');
 
 
 });
