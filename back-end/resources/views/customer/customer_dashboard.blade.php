@@ -1,7 +1,11 @@
 @extends('layouts.theme')
 
 @section('content')
-<div class="container">
+    <div class="container">
 
-</div>
+
+
+
+
+    </div>
 @endsection

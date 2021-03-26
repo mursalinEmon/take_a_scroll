@@ -127,7 +127,7 @@
                            @elseif ($product->category->categoryType=='cars' )
                                 <a href="{{ route('contact.mail',['store_id'=>$product->store_id,'product_id'=>$product->id]) }}"  ><button class="btn btn-success">Contact</button></a>
                            @else
-                                 <a href="#" class="add-to-cart"  data-para2="{{$product->id}}"><span>ADD TO CART</span></a>
+                           <a href="{{ route('cart.add',$product->id) }}" data-para2="{{$product->id}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
                            @endif
 
                            @if($product->category->categoryType=='RealEstate'  )

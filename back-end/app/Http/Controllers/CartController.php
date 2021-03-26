@@ -95,7 +95,7 @@ class CartController extends Controller
         //
     }
     public function add_to_cart(Product $product){
-        // dd($product);
+
         $product=[
             'id' => $product->id,
             'name' => $product->name,
@@ -120,8 +120,8 @@ class CartController extends Controller
     }
 
     public function checkout(){
-        $indentity=auth()->user()->name.auth()->user()->id;
-        $cart=Cart::stored_data($indentity);
+        // $indentity=auth()->user()->name.auth()->user()->id;
+        // $cart=Cart::stored_data($indentity);
         $cart=Cart::content();
 
         dd($cart);
