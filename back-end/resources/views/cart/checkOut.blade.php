@@ -1,7 +1,8 @@
 @extends('layouts.front-end.theme')
 @section('section')
     <div class="container">
-        <form>
+        <form action="{{ route('ssl.pay') }}" method="POST">
+            @csrf
             <div class="card">
                 <div class="card-title">
                     <h2 class="text text-success text-center">Your Cart.. Wanna CheckOut ?? </h2>
@@ -34,6 +35,7 @@
                             <td></td>
                             <th >Total Amount = </th>
                             <td>{{ $total }}</td>
+                            <input type="hidden" value="{{ $total }}" name="total_amount">
                           </tr>
                         </tbody>
                       </table>
@@ -41,7 +43,7 @@
                         <div class="col-md-9"></div>
                         <div class="col-md-3">
                             <div class="d-flex justify-content-around">
-                                <a href="#" class="btn btn-success" style="color:white;">Pay Now</a>
+                                <button  type="submit" class="btn btn-success" style="color:white;">Pay Now</button>
                                 <a href="#" class="btn btn-danger" style="color:white;">Cancel</a>
                             </div>
                         </div>

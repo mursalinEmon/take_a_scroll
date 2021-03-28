@@ -80,6 +80,7 @@ Route::middleware(['verified','customer'])->group( function () {
     Route::get('/cart/{item}/update/{qty}','CartController@update_cart');
 
     Route::get('/send-mail/{store_id}/{product_id}', 'MailController@send_contact_request')->name('contact.mail');
+    Route::post('/checkout','SslCommerzPaymentController@index')->name('ssl.pay');
 
 
 });
