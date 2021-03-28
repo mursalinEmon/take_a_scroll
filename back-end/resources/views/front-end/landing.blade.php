@@ -1,16 +1,16 @@
 @extends('layouts.front-end.theme')
 @section( 'section')
 <!-- Mini Cart Wrap Start -->
-<div class="row">
-    @if(Session::has('message'))
+
+@if(Session::has('message'))
     <div class="alert alert-{{ Session::get('stat') }} alert-dismissible fade show" role="alert">
-        {{ Session::get('message') }}
+       <h4> {{ Session::get('message') }}</h4>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
 @endif
-</div>
+
 <div class="mini-cart-wrap">
 
     <!-- Mini Cart Top -->
