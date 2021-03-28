@@ -189,7 +189,9 @@ class SslCommerzPaymentController extends Controller
                     ->where('transaction_id', $tran_id)
                     ->update(['status' => 'Processing']);
 
-                echo "<br >Transaction is successfully Completed";
+                // echo "<br >Transaction is successfully Completed";
+           return redirect('/')->with(['message'=>'Transaction is successfully Completed','stat'=>'success']);
+
             } else {
                 /*
                 That means IPN did not work or IPN URL was not set in your merchant panel and Transation validation failed.
@@ -204,10 +206,15 @@ class SslCommerzPaymentController extends Controller
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
-            echo "Transaction is successfully Completed";
+            // echo "Transaction is successfully Completed";
+           return redirect('/')->with(['message'=>'Transaction is successfully Completed','stat'=>'success']);
+
+
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
-            echo "Invalid Transaction";
+            // echo "Invalid Transaction";
+           return redirect('/')->with(['message'=>'Transaction is Invalid','stat'=>'danger']);
+
         }
 
 
@@ -225,11 +232,17 @@ class SslCommerzPaymentController extends Controller
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Failed']);
-            echo "Transaction is Falied";
+            // echo "Transaction is Falied";
+           return redirect('/')->with(['message'=>'Transaction is Falied','stat'=>'danger']);
+
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
-            echo "Transaction is already Successful";
+            // echo "Transaction is already Successful";
+            return redirect('/')->with(['message'=>'Transaction is successfully Completed','stat'=>'success']);
+
         } else {
-            echo "Transaction is Invalid";
+            // echo "Transaction is Invalid";
+           return redirect('/')->with(['message'=>'Transaction is Invalid','stat'=>'danger']);
+
         }
 
     }
@@ -246,11 +259,14 @@ class SslCommerzPaymentController extends Controller
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Canceled']);
-           return redirect('/')->with(['message'=>'Transaction Was Cancled']);
+           return redirect('/')->with(['message'=>'Transaction Was Cancled','stat'=>'danger']);
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
-            echo "Transaction is already Successful";
+
+           return redirect('/')->with(['message'=>'Transaction is already Successful','stat'=>'success']);
+
         } else {
-            echo "Transaction is Invalid";
+           return redirect('/')->with(['message'=>'Transaction is Invalid','stat'=>'danger']);
+
         }
 
 
