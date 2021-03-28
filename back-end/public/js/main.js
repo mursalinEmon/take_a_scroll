@@ -812,6 +812,30 @@
         $('[data-method="' + $value + '"]').slideDown();
     });
 
+
+
+
+
+
+    $(".adz").on("click", function(e) {
+        e.preventDefault();
+        console.log("hit");
+        var address=document.getElementById("recipient").value;
+        $.ajax({
+            method: "POST",
+            url: `/address-update`,
+            data: { address: address }
+        }).done(function(res) {
+            location.reload();
+            alert(res.data.message);
+        });
+    });
+
+
+
+
+
+
     /*-----
 	Account Image Upload
 --------------------------------*/

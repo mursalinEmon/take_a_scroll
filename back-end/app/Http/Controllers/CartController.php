@@ -6,7 +6,7 @@ use Cart;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\CustomerProfile;
 
 class CartController extends Controller
 {
@@ -20,8 +20,10 @@ class CartController extends Controller
         $cart=Cart::content();
         // $cart=Cart::instance(auth()->user()->id);
         // dd($cart);
-
-        return view('cart.cart_view',compact('cart'));
+        $address = CustomerProfile::where('user_id',auth()->user()->id)->get();
+        //    dd();
+        $address=$address[0]->address;
+        return view('cart.cart_view',compact('cart','address'));
         // return view('cart.cart_view','cart');
     }
 
@@ -120,11 +122,7 @@ class CartController extends Controller
     }
 
     public function checkout(){
-        // $indentity=auth()->user()->name.auth()->user()->id;
-        // $cart=Cart::stored_data($indentity);
-        // $cart=Cart::content();
-// dd($cart);
-
+        // dd($address);
         return view('cart.checkOut');
     }
 

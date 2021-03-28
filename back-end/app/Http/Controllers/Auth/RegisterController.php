@@ -10,6 +10,7 @@ use Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\CustomerProfile;
 
 class RegisterController extends Controller
 {
@@ -41,7 +42,7 @@ class RegisterController extends Controller
 
                 return '/vendor-dashboard';
             case $user->type=='customer':
-                return '/';
+                return '/customer-dashboard';
             default:
                 return '/';
         }
@@ -91,6 +92,11 @@ class RegisterController extends Controller
                 Vendor::create([
                     'user_id'=>$user->id,
                     'name'=>$user->name,
+                    ]);
+            }
+            if( $data['type'] == "customer"){
+                CustomerProfile::create([
+                    'user_id'=>$user->id,
                     ]);
             }
             return $user;

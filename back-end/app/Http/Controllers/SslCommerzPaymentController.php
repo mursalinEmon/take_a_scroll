@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 use Auth;
+use App\CustomerProfile;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -27,6 +28,10 @@ class SslCommerzPaymentController extends Controller
         # Let's say, your oder transaction informations are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
         $user=auth()->user();
+        $address=CustomerProfile::where('user_id',$user->id)->get();
+        // dd($address);
+        $address=$address[0]->address;
+
         $post_data = array();
         $post_data['total_amount'] = $request->total_amount; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
@@ -35,7 +40,7 @@ class SslCommerzPaymentController extends Controller
         # CUSTOMER INFORMATION
         $post_data['cus_name'] = $user->name;
         $post_data['cus_email'] = $user->email;
-        $post_data['cus_add1'] = 'Customer Address';
+        $post_data['cus_add1'] = $address;
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
         $post_data['cus_state'] = "";

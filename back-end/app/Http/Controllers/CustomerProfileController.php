@@ -72,6 +72,14 @@ class CustomerProfileController extends Controller
         //
     }
 
+    public function address_update(Request $request){
+        $profile=CustomerProfile::all()->where('user_id',auth()->user()->id);
+        $profile=$profile[0];
+        $profile->update([
+            'address'=>$request->address,
+        ]);
+        return response(['messgage'=>'updated successfully..!!']);
+    }
     /**
      * Remove the specified resource from storage.
      *

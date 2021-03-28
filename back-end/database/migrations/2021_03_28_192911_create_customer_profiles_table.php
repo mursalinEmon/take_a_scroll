@@ -17,8 +17,9 @@ class CreateCustomerProfilesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->float('royalty_point');
-            $table->json('purchase_history');
+            $table->float('royalty_point')->nullable();
+            $table->json('purchase_history')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

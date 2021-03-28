@@ -76,11 +76,13 @@ Route::middleware(['verified','customer'])->group( function () {
 
     Route::get('/cart/remove/product/{id}','CartController@remove_item')->name('cart.remove');
     Route::get('/cart-restore','CartController@restore');
-    Route::get('/cart-checkout','CartController@checkout')->name('cart.checkout');
+    Route::get('/cart-checkout/','CartController@checkout')->name('cart.checkout');
     Route::get('/cart/{item}/update/{qty}','CartController@update_cart');
 
     Route::get('/send-mail/{store_id}/{product_id}', 'MailController@send_contact_request')->name('contact.mail');
     Route::post('/checkout','SslCommerzPaymentController@index')->name('ssl.pay');
+
+    Route::post('/address-update','CustomerProfileController@address_update');
 
 
 });

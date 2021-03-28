@@ -27,7 +27,7 @@
                                 @forelse(Cart::content() as $row)
                                 @php $count++;@endphp
                                     <tr>
-                                        <td class="pro-thumbnail"><a href="#"><img src="{{  asset($row->model->product_pictures[0])  }}" alt="Product"></a></td>
+                                        <td class="pro-thumbnail"><img src="{{  asset($row->model->product_pictures[0])  }}" alt="Product"></a></td>
                                         <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
                                         <td class="pro-price"><span> ৳{{ $row->price }}</span></td>
 
@@ -38,8 +38,10 @@
                                         <td class="pro-remove"><a href="#"><i class="fa fa-trash-o remove-cart" data-rowid="{{ $row->rowId }}"></i></a></td>
                                     </tr>
                                     <tr>
-                                        @if($count==1)
-                                        <a  href="{{ route('cart.checkout') }}" class="btn btn-success float-right mr-4 pr-4 mt-4 mb-4"><span class="text text-white">Check-Out</span></a>
+                                        @if($count==1 && $address!=null)
+                                        <a  href="{{ route('cart.checkout',$address) }}" class="btn btn-success float-right mr-4 pr-4 mt-4 mb-4"><span class="text text-white">Check-Out</span></a>
+                                        @else
+                                        <button type="button" class="btn btn-success float-right mr-4 pr-4 mt-4 mb-4" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Check-Out</button>
                                         @endif
                                     </tr>
                                 @empty
@@ -52,10 +54,6 @@
 
                 </form>
 
-                <div class="row">
-
-                </div>
-
             </div>
         </div>
     </div>
@@ -64,9 +62,35 @@
 
 
 
-<!-- JS
-============================================ -->
 
+
+
+
+{{-- modal --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">In Order to Procede We Need Your Delivery Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="recipient" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control recipient" id="recipient">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" style="color:white;" data-dismiss="modal">Close</button>
+        <button  class="btn btn-success adz" id="adz" style="color:white;" >Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JS
 
 
 @endsection
