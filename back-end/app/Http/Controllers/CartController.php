@@ -122,9 +122,10 @@ class CartController extends Controller
     public function checkout(){
         // $indentity=auth()->user()->name.auth()->user()->id;
         // $cart=Cart::stored_data($indentity);
-        $cart=Cart::content();
+        // $cart=Cart::content();
+// dd($cart);
 
-        dd($cart);
+        return view('cart.checkOut');
     }
 
     public function update_cart($item,$qty){
