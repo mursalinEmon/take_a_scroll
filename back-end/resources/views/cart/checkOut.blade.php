@@ -40,10 +40,13 @@
                         </tbody>
                       </table>
                       <div class="row">
-                        <div class="col-md-9"></div>
-                        <div class="col-md-3">
+                        <div class="col-md-7"></div>
+                        <div class="col-md-5">
                             <div class="d-flex justify-content-around">
                                 <button  type="submit" class="btn btn-success" style="color:white;">Pay Now</button>
+
+                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Pay On Delivery</button>
+
                                 <a href="#" class="btn btn-danger" style="color:white;">Cancel</a>
                             </div>
                         </div>
@@ -52,6 +55,30 @@
             </div>
         </form>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">In Order to Procede We Need Your Delivery Address</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="recipient" class="col-form-label">Put Address</label>
+                  <input type="text" class="form-control recipient" id="recipient">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" style="color:white;" data-dismiss="modal">Close</button>
+              <button  class="btn btn-success adz" id="adz" style="color:white;" >Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 

@@ -81,6 +81,8 @@ Route::middleware(['verified','customer'])->group( function () {
 
     Route::get('/send-mail/{store_id}/{product_id}', 'MailController@send_contact_request')->name('contact.mail');
     Route::post('/checkout','SslCommerzPaymentController@index')->name('ssl.pay');
+    Route::post('/checkout/pay_later','SslCommerzPaymentController@paylater')->name('ssl.pay_later');
+
 
     Route::post('/address-update','CustomerProfileController@address_update');
 

@@ -20,7 +20,9 @@ class SslCommerzPaymentController extends Controller
     {
         return view('exampleHosted');
     }
+    public function paylater(){
 
+    }
     public function index(Request $request)
     {
         // dd($request);

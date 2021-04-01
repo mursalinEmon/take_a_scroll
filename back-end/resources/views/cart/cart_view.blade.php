@@ -24,6 +24,15 @@
                             </thead>
                             <tbody>
                                 @php $count=0;@endphp
+                                @php $payoption=null;@endphp
+
+                                <tr>
+                                    @if($address!=null )
+                                    <a  href="{{ route('cart.checkout',$address) }}" class="btn btn-success float-right mr-4 pr-4 mt-4 mb-4"><span class="text text-white">Check-Out</span></a>
+                                    @else
+                                    <button type="button" class="btn btn-success float-right mr-4 pr-4 mt-4 mb-4" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Check-Out</button>
+                                    @endif
+                                </tr>
                                 @forelse(Cart::content() as $row)
                                 @php $count++;@endphp
                                     <tr>
@@ -37,13 +46,7 @@
 
                                         <td class="pro-remove"><a href="#"><i class="fa fa-trash-o remove-cart" data-rowid="{{ $row->rowId }}"></i></a></td>
                                     </tr>
-                                    <tr>
-                                        @if($count==1 && $address!=null)
-                                        <a  href="{{ route('cart.checkout',$address) }}" class="btn btn-success float-right mr-4 pr-4 mt-4 mb-4"><span class="text text-white">Check-Out</span></a>
-                                        @else
-                                        <button type="button" class="btn btn-success float-right mr-4 pr-4 mt-4 mb-4" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Check-Out</button>
-                                        @endif
-                                    </tr>
+
                                 @empty
                                     <h1 class="text text-danger">Empty Cart ....!!</h1>
                                     <br>
@@ -78,9 +81,10 @@
       </div>
       <div class="modal-body">
           <div class="form-group">
-            <label for="recipient" class="col-form-label">Recipient:</label>
+            <label for="recipient" class="col-form-label">Put Address</label>
             <input type="text" class="form-control recipient" id="recipient">
           </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" style="color:white;" data-dismiss="modal">Close</button>
