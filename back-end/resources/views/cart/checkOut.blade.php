@@ -45,8 +45,7 @@
                             <div class="d-flex justify-content-around">
                                 <button  type="submit" class="btn btn-success" style="color:white;">Pay Now</button>
 
-                                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Pay On Delivery</button>
-
+                                <a href="#" type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Pay On Delivery</a>
                                 <a href="#" class="btn btn-danger" style="color:white;">Cancel</a>
                             </div>
                         </div>
@@ -54,6 +53,8 @@
                 </div>
             </div>
         </form>
+
+
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -67,14 +68,16 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                  <label for="recipient" class="col-form-label">Put Address</label>
+                  <label for="recipient" class="col-form-label">Put Delivery Address</label>
                   <input type="text" class="form-control recipient" id="recipient">
                 </div>
+                <input type="hidden" id="totalam" value="{{ $total }}" name="total_amount">
+
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" style="color:white;" data-dismiss="modal">Close</button>
-              <button  class="btn btn-success adz" id="adz" style="color:white;" >Submit</button>
+              <button class="btn btn-success payd" id="payd" style="color:white;" >Proceed</button>
             </div>
           </div>
         </div>

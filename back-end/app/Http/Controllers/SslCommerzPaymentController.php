@@ -36,6 +36,7 @@ class SslCommerzPaymentController extends Controller
         $address=$address[0]->address;
 
         $post_data = array();
+
         $post_data['total_amount'] = $request->total_amount; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = uniqid(); // tran_id must be unique
@@ -82,7 +83,7 @@ class SslCommerzPaymentController extends Controller
                 'phone' => $post_data['cus_phone'],
                 'amount' => $post_data['total_amount'],
                 'status' => 'Pending',
-                'address' => $post_data['cus_add1'],
+                'address' => $address,
                 'transaction_id' => $post_data['tran_id'],
                 'currency' => $post_data['currency'],
                 'cart_identifier'=>auth()->user()->name.auth()->user()->id,

@@ -24,7 +24,7 @@
                             </thead>
                             <tbody>
                                 @php $count=0;@endphp
-                                @php $payoption=null;@endphp
+
 
                                 <tr>
                                     @if($address!=null )
