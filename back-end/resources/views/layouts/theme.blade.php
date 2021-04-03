@@ -26,8 +26,9 @@
 </head>
 
 <body id="page-top">
+    <div id="app" >
 
-  <!-- Page Wrapper -->
+        <!-- Page Wrapper -->
   <div id="wrapper">
 
     <!-- Sidebar -->
@@ -155,16 +156,21 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+    @if (auth()->user()->type=="vendor")
+    <search></search>
+    @else
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+          <input type="text" class="form-control bg-light border-0 small" id="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary searbtn" type="button">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    @endif
+
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -255,9 +261,9 @@
         <!-- End of Topbar -->
 
         <!-- Main Body -->
-        <div id="app" >
+
         @yield('content')
-        </div>
+
       </div>
       <!-- End of Main Content -->
 
@@ -290,6 +296,7 @@
     </div>
   </div>
 
+    </div>
   <!-- Bootstrap core JavaScript-->
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>

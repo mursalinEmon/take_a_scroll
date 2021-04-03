@@ -27,7 +27,7 @@ class VerificationController extends Controller
      * @var string
      */
     public function redirectTo() {
-        $user = Auth::user();
+        $user = auth()->user();
 
         switch(true) {
             case $user->type=='vendor':
