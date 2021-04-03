@@ -78,6 +78,8 @@
                         @else
                             @if(auth()->user()->type === 'vendor')
                             <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                            @elseif (auth()->user()->type==='admin')
+                            <a href="{{ route('admin.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
                             @else
                             <a href="{{ route('customer.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
                             @endif

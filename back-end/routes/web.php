@@ -32,7 +32,9 @@ Route::post('/create-category','CategoryController@store')->name('category.store
 Route::get('/categories/{category}/subcategory/create','SubCategoryController@create')->name('subcategory.create');
 Route::post('/categories/{category}/subcategory/create','SubCategoryController@store')->name('subcategory.store');
 
-
+Route::middleware(['verified','admin'])->group( function () {
+    Route::get('/admin-dashboard', 'AdminProfileController@index')->name('admin.dashboard');
+});
 Route::middleware(['verified','vendor'])->group( function () {
     Route::get('/vendor-dashboard', 'HomeController@index')->name('dashboard');
 
