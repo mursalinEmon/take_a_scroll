@@ -7,6 +7,7 @@ use Cart;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 use Auth;
+use App\Delivery;
 use App\CustomerProfile;
 
 class SslCommerzPaymentController extends Controller
@@ -86,10 +87,21 @@ class SslCommerzPaymentController extends Controller
                 'address' => $address,
                 'transaction_id' => $post_data['tran_id'],
                 'currency' => $post_data['currency'],
+                'created_at'=>date("Y-m-d "),
                 'cart_identifier'=>auth()->user()->name.auth()->user()->id,
             ]);
 
+
         $sslc = new SslCommerzNotification();
+        $od= DB::table('orders')
+        ->where('transaction_id', $post_data['tran_id'])->get('id');
+
+            $delivery=Delivery::create([
+                'order_id'=>$od[0]->id,
+                'delivery_status'=>'pending',
+                'checkpoints'=>'inreview',
+                'delivery_address'=>$address,
+            ]);
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
 
@@ -97,6 +109,7 @@ class SslCommerzPaymentController extends Controller
             print_r($payment_options);
             $payment_options = array();
         }
+
 
     }
 
@@ -269,6 +282,12 @@ class SslCommerzPaymentController extends Controller
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Canceled']);
+                $od= DB::table('orders')
+                ->where('transaction_id',  $tran_id)->get('id');
+
+                Delivery::where('order_id',$od[0]->id,)->delete();
+
+
            return redirect('/')->with(['message'=>'Transaction Was Cancled','stat'=>'danger']);
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
 

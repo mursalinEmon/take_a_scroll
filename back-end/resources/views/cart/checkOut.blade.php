@@ -68,8 +68,8 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                  <label for="recipient" class="col-form-label">Put Delivery Address</label>
-                  <input type="text" class="form-control recipient" id="recipient">
+                  <label for="recipient" class="col-form-label">Delivery Address Will be the Address You Gave in Profile.</label>
+                  <h6 class="text text-primary">To Change it Go To Profile..and Cahnge ..!!</h6>
                 </div>
                 <input type="hidden" id="totalam" value="{{ $total }}" name="total_amount">
 
