@@ -100,7 +100,7 @@ public function send_contact_request($store_id,$product_id)
 
         $details = [
             'title' => 'Mail from takeascroll.com',
-            'body' => 'This is a contact mail for your a product of your store'.$store->name.'for product'.$product_id,
+            'body' => 'This is a contact mail for your a product of your store'.'""'.$store->name.'""'.'for product ID:'.$product_id,
             'contact'=>'Contact-no:' .$user->contact_no .'      '.'email:' .$user->email
         ];
 
