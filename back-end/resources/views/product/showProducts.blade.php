@@ -12,7 +12,7 @@
       @endif
         @forelse($products as $product)
         <div class="card m-4">
-            <div class="card-header">{{ $product->name }}</div>
+            <div class="card-header">Name:{{ $product->name }} <span class="ml-2 mr-2"></span>   ID:{{ $product->id }}</div>
                 <div class="card-body">
                     <p class="text"><i>Brand</i>: {{ $product->brand_name }}</p>
                     <p class="text"><i>Price</i>: {{ $product->price }} </p>
