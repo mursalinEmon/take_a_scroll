@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Events\DeliveryEvent;
 use App\Notifications\DeliveryRequest;
 use App\User;
 use DB;
@@ -108,11 +110,11 @@ class SslCommerzPaymentController extends Controller
             'delivery_address' => $address,
         ]);
 
-
+        broadcast(new DeliveryEvent())->toOthers();
         //        notification part
-        $when = now()->addSecond(20);
+
         $user=User::findOrFail(6);
-        $user->notify((new DeliveryRequest($delivery))->delay($when));
+        $user->notify((new DeliveryRequest($delivery)));
 
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');

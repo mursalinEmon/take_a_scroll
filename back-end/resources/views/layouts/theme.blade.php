@@ -198,7 +198,7 @@
             </li>
           @if(auth()->user()->type=="admin")
             <!-- Nav Item - Alerts -->
-           <notifications :noti_count={{auth()->user()->notifications()->count()}}></notifications>
+           <notifications :noti_count={{auth()->user()->notifications()->count()}} ></notifications>
           @else
 
           @endif
