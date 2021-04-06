@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\DeliveryRequest;
+use App\User;
 use DB;
 use Cart;
 use Illuminate\Http\Request;
@@ -105,6 +107,13 @@ class SslCommerzPaymentController extends Controller
             'checkpoints' => 'inreview',
             'delivery_address' => $address,
         ]);
+
+
+        //        notification part
+        $when = now()->addSecond(20);
+        $user=User::findOrFail(6);
+        $user->notify((new DeliveryRequest($delivery))->delay($when));
+
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
 

@@ -16,9 +16,10 @@ class DeliveryRequest extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public  $delivery;
+    public function __construct($delivery)
     {
-        //
+        $this->delivery=$delivery;
     }
 
     /**
@@ -29,7 +30,7 @@ class DeliveryRequest extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['Database'];
     }
 
     /**
@@ -46,6 +47,14 @@ class DeliveryRequest extends Notification
                     ->line('Thank you for using our application!');
     }
 
+
+    public function toDatabase($notifiable)
+    {
+        return[
+            'order_id'=>$this->delivery->order_id,
+            'delivery_id'=>$this->delivery->id
+        ];
+    }
     /**
      * Get the array representation of the notification.
      *
