@@ -22,19 +22,22 @@ class SslCommerzPaymentController extends Controller
     {
         return view('exampleHosted');
     }
-    public function paylater(){
+
+    public function paylater()
+    {
 
     }
+
     public function index(Request $request)
     {
         // dd($request);
         # Here you have to receive all the order data to initate the payment.
         # Let's say, your oder transaction informations are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
-        $user=auth()->user();
-        $address=CustomerProfile::where('user_id',$user->id)->get();
+        $user = auth()->user();
+        $address = CustomerProfile::where('user_id', $user->id)->get();
         // dd($address);
-        $address=$address[0]->address;
+        $address = $address[0]->address;
 
         $post_data = array();
 
@@ -87,21 +90,21 @@ class SslCommerzPaymentController extends Controller
                 'address' => $address,
                 'transaction_id' => $post_data['tran_id'],
                 'currency' => $post_data['currency'],
-                'created_at'=>date("Y-m-d "),
-                'cart_identifier'=>auth()->user()->name.auth()->user()->id,
+                'created_at' => date("Y-m-d "),
+                'cart_identifier' => auth()->user()->name . auth()->user()->id,
             ]);
 
 
         $sslc = new SslCommerzNotification();
-        $od= DB::table('orders')
-        ->where('transaction_id', $post_data['tran_id'])->get('id');
+        $od = DB::table('orders')
+            ->where('transaction_id', $post_data['tran_id'])->get('id');
 
-            $delivery=Delivery::create([
-                'order_id'=>$od[0]->id,
-                'delivery_status'=>'pending',
-                'checkpoints'=>'inreview',
-                'delivery_address'=>$address,
-            ]);
+        $delivery = Delivery::create([
+            'order_id' => $od[0]->id,
+            'delivery_status' => 'pending',
+            'checkpoints' => 'inreview',
+            'delivery_address' => $address,
+        ]);
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
 
@@ -213,7 +216,7 @@ class SslCommerzPaymentController extends Controller
                     ->update(['status' => 'Processing']);
 
                 // echo "<br >Transaction is successfully Completed";
-           return redirect('/')->with(['message'=>'Transaction is successfully Completed','stat'=>'success']);
+                return redirect('/')->with(['message' => 'Transaction is successfully Completed', 'stat' => 'success']);
 
             } else {
                 /*
@@ -230,13 +233,13 @@ class SslCommerzPaymentController extends Controller
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
             // echo "Transaction is successfully Completed";
-           return redirect('/')->with(['message'=>'Transaction is successfully Completed','stat'=>'success']);
+            return redirect('/')->with(['message' => 'Transaction is successfully Completed', 'stat' => 'success']);
 
 
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
             // echo "Invalid Transaction";
-           return redirect('/')->with(['message'=>'Transaction is Invalid','stat'=>'danger']);
+            return redirect('/')->with(['message' => 'Transaction is Invalid', 'stat' => 'danger']);
 
         }
 
@@ -256,15 +259,15 @@ class SslCommerzPaymentController extends Controller
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Failed']);
             // echo "Transaction is Falied";
-           return redirect('/')->with(['message'=>'Transaction is Falied','stat'=>'danger']);
+            return redirect('/')->with(['message' => 'Transaction is Falied', 'stat' => 'danger']);
 
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
             // echo "Transaction is already Successful";
-            return redirect('/')->with(['message'=>'Transaction is successfully Completed','stat'=>'success']);
+            return redirect('/')->with(['message' => 'Transaction is successfully Completed', 'stat' => 'success']);
 
         } else {
             // echo "Transaction is Invalid";
-           return redirect('/')->with(['message'=>'Transaction is Invalid','stat'=>'danger']);
+            return redirect('/')->with(['message' => 'Transaction is Invalid', 'stat' => 'danger']);
 
         }
 
@@ -282,19 +285,19 @@ class SslCommerzPaymentController extends Controller
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Canceled']);
-                $od= DB::table('orders')
-                ->where('transaction_id',  $tran_id)->get('id');
+            $od = DB::table('orders')
+                ->where('transaction_id', $tran_id)->get('id');
 
-                Delivery::where('order_id',$od[0]->id,)->delete();
+            Delivery::where('order_id', $od[0]->id,)->delete();
 
 
-           return redirect('/')->with(['message'=>'Transaction Was Cancled','stat'=>'danger']);
+            return redirect('/')->with(['message' => 'Transaction Was Cancled', 'stat' => 'danger']);
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
 
-           return redirect('/')->with(['message'=>'Transaction is already Successful','stat'=>'success']);
+            return redirect('/')->with(['message' => 'Transaction is already Successful', 'stat' => 'success']);
 
         } else {
-           return redirect('/')->with(['message'=>'Transaction is Invalid','stat'=>'danger']);
+            return redirect('/')->with(['message' => 'Transaction is Invalid', 'stat' => 'danger']);
 
         }
 
