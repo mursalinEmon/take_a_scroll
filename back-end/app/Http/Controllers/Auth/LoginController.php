@@ -29,27 +29,20 @@ class LoginController extends Controller
      * @var string
      */
 
-    // protected $redirectTo = RouteServiceProvider::VDASHBOARD;
 
-
-
-    // protected function authenticated(Request $request, $user)
-    //     {
-    //     if ( $user->type==='vendor' ) {// do your magic here
-    //         return redirect()->route('dashboard');
-    //     }
-
-    //     return redirect('/home');
-    //     }
 
 
     public function redirectTo() {
+
         $user = Auth::user();
+
         switch(true) {
             case $user->type=='vendor':
                 return '/vendor-dashboard';
             case $user->type=='customer':
                 return '/';
+            case $user->type=='admin':
+                return '/admin-dashboard';
             default:
                 return '/';
         }

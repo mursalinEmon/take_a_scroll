@@ -22,12 +22,15 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
 
 </head>
 
 <body id="page-top">
+    <div id="app" >
 
-  <!-- Page Wrapper -->
+        <!-- Page Wrapper -->
   <div id="wrapper">
 
     <!-- Sidebar -->
@@ -164,16 +167,21 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+    @if (auth()->user()->type=="vendor")
+    <search></search>
+    @else
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+          <input type="text" class="form-control bg-light border-0 small" id="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary searbtn" type="button">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    @endif
+
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -197,16 +205,12 @@
                 </form>
               </div>
             </li>
-
+          @if(auth()->user()->type=="admin")
             <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter"></span>
-              </a>
+           <notifications :noti_count={{auth()->user()->notifications()->count()}} ></notifications>
+          @else
 
-            </li>
+          @endif
 
             <!-- Nav Item - Messages -->
             <li class="nav-item dropdown no-arrow mx-1">
@@ -251,22 +255,21 @@
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a  class="nav-link dropdown-toggle"  href="{{ url('/logout') }}" id="userDropdown" role="button">
+            <li class="nav-item ">
+              <a  class="nav-link "  href="{{ url('/logout') }}" id="userDropdown" role="button">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
                 <button class="btn">Logout <i class="fas fa-sign-out-alt"></i></button>
               </a>
             </li>
 
           </ul>
-
         </nav>
         <!-- End of Topbar -->
 
         <!-- Main Body -->
-        <div id="app" >
+
         @yield('content')
-        </div>
+
       </div>
       <!-- End of Main Content -->
 
@@ -299,6 +302,7 @@
     </div>
   </div>
 
+    </div>
   <!-- Bootstrap core JavaScript-->
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>

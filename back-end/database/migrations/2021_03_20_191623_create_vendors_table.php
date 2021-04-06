@@ -14,16 +14,16 @@ class CreateVendorsTable extends Migration
     public function up()
     {
         Schema::create('vendors', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
-            $table->mediumText('description');
-            $table->string('banner');
-            $table->string('type');
-            $table->double('vendor_rating');
-            $table->string('vendor_review');
-            $table->string('vendor_nid');
+            $table->mediumText('description')->nullable();
+            $table->string('banner')->nullable();
+            $table->string('type')->nullable();
+            $table->double('vendor_rating')->nullable();
+            $table->string('vendor_review')->nullable();
+            $table->string('vendor_nid')->nullable();
             $table->timestamps();
         });
     }

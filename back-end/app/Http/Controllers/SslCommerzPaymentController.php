@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Events\DeliveryEvent;
+use App\Notifications\DeliveryRequest;
+use App\User;
 use DB;
+use Cart;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use Auth;
+use App\Delivery;
+use App\CustomerProfile;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -19,27 +27,38 @@ class SslCommerzPaymentController extends Controller
         return view('exampleHosted');
     }
 
+    public function paylater()
+    {
+
+    }
+
     public function index(Request $request)
     {
+        // dd($request);
         # Here you have to receive all the order data to initate the payment.
         # Let's say, your oder transaction informations are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
+        $user = auth()->user();
+        $address = CustomerProfile::where('user_id', $user->id)->get();
+        // dd($address);
+        $address = $address[0]->address;
 
         $post_data = array();
-        $post_data['total_amount'] = '10'; # You cant not pay less than 10
+
+        $post_data['total_amount'] = $request->total_amount; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = uniqid(); // tran_id must be unique
 
         # CUSTOMER INFORMATION
-        $post_data['cus_name'] = 'Customer Name';
-        $post_data['cus_email'] = 'customer@mail.com';
-        $post_data['cus_add1'] = 'Customer Address';
+        $post_data['cus_name'] = $user->name;
+        $post_data['cus_email'] = $user->email;
+        $post_data['cus_add1'] = $address;
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
         $post_data['cus_state'] = "";
         $post_data['cus_postcode'] = "";
         $post_data['cus_country'] = "Bangladesh";
-        $post_data['cus_phone'] = '8801XXXXXXXXX';
+        $post_data['cus_phone'] = $user->contact_no;
         $post_data['cus_fax'] = "";
 
         # SHIPMENT INFORMATION
@@ -72,12 +91,31 @@ class SslCommerzPaymentController extends Controller
                 'phone' => $post_data['cus_phone'],
                 'amount' => $post_data['total_amount'],
                 'status' => 'Pending',
-                'address' => $post_data['cus_add1'],
+                'address' => $address,
                 'transaction_id' => $post_data['tran_id'],
-                'currency' => $post_data['currency']
+                'currency' => $post_data['currency'],
+                'created_at' => date("Y-m-d "),
+                'cart_identifier' => auth()->user()->name . auth()->user()->id,
             ]);
 
+
         $sslc = new SslCommerzNotification();
+        $od = DB::table('orders')
+            ->where('transaction_id', $post_data['tran_id'])->get('id');
+
+        $delivery = Delivery::create([
+            'order_id' => $od[0]->id,
+            'delivery_status' => 'pending',
+            'checkpoints' => 'inreview',
+            'delivery_address' => $address,
+        ]);
+
+        broadcast(new DeliveryEvent())->toOthers();
+        //        notification part
+
+        $user=User::findOrFail(6);
+        $user->notify((new DeliveryRequest($delivery)));
+
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
 
@@ -85,6 +123,7 @@ class SslCommerzPaymentController extends Controller
             print_r($payment_options);
             $payment_options = array();
         }
+
 
     }
 
@@ -187,7 +226,9 @@ class SslCommerzPaymentController extends Controller
                     ->where('transaction_id', $tran_id)
                     ->update(['status' => 'Processing']);
 
-                echo "<br >Transaction is successfully Completed";
+                // echo "<br >Transaction is successfully Completed";
+                return redirect('/')->with(['message' => 'Transaction is successfully Completed', 'stat' => 'success']);
+
             } else {
                 /*
                 That means IPN did not work or IPN URL was not set in your merchant panel and Transation validation failed.
@@ -202,10 +243,15 @@ class SslCommerzPaymentController extends Controller
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
-            echo "Transaction is successfully Completed";
+            // echo "Transaction is successfully Completed";
+            return redirect('/')->with(['message' => 'Transaction is successfully Completed', 'stat' => 'success']);
+
+
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
-            echo "Invalid Transaction";
+            // echo "Invalid Transaction";
+            return redirect('/')->with(['message' => 'Transaction is Invalid', 'stat' => 'danger']);
+
         }
 
 
@@ -223,11 +269,17 @@ class SslCommerzPaymentController extends Controller
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Failed']);
-            echo "Transaction is Falied";
+            // echo "Transaction is Falied";
+            return redirect('/')->with(['message' => 'Transaction is Falied', 'stat' => 'danger']);
+
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
-            echo "Transaction is already Successful";
+            // echo "Transaction is already Successful";
+            return redirect('/')->with(['message' => 'Transaction is successfully Completed', 'stat' => 'success']);
+
         } else {
-            echo "Transaction is Invalid";
+            // echo "Transaction is Invalid";
+            return redirect('/')->with(['message' => 'Transaction is Invalid', 'stat' => 'danger']);
+
         }
 
     }
@@ -244,11 +296,20 @@ class SslCommerzPaymentController extends Controller
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Canceled']);
-            echo "Transaction is Cancel";
+            $od = DB::table('orders')
+                ->where('transaction_id', $tran_id)->get('id');
+
+            Delivery::where('order_id', $od[0]->id,)->delete();
+
+
+            return redirect('/')->with(['message' => 'Transaction Was Cancled', 'stat' => 'danger']);
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
-            echo "Transaction is already Successful";
+
+            return redirect('/')->with(['message' => 'Transaction is already Successful', 'stat' => 'success']);
+
         } else {
-            echo "Transaction is Invalid";
+            return redirect('/')->with(['message' => 'Transaction is Invalid', 'stat' => 'danger']);
+
         }
 
 

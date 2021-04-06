@@ -812,6 +812,44 @@
         $('[data-method="' + $value + '"]').slideDown();
     });
 
+
+
+
+// for updating address
+
+    $(".adz").on("click", function(e) {
+        e.preventDefault();
+
+        var address=document.getElementById("recipient").value;
+        $.ajax({
+            method: "POST",
+            url: `/address-update`,
+            data: { address: address }
+        }).done(function(res) {
+            location.reload();
+        });
+    });
+
+
+
+// for pay on delivery
+$(".payd").on("click", function(e) {
+    e.preventDefault();
+    var total=document.getElementById("totalam").value;
+    console.log(total);
+    $.ajax({
+        method: "POST",
+        url: `/checkout`,
+        data: { total_amount: total ,}
+    }).done(function(res) {
+        // alert(res.message);
+        // location.reload();
+    });
+    location.reload();
+    alert('Your Order Is Placed To Check Further Status Go To Profile');
+
+});
+
     /*-----
 	Account Image Upload
 --------------------------------*/

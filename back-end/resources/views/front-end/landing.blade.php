@@ -1,6 +1,16 @@
 @extends('layouts.front-end.theme')
 @section( 'section')
 <!-- Mini Cart Wrap Start -->
+
+@if(Session::has('message'))
+    <div class="alert alert-{{ Session::get('stat') }} alert-dismissible fade show" role="alert">
+       <h4> {{ Session::get('message') }}</h4>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
 <div class="mini-cart-wrap">
 
     <!-- Mini Cart Top -->
@@ -2170,82 +2180,6 @@
     </div>
 </div><!-- New Arrival Product Section End -->
 
-<!-- Banner Section Start -->
-{{-- <div class="banner-section section mb-60">
-    <div class="container">
-        <div class="row">
-
-            <!-- Banner -->
-            <div class="col-md-4 col-12 mb-30">
-                <div class="banner"><a href="#"><img src="assets/images/banner/banner-4.jpg" alt="Banner"></a></div>
-            </div>
-
-            <!-- Banner -->
-            <div class="col-md-4 col-12 mb-30">
-                <div class="banner"><a href="#"><img src="assets/images/banner/banner-5.jpg" alt="Banner"></a></div>
-            </div>
-
-            <!-- Banner -->
-            <div class="col-md-4 col-12 mb-30">
-                <div class="banner"><a href="#"><img src="assets/images/banner/banner-6.jpg" alt="Banner"></a></div>
-            </div>
-
-        </div>
-    </div>
-</div><!-- Banner Section End --> --}}
-
-<!-- Brands Section Start -->
-{{-- <div class="brands-section section mb-90">
-    <div class="container">
-        <div class="row">
-
-            <!-- Brand Slider Start -->
-            <div class="brand-slider col">
-                <div class="brand-item col"><img src="assets/images/brands/brand-1.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-2.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-3.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-4.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-5.png" alt="Brands"></div>
-            </div><!-- Brand Slider End -->
-
-        </div>
-    </div>
-</div><!-- Brands Section End --> --}}
-
-<!-- Subscribe Section Start -->
-{{-- <div class="subscribe-section section bg-gray pt-55 pb-55">
-    <div class="container">
-        <div class="row align-items-center">
-
-            <!-- Mailchimp Subscribe Content Start -->
-            <div class="col-lg-6 col-12 mb-15 mt-15">
-                <div class="subscribe-content">
-                    <h2>SUBSCRIBE <span>OUR NEWSLETTER</span></h2>
-                    <h2><span>TO GET LATEST</span> PRODUCT UPDATE</h2>
-                </div>
-            </div><!-- Mailchimp Subscribe Content End -->
-
-
-            <!-- Mailchimp Subscribe Form Start -->
-            <div class="col-lg-6 col-12 mb-15 mt-15">
-
-				<form class="subscribe-form" action="#">
-					<input type="email" autocomplete="off" placeholder="Enter your email here" />
-					<button >subscribe</button>
-				</form>
-				<!-- mailchimp-alerts Start -->
-				<div class="mailchimp-alerts text-centre">
-					<div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-					<div class="mailchimp-success"></div><!-- mailchimp-success end -->
-					<div class="mailchimp-error"></div><!-- mailchimp-error end -->
-				</div><!-- mailchimp-alerts end -->
-
-            </div><!-- Mailchimp Subscribe Form End -->
-
-        </div>
-    </div>
-</div><!-- Subscribe Section End --> --}}
-
 <!-- Popup Subscribe Section Start -->
 <div class="popup-subscribe-section section bg-gray pt-55 pb-55" data-modal="popup-modal">
 
@@ -2283,6 +2217,7 @@
     </div><!-- Popup Subscribe Wrap End -->
 
 </div><!-- Popup Subscribe Section End -->
+
 
 
 @endsection

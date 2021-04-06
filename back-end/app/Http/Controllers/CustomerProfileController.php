@@ -15,8 +15,12 @@ class CustomerProfileController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $customer=User::where('id',auth()->user()->id)->get();
         return view('customer.customer_dashboard',compact('customer'));
+=======
+        return view('customer.customer_dashboard');
+>>>>>>> 038c2b898af2340a6d7fe21463043b4963bbe4a2
     }
 
     /**
@@ -74,6 +78,14 @@ class CustomerProfileController extends Controller
         //
     }
 
+    public function address_update(Request $request){
+        $profile=CustomerProfile::all()->where('user_id',auth()->user()->id);
+        $profile=$profile[0];
+        $profile->update([
+            'address'=>$request->address,
+        ]);
+        return response(['messgage'=>'updated successfully..!!']);
+    }
     /**
      * Remove the specified resource from storage.
      *

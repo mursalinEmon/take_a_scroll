@@ -7,6 +7,7 @@
     <title>Take a Scroll</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
 
@@ -87,6 +88,8 @@
                         @else
                             @if(auth()->user()->type === 'vendor')
                             <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                            @elseif (auth()->user()->type==='admin')
+                            <a href="{{ route('admin.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
                             @else
                             <a href="{{ route('customer.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
                             @endif
