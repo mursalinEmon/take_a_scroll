@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Vendor;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class VendorController extends Controller
      */
     public function index()
     {
-        //
+
+
     }
 
     /**
@@ -81,5 +83,18 @@ class VendorController extends Controller
     public function destroy(Vendor $vendor)
     {
         //
+    }
+
+    public function show_profile(){
+        //$id=auth()->user()->id;
+        $userData=User::where('id',auth()->user()->id)->get();
+        return view('front-end.profile-view.profile_view',compact('userData'));
+        //dd($vendor);
+
+    }
+
+    public function edit_profile(){
+        $userData=User::where('id',auth()->user()->id)->get();
+        return view('front-end.profile-view.edit_profile',compact('userData'));
     }
 }

@@ -35,7 +35,8 @@ Route::post('/categories/{category}/subcategory/create','SubCategoryController@s
 
 Route::middleware(['verified','vendor'])->group( function () {
     Route::get('/vendor-dashboard', 'HomeController@index')->name('dashboard');
-
+    Route::get('/vendor-profile', 'VendorController@show_profile')->name('vendor_profile.show');
+    Route::get('/edit-vendor-profile', 'VendorController@edit_profile')->name('vendor_profile.edit');
     //sore-routes
     Route::resource('stores', StoreController::class)->except('stores.update');
 
@@ -67,6 +68,8 @@ Route::middleware(['verified','vendor'])->group( function () {
 // customer routes
 Route::middleware(['verified','customer'])->group( function () {
     Route::get('/customer-dashboard','CustomerProfileController@index')->name('customer.dashboard');
+    Route::get('/customer-profile', 'CustomerProfileController@show_profile')->name('customer_profile.show');
+    Route::get('/edit-profile', 'CustomerProfileController@edit_profile')->name('customer_profile.edit');
     //cart
     Route::get('/cart','CartController@index')->name('cart.index');
     Route::get('/cart/products/{product}/add','CartController@add_to_cart')->name('cart.add');
@@ -110,6 +113,8 @@ Route::get('/test/{id}','ProductController@index');
 Route::get('categories/{category}/{sub_cat_name}/{sub_cat}','SubCategoryController@index')->name('category.products.index');
 Route::get('categories/{category}/{sub_cat_name}/{sub_cat}/products/{product}','SubCategoryController@show')->name('category.products.show');
 Route::get('categories/{category}/{sub_cat_name}/{sub_cat}/realestates/{realestate}','SubCategoryController@show_realestate')->name('category.realestate.products.show');
+
+//Profiles
 
 
 Route::get('/logout', function () {

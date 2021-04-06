@@ -72,7 +72,16 @@
                 <div class="col order-2 order-xs-2 order-lg-12 mt-10 mb-10">
                     <!-- Header Account Links Start -->
                     <div class="header-account-links">
-                        <a href="register.html"><i class="icofont icofont-user-alt-7"></i> <span>my account</span></a>
+                        @if(!auth()->user())
+                        <a href="{{ route('login')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
+                        @else
+                            @if(auth()->user()->type === 'vendor')
+                            <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
+                            @else
+                            <a href="{{ route('customer_profile.show')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
+                            @endif
+
+                        @endif
                         @if(!auth()->user())
                         <a href="{{ route('login')}}"><i class="icofont icofont-login d-none"></i> <span>Login</span></a>
                         @else

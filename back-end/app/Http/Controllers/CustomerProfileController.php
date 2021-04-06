@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CustomerProfile;
+use App\User;
 use Illuminate\Http\Request;
 
 class CustomerProfileController extends Controller
@@ -14,7 +15,8 @@ class CustomerProfileController extends Controller
      */
     public function index()
     {
-        //
+        $customer=User::where('id',auth()->user()->id)->get();
+        return view('customer.customer_dashboard',compact('customer'));
     }
 
     /**
@@ -81,5 +83,20 @@ class CustomerProfileController extends Controller
     public function destroy(CustomerProfile $customerProfile)
     {
         //
+    }
+    public function show_profile(){
+        //$id=auth()->user()->id;
+        $userData=User::where('id',auth()->user()->id)->get();
+        return view('front-end.profile-view.profile_view',compact('userData'));
+        //dd($vendor);
+
+    }
+
+    public function edit_profile(){
+        //$id=auth()->user()->id;
+        $userData=User::where('id',auth()->user()->id)->get();
+        return view('front-end.profile-view.edit_profile',compact('userData'));
+        //dd($vendor);
+
     }
 }
