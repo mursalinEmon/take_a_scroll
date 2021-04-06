@@ -2887,7 +2887,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.store_id = this.store.id;
-    this.fetch_sub_category("Ralestate");
+    this.fetch_sub_category("Realestate");
   },
   data: function data() {
     return {
@@ -2897,7 +2897,7 @@ __webpack_require__.r(__webpack_exports__);
       p_section: "",
       p_area: "",
       p_price: 0,
-      p_category: "Ralestate",
+      p_category: "Realestate",
       p_category_id: "",
       p_sub_category: "",
       p_description: "",
@@ -10345,7 +10345,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.moving-button{\r\n    transform: translateY(20vh);\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.moving-button{\n    transform: translateY(20vh);\n}\n\n", ""]);
 
 // exports
 
@@ -80571,13 +80571,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! D:\Practice\Laravel\take_a_scroll\back-end\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\Practice\Laravel\take_a_scroll\back-end\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\Users\Shuvo\Desktop\client_projects\take_a_scroll\back-end\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Shuvo\Desktop\client_projects\take_a_scroll\back-end\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 60b6cf365f2ae1908786a779223193a60d92d0c9
 
 
 /***/ })
