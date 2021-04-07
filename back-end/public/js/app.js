@@ -3874,6 +3874,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    gotopage: function gotopage(order_id) {
+      location.replace("/order-notification/".concat(order_id));
     }
   }
 });
@@ -10537,7 +10540,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".notibox[data-v-d7f806e6] {\n  position: fixed;\n  top: 5rem;\n  margin-left: -13rem;\n  border-radius: 10px;\n}\n.line[data-v-d7f806e6]:hover {\n  background-image: linear-gradient(#00b09b, #96c93d) !important;\n  color: white;\n  border-radius: 10px;\n}", ""]);
+exports.push([module.i, ".notibox[data-v-d7f806e6] {\n  position: fixed;\n  top: 5rem;\n  margin-left: -13rem;\n  border-radius: 10px;\n  max-height: 70vh;\n  min-height: 70vh;\n  overflow-y: scroll;\n}\n.line[data-v-d7f806e6]:hover {\n  background-image: linear-gradient(#00b09b, #96c93d) !important;\n  color: white;\n  border-radius: 10px;\n}", ""]);
 
 // exports
 
@@ -66569,29 +66572,40 @@ var render = function() {
             { staticClass: "shadow notibox animated--grow-in col-md-4" },
             [
               _vm._l(_vm.notifications, function(noti, index) {
-                return _c("div", { staticClass: "row line " }, [
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-5" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(noti.cus.name) +
-                        "\n                    TID: " +
-                        _vm._s(noti.tid) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _vm._v(
-                      "\n                    Amount: " +
-                        _vm._s(noti.amount) +
-                        "\n                    Status: " +
-                        _vm._s(noti.stat) +
-                        "\n                "
-                    )
-                  ])
-                ])
+                return _c(
+                  "div",
+                  {
+                    staticClass: "row line",
+                    on: {
+                      click: function($event) {
+                        return _vm.gotopage(noti.order_id)
+                      }
+                    }
+                  },
+                  [
+                    _vm._m(0, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-5" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(noti.cus.name) +
+                          "\n                    TID: " +
+                          _vm._s(noti.tid) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _vm._v(
+                        "\n                    Amount: " +
+                          _vm._s(noti.amount) +
+                          "\n                    Status: " +
+                          _vm._s(noti.stat) +
+                          "\n                "
+                      )
+                    ])
+                  ]
+                )
               }),
               _vm._v(" "),
               _c(

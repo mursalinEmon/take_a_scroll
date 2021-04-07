@@ -35,6 +35,9 @@ Route::post('/categories/{category}/subcategory/create','SubCategoryController@s
 
 Route::middleware(['verified','admin'])->group( function () {
     Route::get('/admin-dashboard', 'AdminProfileController@index')->name('admin.dashboard');
+    Route::get('/order-notification/{order_id}', 'DeliveryController@show_order');
+
+
 });
 Route::middleware(['verified','vendor'])->group( function () {
     Route::get('/vendor-dashboard', 'HomeController@index')->name('dashboard');

@@ -117,7 +117,11 @@ class CartController extends Controller
     }
 
     public function remove_item($id){
+
         Cart::remove($id);
+        $indentity=auth()->user()->name.auth()->user()->id;
+        Cart::restore($indentity);
+        Cart::store( $indentity);
         return response(['message' => "Product removed from the cart"]);
     }
 
@@ -129,6 +133,9 @@ class CartController extends Controller
     public function update_cart($item,$qty){
             // dd($item,$qty);
         Cart::update($item, $qty);
+        $indentity=auth()->user()->name.auth()->user()->id;
+        Cart::restore($indentity);
+        Cart::store( $indentity);
         // dd(Cart::content());
         return response(['message'=>'Product Quantity Updated']);
     }

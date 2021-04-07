@@ -13,7 +13,7 @@
             <span class="badge badge-danger badge-counter">{{count}}</span>
         </button>
         <div v-if="bell" class="shadow notibox animated--grow-in col-md-4">
-            <div v-for="(noti,index) in notifications" class="row line ">
+            <div v-for="(noti,index) in notifications" class="row line" @click="gotopage(noti.order_id)">
                 <div class="col-md-3">
                     <img style="height:4rem;" class="rounded-circle m-2" src="/images/avatar.png" alt="avatar">
                 </div>
@@ -64,6 +64,9 @@
                         this.notifications=res.data.notifications;
                     }
                 ).catch(err=>console.log(err));
+            },
+            gotopage(order_id){
+                location.replace(`/order-notification/${order_id}`);
             }
         }
 
@@ -76,6 +79,9 @@
     top:5rem;
     margin-left: -13rem;
     border-radius: 10px;
+    max-height: 70vh;
+    min-height: 70vh;
+    overflow-y: scroll;
 }
     .line:hover{
         background-image: linear-gradient(rgb(0, 176, 155), rgb(150, 201, 61)) !important;

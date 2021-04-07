@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Delivery;
 use Auth;
 use App\User;
+use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -51,7 +52,27 @@ class DeliveryController extends Controller
     {
         //
     }
+    public function show_order($order_id){
+        $order = DB::table('orders')
+            ->where('id',$order_id)->get();
+        $order=$order[0];
+        $cart=Cart::stored_data($order->cart_identifier);
+        $stores=[];
+        foreach ($cart as $row){
+            array_push($stores,$row->model->store_id);
+        }
+        $stores=array_unique($stores);
+        $store_wise_row=[];
+       foreach ($stores as $store){
+           $prodcts=[];
+           foreach ($cart as $row){
 
+               array_push($prodcts,$row);
+           }
+           $store_wise_row[$store]=$prodcts;
+       }
+       dd(  $store_wise_row);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -103,7 +124,8 @@ class DeliveryController extends Controller
                 'stat'=>$stat,
                 'amount'=>$amount,
                 'tid'=>$tid,
-                'cus'=>$user
+                'cus'=>$user,
+                'order_id'=>$order->id
             ]);
 
         }
