@@ -3830,6 +3830,12 @@ __webpack_require__.r(__webpack_exports__);
       type: Number,
       "default": null
     }
+  },
+  mounted: function mounted() {
+    //fetch notifications rather than passing in props
+    Echo["private"]("delivery").listen('DeliveryEvent', function (e) {
+      console.log("hit");
+    });
   }
 });
 
@@ -79869,8 +79875,8 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: "pusher",
-  key: "",
-  cluster: "mt1",
+  key: "3921f05a9e8200124c98",
+  cluster: "ap2",
   forceTLS: true
 });
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Events\DeliveryEvent;
+
 use App\Notifications\DeliveryRequest;
 use App\User;
 use DB;
@@ -13,6 +13,7 @@ use App\Library\SslCommerz\SslCommerzNotification;
 use Auth;
 use App\Delivery;
 use App\CustomerProfile;
+use App\Events\DeliveryEvent;
 
 class SslCommerzPaymentController extends Controller
 {

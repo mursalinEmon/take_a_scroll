@@ -21,5 +21,5 @@ Broadcast::channel('messages.{id}', function ($user, $id) {
 Broadcast::channel('delivery', function ($user) {
 //    (int)auth()->user()->id
 
-   return $user->id=6;
+   return true;
 });

@@ -54,7 +54,7 @@
         mounted(){
             //fetch notifications rather than passing in props
             Echo.private(`delivery`).listen('DeliveryEvent',(e)=>{
-                console.log(e);
+                console.log("hit");
             });
 
         },

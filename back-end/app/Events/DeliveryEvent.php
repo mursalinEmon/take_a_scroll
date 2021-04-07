@@ -33,8 +33,4 @@ class DeliveryEvent implements ShouldBroadcast
     {
         return new PrivateChannel('delivery');
     }
-    public function broadcastAs()
-    {
-        return 'DeliveryEvent';
-    }
 }
