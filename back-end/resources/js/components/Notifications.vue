@@ -2,41 +2,31 @@
 <div>
     <li class="nav-item dropdown no-arrow mx-1" >
 <!--        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="nav-link " style="background: none;
+                                            border: none;
+                                            font: inherit;
+                                            cursor: pointer;"
+                aria-expanded="false">
 
-        <i class="fas fa-bell fa-fw"></i>
+        <i class="fas fa-bell fa-fw" @click="()=>this.bell=!this.bell"></i>
             <!-- Counter - Alerts -->
-            <span class="badge badge-danger badge-counter">{{noti_count}}</span>
-        </a>
-        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-            <h6 class="dropdown-header">
-                Message Center
-            </h6>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-                    <div class="status-indicator bg-warning"></div>
+            <span class="badge badge-danger badge-counter">{{count}}</span>
+        </button>
+        <div v-if="bell" class="shadow notibox animated--grow-in col-md-4">
+            <div v-for="(noti,index) in notifications" class="row line ">
+                <div class="col-md-3">
+                    <img style="height:4rem;" class="rounded-circle m-2" src="/images/avatar.png" alt="avatar">
                 </div>
-                <div>
-                    <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                <div class="col-md-5">
+                    {{noti.cus.name}}
+                    TID: {{noti.tid}}
                 </div>
-            </a>
-            <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
-                    <div class="status-indicator bg-success"></div>
+                <div class="col-md-4">
+                    Amount: {{noti.amount}}
+                    Status: {{noti.stat}}
                 </div>
-                <div>
-                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                </div>
-            </a>
-            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+            </div>
+            <a class="dropdown-item text-center small text-gray-700" href="#">Read More Messages</a>
         </div>
     </li>
 </div>
@@ -52,18 +42,26 @@
             },
         },
         mounted(){
-            this.getNotifications();
+            this.count=this.noti_count;
+             this.getNotifications();
             //fetch notifications rather than passing in props
             Echo.private(`delivery`).listen('DeliveryEvent',(e)=>{
              this.getNotifications();
             });
 
         },
+        data:()=>({
+           count:0,
+            notifications:[],
+            bell:false,
+        }),
         methods:{
             getNotifications(){
                 axios.get('/notifications').then(
                     (res)=>{
                         console.log(res.data.notifications);
+                        this.count=res.data.notifications.length;
+                        this.notifications=res.data.notifications;
                     }
                 ).catch(err=>console.log(err));
             }
@@ -72,6 +70,16 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.notibox{
+    position: fixed;
+    top:5rem;
+    margin-left: -13rem;
+    border-radius: 10px;
+}
+    .line:hover{
+        background-image: linear-gradient(rgb(0, 176, 155), rgb(150, 201, 61)) !important;
+        color: white;
+        border-radius: 10px;
+    }
 </style>
