@@ -28,6 +28,7 @@ class CategoryController extends Controller
         return response(['message'=>'Category created successfully!','category'=> $category]);
     }
     public function fetch_sub_category($name){
+        // dd($name);
         $category=Category::where('name',$name)->get('id')->first();
 
         $sub_categories=SubCategory::where('category_id',$category->id)->get();
