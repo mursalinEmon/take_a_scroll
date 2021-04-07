@@ -5,6 +5,7 @@ use App\Category;
 // use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,7 +115,7 @@ Route::get('/sub-category/{name}','CategoryController@fetch_sub_category')->name
 Route::get('/test/{id}','ProductController@index');
 
 
-
+Route::get('/notifications','DeliveryController@allnotifications');
 
 //sub actegory or products
 

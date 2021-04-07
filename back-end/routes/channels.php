@@ -19,7 +19,7 @@ Broadcast::channel('messages.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('delivery', function ($user) {
-//    (int)auth()->user()->id
+//
 
-   return true;
+   return    (int)auth()->user()->id==6;
 });

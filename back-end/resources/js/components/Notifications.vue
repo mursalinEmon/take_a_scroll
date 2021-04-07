@@ -52,12 +52,22 @@
             },
         },
         mounted(){
+            this.getNotifications();
             //fetch notifications rather than passing in props
             Echo.private(`delivery`).listen('DeliveryEvent',(e)=>{
-                console.log("hit");
+             this.getNotifications();
             });
 
         },
+        methods:{
+            getNotifications(){
+                axios.get('/notifications').then(
+                    (res)=>{
+                        console.log(res.data.notifications);
+                    }
+                ).catch(err=>console.log(err));
+            }
+        }
 
     }
 </script>

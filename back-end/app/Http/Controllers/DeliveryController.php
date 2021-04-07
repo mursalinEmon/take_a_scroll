@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Delivery;
+use Auth;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeliveryController extends Controller
 {
@@ -81,5 +84,29 @@ class DeliveryController extends Controller
     public function destroy(Delivery $delivery)
     {
         //
+    }
+    public function allnotifications(){
+        $data=[];
+        $user = User::find(6);
+
+        foreach ($user->unreadNotifications as $notification) {
+            $p= $notification->data['order_id'];
+            $order=DB::table('orders')
+                ->where('id',$p)->get();
+          $order=$order[0];
+            $stat=$order->status;
+            $amount=$order->amount;
+            $tid=$order->transaction_id;
+            $user=User::where('email',$order->email)->get();
+            $user=$user[0];
+            array_push($data,[
+                'stat'=>$stat,
+                'amount'=>$amount,
+                'tid'=>$tid,
+                'cus'=>$user
+            ]);
+
+        }
+        return response(['notifications'=>$data]) ;
     }
 }

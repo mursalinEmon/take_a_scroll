@@ -179,11 +179,9 @@ export default {
     created() {
 
         this.store_id=this.store.id;
-<<<<<<< HEAD
-         this.fetch_sub_category( "Realestate");
-=======
+
          this.fetch_sub_category( "RealEstate");
->>>>>>> 038c2b898af2340a6d7fe21463043b4963bbe4a2
+
     },
     data: function() {
         return {
@@ -193,11 +191,9 @@ export default {
             p_section: "",
             p_area: "",
             p_price: 0,
-<<<<<<< HEAD
+
             p_category: "Realestate",
-=======
-            p_category: "RealEstate",
->>>>>>> 038c2b898af2340a6d7fe21463043b4963bbe4a2
+
             p_category_id: "",
             p_sub_category: "",
             p_description: "",
