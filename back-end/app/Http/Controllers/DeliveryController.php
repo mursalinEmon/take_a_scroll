@@ -64,6 +64,7 @@ class DeliveryController extends Controller
         $stores=array_unique($stores);
         $store_wise_row=[];
        foreach ($stores as $store){
+
            $prodcts=[];
            foreach ($cart as $row){
 
@@ -71,7 +72,7 @@ class DeliveryController extends Controller
            }
            $store_wise_row[$store]=$prodcts;
        }
-       dd(  $store_wise_row);
+       return view('Orders.adminOrder',compact('store_wise_row','order'));
     }
     /**
      * Show the form for editing the specified resource.
