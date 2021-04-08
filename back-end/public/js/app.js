@@ -3875,8 +3875,8 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
-    gotopage: function gotopage(order_id) {
-      location.replace("/order-notification/".concat(order_id));
+    gotopage: function gotopage(order_id, noti_id) {
+      location.replace("/order-notification/".concat(order_id, "/").concat(noti_id));
     }
   }
 });
@@ -66578,7 +66578,7 @@ var render = function() {
                     staticClass: "row line",
                     on: {
                       click: function($event) {
-                        return _vm.gotopage(noti.order_id)
+                        return _vm.gotopage(noti.order_id, noti.noti_id)
                       }
                     }
                   },

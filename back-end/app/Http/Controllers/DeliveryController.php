@@ -16,6 +16,15 @@ class DeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function markasdone(Request $request){
+        $notifications=auth()->user()->notifications;
+        foreach ($notifications as $noti){
+            if($noti->id == $request->noti_id){
+                $noti->markAsRead();
+            }
+        }
+    }
     public function index()
     {
         //
@@ -52,7 +61,7 @@ class DeliveryController extends Controller
     {
         //
     }
-    public function show_order($order_id){
+    public function show_order($order_id,$noti_id){
         $order = DB::table('orders')
             ->where('id',$order_id)->get();
         $order=$order[0];
@@ -72,7 +81,8 @@ class DeliveryController extends Controller
            }
            $store_wise_row[$store]=$prodcts;
        }
-       return view('Orders.adminOrder',compact('store_wise_row','order'));
+
+       return view('Orders.adminOrder',compact('store_wise_row','order','noti_id'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -126,10 +136,17 @@ class DeliveryController extends Controller
                 'amount'=>$amount,
                 'tid'=>$tid,
                 'cus'=>$user,
-                'order_id'=>$order->id
+                'order_id'=>$order->id,
+                'noti_id'=>$notification->id
             ]);
 
         }
         return response(['notifications'=>$data]) ;
     }
+
+
+    public function process_vendor_order(Request $request){
+        dd($request);
+    }
+
 }

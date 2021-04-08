@@ -320,6 +320,21 @@
 
   <script src="{{ asset('js/demo/chart-area-demo.js') }}" ></script>
   <script  src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+    <script>
+       function mark() {
+           var noti_id=document.getElementById("markvalue").value;
+           $.ajax({
+               method: "POST",
+               url: `/markasdone`,
+               data: { noti_id: noti_id }
+           }).done(function(res) {
+               location.replace('/admin-dashboard');
+           });
+       }
+
+
+
+    </script>
 
 
 </body>

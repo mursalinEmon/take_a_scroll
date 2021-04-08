@@ -35,10 +35,15 @@ Route::post('/categories/{category}/subcategory/create','SubCategoryController@s
 
 Route::middleware(['verified','admin'])->group( function () {
     Route::get('/admin-dashboard', 'AdminProfileController@index')->name('admin.dashboard');
-    Route::get('/order-notification/{order_id}', 'DeliveryController@show_order');
+    Route::get('/order-notification/{order_id}/{noti_id}', 'DeliveryController@show_order');
+    Route::post('/vendor-order','DeliveryController@process_vendor_order')->name('vendor.order');
+
 
 
 });
+Route::post('/markasdone','DeliveryController@markasdone');
+
+
 Route::middleware(['verified','vendor'])->group( function () {
     Route::get('/vendor-dashboard', 'HomeController@index')->name('dashboard');
     Route::get('/vendor-profile', 'VendorController@show_profile')->name('vendor_profile.show');

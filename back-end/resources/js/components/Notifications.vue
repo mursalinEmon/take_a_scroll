@@ -13,7 +13,7 @@
             <span class="badge badge-danger badge-counter">{{count}}</span>
         </button>
         <div v-if="bell" class="shadow notibox animated--grow-in col-md-4">
-            <div v-for="(noti,index) in notifications" class="row line" @click="gotopage(noti.order_id)">
+            <div v-for="(noti,index) in notifications" class="row line" @click="gotopage(noti.order_id,noti.noti_id)">
                 <div class="col-md-3">
                     <img style="height:4rem;" class="rounded-circle m-2" src="/images/avatar.png" alt="avatar">
                 </div>
@@ -65,8 +65,8 @@
                     }
                 ).catch(err=>console.log(err));
             },
-            gotopage(order_id){
-                location.replace(`/order-notification/${order_id}`);
+            gotopage(order_id,noti_id){
+                location.replace(`/order-notification/${order_id}/${noti_id}`);
             }
         }
 
