@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Delivery;
+use App\Notifications\DeliveryRequest;
+use App\Store;
+use App\VendorOrder;
 use Auth;
 use App\User;
 use Cart;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -73,7 +77,6 @@ class DeliveryController extends Controller
         $stores=array_unique($stores);
         $store_wise_row=[];
        foreach ($stores as $store){
-
            $prodcts=[];
            foreach ($cart as $row){
 
@@ -119,7 +122,7 @@ class DeliveryController extends Controller
     }
     public function allnotifications(){
         $data=[];
-        $user = User::find(6);
+        $user =auth()->user();
 
         foreach ($user->unreadNotifications as $notification) {
             $p= $notification->data['order_id'];
@@ -146,7 +149,48 @@ class DeliveryController extends Controller
 
 
     public function process_vendor_order(Request $request){
-        dd($request);
+        $order = DB::table('orders')
+            ->where('id',$request->order_id)->get();
+        $order=$order[0];
+        $cart=Cart::stored_data($order->cart_identifier);
+        $stores=[];
+        foreach ($cart as $row){
+            array_push($stores,$row->model->store_id);
+        }
+        $stores=array_unique($stores);
+        $store_wise_row=[];
+        foreach ($stores as $store){
+            $prodcts=[];
+            foreach ($cart as $row){
+
+                array_push($prodcts,$row);
+            }
+            $store_wise_row[$store]=$prodcts;
+        }
+       foreach ($store_wise_row as $key=>$value){
+           foreach ($value as $row){
+
+             VendorOrder::create([
+                 'store_id'=>$key,
+                 'order_id'=>$order->id,
+                 'product_id'=>$row->model->id,
+                 'qty'=>$row->qty,
+                 'price'=>$row->model->price+0.00,
+                 'tid'=>$order->transaction_id,
+             ]);
+
+           }
+
+           $store=Store::findOrFail($key);
+
+
+           Delivery::where('order_id',$order->id)->update([
+                'delivery_status'=>'at Vendor'
+            ]);
+           $delivery = Delivery::where('order_id',$order->id)->get();
+           $user=User::findOrFail($store->vendor_id);
+           $user->notify((new DeliveryRequest($delivery[0])));
+       }
     }
 
 }

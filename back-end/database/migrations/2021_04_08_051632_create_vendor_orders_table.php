@@ -19,6 +19,7 @@ class CreateVendorOrdersTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('qty');
+            $table->double('price');
             $table->string('tid');
             $table->timestamps();
         });

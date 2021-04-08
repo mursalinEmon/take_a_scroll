@@ -6,7 +6,9 @@
             <span class="text text-success text-center col-md-6">Payment Status: {{$order->status}} </span> <span class="text text-danger text-center">Payment Status: {{$order->amount}}</span>
         </div>
         <hr>
-        <form action="">
+        <form action="{{route('vendor.order')}}" method="post">
+            @csrf
+            <input type="hidden" value="{{$order->id}}" name="order_id">
         @php  $total=0;@endphp
         @forelse($store_wise_row as $key=>$value)
 
@@ -55,7 +57,7 @@
         @endforelse
         <div class="row">
             <div class="col-md-4"></div>
-            <div class="col-md-2"><button  class="btn btn-success text-center"><h5 class=" text  text-center ">Proceed</h5></button></div>
+            <div class="col-md-2"><button type="submit"  class="btn btn-success text-center mr-2"><h5 class=" text  text-center ">Proceed</h5></button></div>
             <div class="col-md-2"><span  href="#" id="markasdone" onclick="mark()" class="btn btn-primary text-center markasdone"><h5 class=" text  text-center ">Mark As Done</h5>
                     <input type="hidden" id="markvalue" value="{{$noti_id}}"></span></div>
             <div class="col-md-4"></div>

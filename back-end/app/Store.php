@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use App\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Store extends Model
 {
