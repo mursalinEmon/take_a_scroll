@@ -80,7 +80,7 @@
     margin-left: -13rem;
     border-radius: 10px;
     max-height: 70vh;
-    min-height: 70vh;
+
     overflow-y: scroll;
 }
     .line:hover{

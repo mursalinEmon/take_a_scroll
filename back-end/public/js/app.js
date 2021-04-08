@@ -10540,7 +10540,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".notibox[data-v-d7f806e6] {\n  position: fixed;\n  top: 5rem;\n  margin-left: -13rem;\n  border-radius: 10px;\n  max-height: 70vh;\n  min-height: 70vh;\n  overflow-y: scroll;\n}\n.line[data-v-d7f806e6]:hover {\n  background-image: linear-gradient(#00b09b, #96c93d) !important;\n  color: white;\n  border-radius: 10px;\n}", ""]);
+exports.push([module.i, ".notibox[data-v-d7f806e6] {\n  position: fixed;\n  top: 5rem;\n  margin-left: -13rem;\n  border-radius: 10px;\n  max-height: 70vh;\n  overflow-y: scroll;\n}\n.line[data-v-d7f806e6]:hover {\n  background-image: linear-gradient(#00b09b, #96c93d) !important;\n  color: white;\n  border-radius: 10px;\n}", ""]);
 
 // exports
 
