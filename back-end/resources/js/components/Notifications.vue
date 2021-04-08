@@ -36,18 +36,28 @@
     export default {
         name: "Notifications",
         props:{
+            user:{
+                type:Object,
+                default: null,
+            },
             noti_count:{
               type:Number,
                 default:null,
             },
         },
         mounted(){
+
             this.count=this.noti_count;
              this.getNotifications();
-            //fetch notifications rather than passing in props
-            Echo.private(`delivery`).listen('DeliveryEvent',(e)=>{
-             this.getNotifications();
-            });
+           if(this.user.type=="admin"){
+               Echo.private(`delivery`).listen('DeliveryEvent',(e)=>{
+                   this.getNotifications();
+               });
+           }else if(this.user.type=="vendor"){
+
+           }else{
+
+           }
 
         },
         data:()=>({
@@ -66,7 +76,14 @@
                 ).catch(err=>console.log(err));
             },
             gotopage(order_id,noti_id){
-                location.replace(`/order-notification/${order_id}/${noti_id}`);
+                if(this.user.type=='admin'){
+                    location.replace(`/order-notification/${order_id}/${noti_id}`);
+                }else if(this.user.type=='vendor') {
+                    location.replace(`/vendor-order-notification/${order_id}/${noti_id}`);
+
+                }
+
+
             }
         }
 
@@ -80,7 +97,7 @@
     margin-left: -13rem;
     border-radius: 10px;
     max-height: 70vh;
-
+z-index: 2000;
     overflow-y: scroll;
 }
     .line:hover{

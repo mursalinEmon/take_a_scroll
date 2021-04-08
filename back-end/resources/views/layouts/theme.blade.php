@@ -207,7 +207,7 @@
             </li>
 
             <!-- Nav Item - Alerts -->
-           <notifications :noti_count={{auth()->user()->notifications()->count()}} ></notifications>
+           <notifications :noti_count={{auth()->user()->notifications()->count()}} :user="{{auth()->user()}}" ></notifications>
             <!-- Nav Item - Messages -->
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -3841,6 +3841,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Notifications",
   props: {
+    user: {
+      type: Object,
+      "default": null
+    },
     noti_count: {
       type: Number,
       "default": null
@@ -3850,11 +3854,13 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.count = this.noti_count;
-    this.getNotifications(); //fetch notifications rather than passing in props
+    this.getNotifications();
 
-    Echo["private"]("delivery").listen('DeliveryEvent', function (e) {
-      _this.getNotifications();
-    });
+    if (this.user.type == "admin") {
+      Echo["private"]("delivery").listen('DeliveryEvent', function (e) {
+        _this.getNotifications();
+      });
+    } else if (this.user.type == "vendor") {} else {}
   },
   data: function data() {
     return {
@@ -3876,7 +3882,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     gotopage: function gotopage(order_id, noti_id) {
-      location.replace("/order-notification/".concat(order_id, "/").concat(noti_id));
+      if (this.user.type == 'admin') {
+        location.replace("/order-notification/".concat(order_id, "/").concat(noti_id));
+      } else if (this.user.type == 'vendor') {
+        location.replace("/vendor-order-notification/".concat(order_id, "/").concat(noti_id));
+      }
     }
   }
 });
@@ -10540,7 +10550,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".notibox[data-v-d7f806e6] {\n  position: fixed;\n  top: 5rem;\n  margin-left: -13rem;\n  border-radius: 10px;\n  max-height: 70vh;\n  overflow-y: scroll;\n}\n.line[data-v-d7f806e6]:hover {\n  background-image: linear-gradient(#00b09b, #96c93d) !important;\n  color: white;\n  border-radius: 10px;\n}", ""]);
+exports.push([module.i, ".notibox[data-v-d7f806e6] {\n  position: fixed;\n  top: 5rem;\n  margin-left: -13rem;\n  border-radius: 10px;\n  max-height: 70vh;\n  z-index: 2000;\n  overflow-y: scroll;\n}\n.line[data-v-d7f806e6]:hover {\n  background-image: linear-gradient(#00b09b, #96c93d) !important;\n  color: white;\n  border-radius: 10px;\n}", ""]);
 
 // exports
 

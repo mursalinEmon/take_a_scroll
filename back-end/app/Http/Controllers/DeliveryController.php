@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Delivery;
 use App\Notifications\DeliveryRequest;
+use App\Odrer;
+use App\Product;
 use App\Store;
 use App\VendorOrder;
 use Auth;
@@ -70,22 +72,51 @@ class DeliveryController extends Controller
             ->where('id',$order_id)->get();
         $order=$order[0];
         $cart=Cart::stored_data($order->cart_identifier);
+
         $stores=[];
         foreach ($cart as $row){
             array_push($stores,$row->model->store_id);
         }
         $stores=array_unique($stores);
+
         $store_wise_row=[];
        foreach ($stores as $store){
            $prodcts=[];
            foreach ($cart as $row){
+               if($row->model->store_id == $store){
+                   array_push($prodcts,$row);
+               }else{
 
-               array_push($prodcts,$row);
+               }
+
            }
            $store_wise_row[$store]=$prodcts;
        }
 
        return view('Orders.adminOrder',compact('store_wise_row','order','noti_id'));
+    }
+
+
+    public function show_vendor_order($order_id,$noti_id){
+       $od= DB::table('orders')
+            ->where('id',$order_id)->get();
+       $status=$od[0]->status;
+       $tid=$od[0]->transaction_id	;
+        $store=Store::where('vendor_id',auth()->user()->id)->get();
+        $store_id=$store[0]->id;
+        $store_name=$store[0]->name;
+        $vorder=VendorOrder::where('order_id',$order_id)->where('store_id',$store_id)->get();
+        $orders=[];
+        foreach ($vorder as $order){
+            $data=[];
+            $product=Product::findOrFail($order->product_id);
+           $data['product']=$product;
+           $data['qty']=$order->qty;
+           $data['tid']=$order->tid;
+           array_push($orders,$data);
+        }
+
+       return view('Orders.vendorOrder',compact('orders','store_name','status','noti_id','tid','order_id'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -162,11 +193,15 @@ class DeliveryController extends Controller
         foreach ($stores as $store){
             $prodcts=[];
             foreach ($cart as $row){
+                if($row->model->store_id == $store){
+                    array_push($prodcts,$row);
+                }else{
 
-                array_push($prodcts,$row);
+                }
             }
             $store_wise_row[$store]=$prodcts;
         }
+
        foreach ($store_wise_row as $key=>$value){
            foreach ($value as $row){
 
@@ -192,5 +227,17 @@ class DeliveryController extends Controller
            $user->notify((new DeliveryRequest($delivery[0])));
        }
     }
+
+
+
+    public function process_vendor_order_update(Request $request){
+        $delivery=Delivery::where('order_id',$request->oreder_id)->get();
+        $delivery=$delivery[0];
+        $delivery->update([
+            'delivery_status'=>'In Shipping',
+        ]);
+        return redirect()->route('dashboard');
+    }
+
 
 }

@@ -74,6 +74,12 @@ Route::middleware(['verified','vendor'])->group( function () {
     Route::post('stores/{store}/realestate-product/store','ProductController@store_realestate_products')->name('product.realestate.store');
     // Route::get('categories/{category}/{sub_cat_name}/{sub_cat}','SubCategoryController@index')->name('category.realestate.index');
 
+//    notificationstuff
+    Route::get('/vendor-order-notification/{order_id}/{noti_id}', 'DeliveryController@show_vendor_order');
+    Route::post('/vendor-order-update','DeliveryController@process_vendor_order_update')->name('vendor.order.update');
+
+
+
 
 
 });
