@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CustomerProfile;
 use App\User;
+use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +24,19 @@ class CustomerProfileController extends Controller
             ->where('email',$customer[0]->email)->get();
         $order_count=$orders->count() ;
         return view('customer.customer_dashboard',compact('customer','order_count'));
+
+    }
+
+    public function orders(){
+        $orders=DB::table('orders')
+            ->where('email',auth()->user()->email)->get();
+            $carts=[];
+        foreach ($orders as $order){
+            $cart=Cart::stored_data($order->cart_identifier);
+            array_push($carts,$cart);
+        }
+        dd($carts);
+
 
     }
 
