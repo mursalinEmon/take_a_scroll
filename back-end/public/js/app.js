@@ -3854,6 +3854,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.count = this.noti_count;
+    this.getNotifications();
 
     if (this.user.type == "admin") {
       Echo["private"]("delivery").listen('DeliveryEvent', function (e) {

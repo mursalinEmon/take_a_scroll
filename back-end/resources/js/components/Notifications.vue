@@ -48,6 +48,7 @@
         mounted(){
 
             this.count=this.noti_count;
+             this.getNotifications();
            if(this.user.type=="admin"){
                Echo.private(`delivery`).listen('DeliveryEvent',(e)=>{
                    this.getNotifications();
