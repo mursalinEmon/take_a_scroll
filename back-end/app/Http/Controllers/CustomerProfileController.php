@@ -33,9 +33,10 @@ class CustomerProfileController extends Controller
             $carts=[];
         foreach ($orders as $order){
             $cart=Cart::stored_data($order->cart_identifier);
-            array_push($carts,$cart);
+//            array_push($carts,$cart);
+            $carts[$order->id]=$cart;
         }
-        dd($carts);
+        return view('customer.orders',compact('orders','carts'));
 
 
     }
