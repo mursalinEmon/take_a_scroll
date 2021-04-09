@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CustomerProfile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerProfileController extends Controller
 {
@@ -17,7 +18,11 @@ class CustomerProfileController extends Controller
     {
 
         $customer=User::where('id',auth()->user()->id)->get();
-        return view('customer.customer_dashboard',compact('customer'));
+
+        $orders=DB::table('orders')
+            ->where('email',$customer[0]->email)->get();
+        $order_count=$orders->count() ;
+        return view('customer.customer_dashboard',compact('customer','order_count'));
 
     }
 
