@@ -111,10 +111,11 @@ class SslCommerzPaymentController extends Controller
             'delivery_address' => $address,
         ]);
 
-        broadcast(new DeliveryEvent())->toOthers();
+
         //        notification part
 
         $user=User::findOrFail(6);
+        broadcast(new DeliveryEvent($user))->toOthers();
         $user->notify((new DeliveryRequest($delivery)));
 
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Delivery;
+use App\Events\DeliveryEvent;
 use App\Notifications\DeliveryRequest;
 use App\Odrer;
 use App\Product;
@@ -225,6 +226,7 @@ class DeliveryController extends Controller
            $delivery = Delivery::where('order_id',$order->id)->get();
            $user=User::findOrFail($store->vendor_id);
            $user->notify((new DeliveryRequest($delivery[0])));
+           broadcast(new DeliveryEvent($user))->toOthers();
        }
     }
 

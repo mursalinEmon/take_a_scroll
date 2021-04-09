@@ -19,9 +19,10 @@ class DeliveryEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct()
+    public $user;
+    public function __construct($user)
     {
-        //
+        $this->user=$user;
     }
 
     /**
@@ -31,6 +32,13 @@ class DeliveryEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('delivery');
+        if($this->user->type=="admin"){
+            return new PrivateChannel('delivery');
+        }elseif ($this->user->type=="vendor"){
+            return new PrivateChannel('delivery.'.$this->user->id);
+        }else{
+
+        }
+
     }
 }

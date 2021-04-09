@@ -23,3 +23,8 @@ Broadcast::channel('delivery', function ($user) {
 
    return    (int)auth()->user()->id==6;
 });
+Broadcast::channel('delivery.{id}', function ($user,$id) {
+//
+
+    return  $user->id === (int) $id;
+});

@@ -48,13 +48,14 @@
         mounted(){
 
             this.count=this.noti_count;
-             this.getNotifications();
            if(this.user.type=="admin"){
                Echo.private(`delivery`).listen('DeliveryEvent',(e)=>{
                    this.getNotifications();
                });
            }else if(this.user.type=="vendor"){
-
+               Echo.private(`delivery.${this.user.id}`).listen('DeliveryEvent',(e)=>{
+                   this.getNotifications();
+               });
            }else{
 
            }

@@ -3854,13 +3854,16 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.count = this.noti_count;
-    this.getNotifications();
 
     if (this.user.type == "admin") {
       Echo["private"]("delivery").listen('DeliveryEvent', function (e) {
         _this.getNotifications();
       });
-    } else if (this.user.type == "vendor") {} else {}
+    } else if (this.user.type == "vendor") {
+      Echo["private"]("delivery.".concat(this.user.id)).listen('DeliveryEvent', function (e) {
+        _this.getNotifications();
+      });
+    } else {}
   },
   data: function data() {
     return {
