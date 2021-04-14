@@ -43,28 +43,38 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         $image="";
-        $store=Store::create([
-            'name'=>$request->store_name,
-            'vendor_id'=>auth()->user()->id,
-            'physical_Address'=>$request->physical_Address,
-            'type'=>$request->type,
-            'vendor_NID'=>$request->vendor_NID,
-            'description'=>$request->description,
-            'banner'=>$image,
-        ]);
+        $st=Store::where('vendor_id',auth()->user()->id)->where('type',$request->type)->get();
 
-        if($request->file('file')){
-            $image = $request->file;
-            $imagePath = $request->file('file');
-            $imageName= time().'.'.$imagePath->getClientOriginalExtension();
-            $image->move(public_path('image/'.auth()->user()->name.'/'.$store->name.'/'),$imageName);
+        if($st->count()!=0){
+            return response(['message'=>'you already have a store in this type can\' create a new one..!!!','store'=>null]);
+        }else{
+            $store=Store::create([
+                'name'=>$request->store_name,
+                'vendor_id'=>auth()->user()->id,
+                'physical_Address'=>$request->physical_Address,
+                'type'=>$request->type,
+                'vendor_NID'=>$request->vendor_NID,
+                'description'=>$request->description,
+                'banner'=>$image,
+            ]);
+
+            if($request->file('file')){
+                $image = $request->file;
+                $imagePath = $request->file('file');
+                $imageName= time().'.'.$imagePath->getClientOriginalExtension();
+                $image->move(public_path('image/'.auth()->user()->name.'/'.$store->name.'/'),$imageName);
+            }
+
+
+            $store->update([
+                'banner'=>'image/'.auth()->user()->name.'/'.$store->name.'/'.$imageName,
+            ]);
+            return response(['message'=>'Store Created Successfully..!!!','store'=>$store]);
         }
 
 
-        $store->update([
-            'banner'=>'image/'.auth()->user()->name.'/'.$store->name.'/'.$imageName,
-        ]);
-        return response(['message'=>'Store Created Successfully..!!!','store'=>$store]);
+
+
     }
 
     /**
