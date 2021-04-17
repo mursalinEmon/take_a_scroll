@@ -121,6 +121,9 @@ Route::get('/chat', 'HomeController@chat')->name('chat');
 Route::get('/fetch-contacts','ChatController@contacts')->name('chat.contacts');
 Route::get('/messages/{id}','ChatController@fetchMessages')->name('chat.messages');
 Route::post('/message/send','ChatController@storeMessage')->name('chat.storemessage');
+Route::get('/unread-message/count','ChatController@unreadcount')->name('chat.unreadcount');
+
+
 
 // category
 Route::get('/categories','CategoryController@index')->name('product.categories');

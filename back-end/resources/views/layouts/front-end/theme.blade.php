@@ -37,9 +37,9 @@
 
 <body>
 <div id="app">
-    @if(auth()->user()->type=="customer")
+
         <chat-head></chat-head>
-    @endif
+
 
 <!-- Ft -->
     <div class="header-section section">

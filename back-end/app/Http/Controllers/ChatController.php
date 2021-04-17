@@ -6,6 +6,7 @@ use App\User;
 use App\Message;
 use App\Events\ChatEvent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -34,5 +35,14 @@ class ChatController extends Controller
         ]);
         broadcast(new ChatEvent($message));
         return response()->json($message);
+    }
+    public function unreadcount(){
+        $messages= DB::table('messages')
+        ->where('seen',0)
+        ->where('from', auth()->user()->id)
+        ->orWhere('to', auth()->user()->id)
+        ->get();
+        $count=$messages->count();
+        return response(['count'=>$count]);
     }
 }

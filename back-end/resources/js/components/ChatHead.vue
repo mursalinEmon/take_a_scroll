@@ -2,7 +2,7 @@
   <div class="container">
 
       <div class="messanger">
-             <i class="icofont icofont-ui-messaging icon" ></i><div class="counter">0</div>
+             <i class="icofont icofont-ui-messaging icon" ></i><div class="counter">{{count}}</div>
       </div>
 
 
@@ -12,8 +12,23 @@
 
 <script>
 export default {
+    props:{
 
+    },
+     data: function() {
+        return {
+            count:0,
+        }
+     }
+    ,
+    created(){
+        axios.get(`/unread-message/count`).then((res)=>{
+            this.count=res.data.count;
+            console.log(res);
+        }).catch((err)=>console.log(err));
+    }
 }
+
 </script>
 
 <style lang="scss" scoped>
