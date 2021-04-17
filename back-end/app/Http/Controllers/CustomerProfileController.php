@@ -30,7 +30,7 @@ class CustomerProfileController extends Controller
 
     public function orders(){
         $orders=DB::table('orders')
-            ->where('email',auth()->user()->email)->get();
+            ->where('email',auth()->user()->email)->orderBy('created_at', 'desc')->get();
             $carts=[];
             $deliveries=[];
         foreach ($orders as $order){

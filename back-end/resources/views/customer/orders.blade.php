@@ -14,6 +14,13 @@
             @php $total=0 @endphp
             @foreach($carts as $key=>$value)
                 @if($key == $order->id)
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <h5 class="text-primary">Order Issued At : {{\Carbon\Carbon::parse($order->created_at)->format('D-M-Y')}}</h5>
+                        </div>
+                    </div>
+                    <br>
                 <table class="table table-hover">
                     <thead>
                     <tr>
