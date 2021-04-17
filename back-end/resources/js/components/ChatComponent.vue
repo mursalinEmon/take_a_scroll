@@ -11,7 +11,7 @@
             <div class="contacts">
                 <ul>
                     <li  v-for="(contact,index) in contacts" :key="index" @click="selectedContact(index,contact)" >
-                            <div class="card" :class="{'selected': index==selected}">
+                            <div class="card" :class="{'selected': index==selected}" @click="markasread(contact)">
                                 <h6>{{ contact.name }}</h6>
                                 <p>{{contact.email}}</p>
                             </div>
@@ -71,6 +71,14 @@ export default {
 
           }).catch((err)=>{concole.log(err)})
       },
+     markasread(contact){
+
+        axios.post(`/unread-message/markasseen`,{
+            contact:contact
+        }).then((res)=>{
+
+        }).catch((err)=>console.log(err));
+     },
        sendMessage(e){
           this.messages.push({
               'body':e,

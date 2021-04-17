@@ -2036,6 +2036,13 @@ __webpack_require__.r(__webpack_exports__);
         concole.log(err);
       });
     },
+    markasread: function markasread(contact) {
+      axios.post("/unread-message/markasseen", {
+        contact: contact
+      }).then(function (res) {})["catch"](function (err) {
+        return console.log(err);
+      });
+    },
     sendMessage: function sendMessage(e) {
       var _this4 = this;
 
@@ -2103,6 +2110,11 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (err) {
       return console.log(err);
     });
+  },
+  methods: {
+    "goto": function goto() {
+      location.replace("/chat");
+    }
   }
 });
 
@@ -63713,7 +63725,12 @@ var render = function() {
                     "div",
                     {
                       staticClass: "card",
-                      class: { selected: index == _vm.selected }
+                      class: { selected: index == _vm.selected },
+                      on: {
+                        click: function($event) {
+                          return _vm.markasread(contact)
+                        }
+                      }
                     },
                     [
                       _c("h6", [_vm._v(_vm._s(contact.name))]),
@@ -63768,10 +63785,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "messanger" }, [
-      _c("i", { staticClass: "icofont icofont-ui-messaging icon" }),
-      _c("div", { staticClass: "counter" }, [_vm._v(_vm._s(_vm.count))])
-    ])
+    _c(
+      "div",
+      {
+        staticClass: "messanger",
+        on: {
+          click: function($event) {
+            return _vm.goto()
+          }
+        }
+      },
+      [
+        _c("i", { staticClass: "icofont icofont-ui-messaging icon" }),
+        _c("div", { staticClass: "counter" }, [_vm._v(_vm._s(_vm.count))])
+      ]
+    )
   ])
 }
 var staticRenderFns = []

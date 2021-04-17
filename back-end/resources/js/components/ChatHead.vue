@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-      <div class="messanger">
+      <div class="messanger" @click="goto()">
              <i class="icofont icofont-ui-messaging icon" ></i><div class="counter">{{count}}</div>
       </div>
 
@@ -26,6 +26,11 @@ export default {
             this.count=res.data.count;
             console.log(res);
         }).catch((err)=>console.log(err));
+    },
+    methods:{
+        goto(){
+            location.replace(`/chat`);
+        }
     }
 }
 

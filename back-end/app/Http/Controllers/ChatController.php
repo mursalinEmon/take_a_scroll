@@ -39,10 +39,19 @@ class ChatController extends Controller
     public function unreadcount(){
         $messages= DB::table('messages')
         ->where('seen',0)
-        ->where('from', auth()->user()->id)
-        ->orWhere('to', auth()->user()->id)
+        ->Where('to', auth()->user()->id)
         ->get();
         $count=$messages->count();
         return response(['count'=>$count]);
+    }
+    public function markasseen(Request $request){
+
+        DB::table('messages')
+            ->where('from',$request['contact']['id'])
+            ->where('to', auth()->user()->id)
+            ->update([
+                'seen'=>1
+            ]);
+        return response([]);
     }
 }
