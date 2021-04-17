@@ -8,6 +8,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
 
@@ -32,222 +36,226 @@
 </head>
 
 <body>
+<div id="app">
+    @if(auth()->user()->type=="customer")
+        <chat-head></chat-head>
+    @endif
 
 <!-- Ft -->
-<div class="header-section section">
+    <div class="header-section section">
 
-    <!-- Header Top Start -->
-    <div class="header-top header-top-one header-top-border pt-10 pb-10">
-        <div class="container">
-            <div class="row align-items-center justify-content-between">
+        <!-- Header Top Start -->
+        <div class="header-top header-top-one header-top-border pt-10 pb-10">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
 
-                <div class="col mt-10 mb-10">
-                    <!-- Header Links Start -->
-                    <div class="header-links">
-                        <a href="track-order.html"><img src="{{ asset('assets/images/icons/car.png') }}" alt="Car Icon"> <span>Track your order</span></a>
-                        {{-- <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a> --}}
-                    </div><!-- Header Links End -->
-                </div>
+                    <div class="col mt-10 mb-10">
+                        <!-- Header Links Start -->
+                        <div class="header-links">
+                            <a href="track-order.html"><img src="{{ asset('assets/images/icons/car.png') }}" alt="Car Icon"> <span>Track your order</span></a>
+                            {{-- <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a> --}}
+                        </div><!-- Header Links End -->
+                    </div>
 
-                <div class="col order-12 order-xs-12 order-lg-2 mt-10 mb-10">
-                    <!-- Header Advance Search Start -->
-                    <div class="header-advance-search">
+                    <div class="col order-12 order-xs-12 order-lg-2 mt-10 mb-10">
+                        <!-- Header Advance Search Start -->
+                        <div class="header-advance-search">
 
-                        <form action="#">
-                            <div class="input"><input type="text" placeholder="Search your product"></div>
-                            <div class="select">
-                                <select class="nice-select">
-                                    <option>All Categories</option>
-                                    <option>Mobile</option>
-                                    <option>Computer</option>
-                                    <option>Laptop</option>
-                                    <option>Camera</option>
-                                </select>
-                            </div>
-                            <div class="submit"><button><i class="icofont icofont-search-alt-1"></i></button></div>
-                        </form>
+                            <form action="#">
+                                <div class="input"><input type="text" placeholder="Search your product"></div>
+                                <div class="select">
+                                    <select class="nice-select">
+                                        <option>All Categories</option>
+                                        <option>Mobile</option>
+                                        <option>Computer</option>
+                                        <option>Laptop</option>
+                                        <option>Camera</option>
+                                    </select>
+                                </div>
+                                <div class="submit"><button><i class="icofont icofont-search-alt-1"></i></button></div>
+                            </form>
 
-                    </div><!-- Header Advance Search End -->
-                </div>
+                        </div><!-- Header Advance Search End -->
+                    </div>
 
-                <div class="col order-2 order-xs-2 order-lg-12 mt-10 mb-10">
-                    <!-- Header Account Links Start -->
-                    <div class="header-account-links">
-                        @if(!auth()->user())
-                        <a href="{{ route('login')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
-                        @else
-                            @if(auth()->user()->type === 'vendor')
-                            <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
+                    <div class="col order-2 order-xs-2 order-lg-12 mt-10 mb-10">
+                        <!-- Header Account Links Start -->
+                        <div class="header-account-links">
+                            @if(!auth()->user())
+                            <a href="{{ route('login')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
                             @else
-                            <a href="{{ route('customer_profile.show')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
-                            @endif
+                                @if(auth()->user()->type === 'vendor')
+                                <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
+                                @else
+                                <a href="{{ route('customer_profile.show')}}"><i class="icofont icofont-login d-none"></i> <span>my account</span></a>
+                                @endif
 
-                        @endif
-                        @if(!auth()->user())
-                        <a href="{{ route('login')}}"><i class="icofont icofont-login d-none"></i> <span>Login</span></a>
-                        @else
-                            @if(auth()->user()->type === 'vendor')
-                            <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
-                            @elseif (auth()->user()->type==='admin')
-                            <a href="{{ route('admin.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                            @endif
+                            @if(!auth()->user())
+                            <a href="{{ route('login')}}"><i class="icofont icofont-login d-none"></i> <span>Login</span></a>
                             @else
-                            <a href="{{ route('customer.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                                @if(auth()->user()->type === 'vendor')
+                                <a href="{{ route('dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                                @elseif (auth()->user()->type==='admin')
+                                <a href="{{ route('admin.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                                @else
+                                <a href="{{ route('customer.dashboard')}}"><i class="icofont icofont-login d-none"></i> <span>Dashboard</span></a>
+                                @endif
+
                             @endif
-
-                        @endif
-                    </div><!-- Header Account Links End -->
-                </div>
-
-            </div>
-        </div>
-    </div><!-- Header Top End -->
-
-    <!-- Header Bottom Start -->
-    <div class="header-bottom header-bottom-one header-sticky">
-        <div class="container">
-            <div class="row align-items-center justify-content-between">
-
-                <div class="col mt-15 mb-15">
-                    <!-- Logo Start -->
-                    <div class="header-logo">
-                        <a href="{{ url('/') }}">
-                            <h1>Take A Scroll</h1>
-                            {{-- <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
-                            <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template"> --}}
-                        </a>
-                    </div><!-- Logo End -->
-                </div>
-
-                <div class="col order-12 order-lg-2 order-xl-2 d-none d-lg-block">
-                    <!-- Main Menu Start -->
-                    <div class="main-menu">
-                        <nav>
-                            <ul>
-                                <li class="active"><a href="{{ url('/') }}">HOME</a></li>
-                                <li class="menu-item-has-children"><a href="javascript:void(0)">Shops</a>
-                                   <ul class="mega-menu three-column ">
-                                        <li>
-                                           <ul>
-                                                <li><strong>Electronics</strong></li>
-                                                @forelse($Electronics as $shop)
-                                                    <li style="margin-left: -1rem;"><a  href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
-                                                    </li>
-                                                @empty
-                                                    <h1 class="text text-danger">No Shops available...!!</h1>
-                                                @endforelse
-                                           </ul>
-                                        </li>
-                                        <li>
-                                            <ul>
-                                                <li><strong>Realestate</strong></li>
-                                                @forelse($Realestate as $shop)
-                                                    <li style="margin-left: -1rem;"><a  href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
-                                                    </li>
-                                                @empty
-                                                    <li class="text text-danger">No Shops available...!!</li>
-                                                @endforelse
-                                            </ul>
-                                        </li>
-                                        <li>
-                                           <ul>
-                                                <li><strong>Cars</strong></li>
-                                                @forelse($Cars as $shop)
-                                                    <li style="margin-left: -1rem;"><a href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
-                                                    </li>
-                                                @empty
-                                                    <li class="text text-danger">No Shops available...!!</li>
-                                                @endforelse
-                                           </ul>
-                                            {{-- <li class="menu-item-has-children"><a href="single-product.html">Single Product</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="single-product.html">Single Product 1</a></li>
-                                                </ul>
-                                            </li> --}}
-                                        </li>
-                                   </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="javascript:void(0)">Categories</a>
-                                    <ul class="mega-menu three-column">
-                                        @forelse ($categories as $cat)
-                                            <li><a href="#">{{ $cat->name }}</a>
-                                                <ul>
-                                                    @forelse ($cat->subCategories as $sub_cat)
-                                                        <li><a href="{{ route('category.products.index',['category'=>$cat->id,'sub_cat_name'=>$sub_cat->name,'sub_cat'=>$sub_cat->id]) }}">{{ $sub_cat->name }}</a></li>
-                                                    @empty
-                                                        <h1 class="text text-danger"> NO Data Found...!!</h1>
-                                                    @endforelse
-                                                </ul>
-                                            </li>
-                                        @empty
-                                            <h1 class="text text-danger"> NO Data Found...!!</h1>
-                                        @endforelse
-
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">CONTACT</a></li>
-                            </ul>
-                        </nav>
-                    </div><!-- Main Menu End -->
-                </div>
-
-                <div class="col order-2 order-lg-12 order-xl-12">
-                    <!-- Header Shop Links Start -->
-                    <div class="header-shop-links">
-
-                        <!-- Compare -->
-                        {{-- <a href="compare.html" class="header-compare"><i class="ti-control-shuffle"></i></a> --}}
-                        <!-- Wishlist -->
-                        <a href="wishlist.html" class="header-wishlist"><i class="ti-heart"></i> <span class="number">3</span></a>
-                        <!-- Cart -->
-                        <a href="{{ route('cart.index') }}" class=""><i class="ti-shopping-cart"></i> <span class="number">{{ $cart }}</span></a>
-
-                    </div><!-- Header Shop Links End -->
-                </div>
-
-                <!-- Mobile Menu -->
-                <div class="mobile-menu order-12 d-block d-lg-none col"></div>
-
-            </div>
-        </div>
-    </div><!-- Header Bottom End -->
-
-    <!-- Header Category Start -->
-    <div class="header-category-section">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-
-                    <!-- Header Category -->
-                    <div class="header-category">
-
-                        <!-- Category Toggle Wrap -->
-                        <div class="category-toggle-wrap d-block d-lg-none">
-                            <!-- Category Toggle -->
-                            <button class="category-toggle">Categories <i class="ti-menu"></i></button>
-                        </div>
-
-                        <!-- Category Menu -->
-                        <nav class="category-menu">
-                            <ul style="border-bottom:1px solid black;">
-                                {{-- <li><a href="category-1.html">Tv & Audio System</a></li>
-                                <li><a href="category-2.html">Computer & Laptop</a></li>
-                                <li><a href="category-3.html">Phones & Tablets</a></li>
-                                <li><a href="category-1.html">Home Appliances</a></li>
-                                <li><a href="category-2.html">Kitchen appliances</a></li>
-                                <li><a href="category-3.html">Accessories</a></li> --}}
-                            </ul>
-                        </nav>
-
+                        </div><!-- Header Account Links End -->
                     </div>
 
                 </div>
             </div>
-        </div>
-    </div><!-- Header Category End -->
+        </div><!-- Header Top End -->
 
-</div>
+        <!-- Header Bottom Start -->
+        <div class="header-bottom header-bottom-one header-sticky">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+
+                    <div class="col mt-15 mb-15">
+                        <!-- Logo Start -->
+                        <div class="header-logo">
+                            <a href="{{ url('/') }}">
+                                <h1>Take A Scroll</h1>
+                                {{-- <img src="assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                                <img class="theme-dark" src="assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template"> --}}
+                            </a>
+                        </div><!-- Logo End -->
+                    </div>
+
+                    <div class="col order-12 order-lg-2 order-xl-2 d-none d-lg-block">
+                        <!-- Main Menu Start -->
+                        <div class="main-menu">
+                            <nav>
+                                <ul>
+                                    <li class="active"><a href="{{ url('/') }}">HOME</a></li>
+                                    <li class="menu-item-has-children"><a href="javascript:void(0)">Shops</a>
+                                    <ul class="mega-menu three-column ">
+                                            <li>
+                                            <ul>
+                                                    <li><strong>Electronics</strong></li>
+                                                    @forelse($Electronics as $shop)
+                                                        <li style="margin-left: -1rem;"><a  href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
+                                                        </li>
+                                                    @empty
+                                                        <h1 class="text text-danger">No Shops available...!!</h1>
+                                                    @endforelse
+                                            </ul>
+                                            </li>
+                                            <li>
+                                                <ul>
+                                                    <li><strong>Realestate</strong></li>
+                                                    @forelse($Realestate as $shop)
+                                                        <li style="margin-left: -1rem;"><a  href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
+                                                        </li>
+                                                    @empty
+                                                        <li class="text text-danger">No Shops available...!!</li>
+                                                    @endforelse
+                                                </ul>
+                                            </li>
+                                            <li>
+                                            <ul>
+                                                    <li><strong>Cars</strong></li>
+                                                    @forelse($Cars as $shop)
+                                                        <li style="margin-left: -1rem;"><a href="{{ route('customer.shop.show',$shop->id) }}">{{ $shop->name }}</a>
+                                                        </li>
+                                                    @empty
+                                                        <li class="text text-danger">No Shops available...!!</li>
+                                                    @endforelse
+                                            </ul>
+                                                {{-- <li class="menu-item-has-children"><a href="single-product.html">Single Product</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="single-product.html">Single Product 1</a></li>
+                                                    </ul>
+                                                </li> --}}
+                                            </li>
+                                    </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="javascript:void(0)">Categories</a>
+                                        <ul class="mega-menu three-column">
+                                            @forelse ($categories as $cat)
+                                                <li><a href="#">{{ $cat->name }}</a>
+                                                    <ul>
+                                                        @forelse ($cat->subCategories as $sub_cat)
+                                                            <li><a href="{{ route('category.products.index',['category'=>$cat->id,'sub_cat_name'=>$sub_cat->name,'sub_cat'=>$sub_cat->id]) }}">{{ $sub_cat->name }}</a></li>
+                                                        @empty
+                                                            <h1 class="text text-danger"> NO Data Found...!!</h1>
+                                                        @endforelse
+                                                    </ul>
+                                                </li>
+                                            @empty
+                                                <h1 class="text text-danger"> NO Data Found...!!</h1>
+                                            @endforelse
+
+                                        </ul>
+                                    </li>
+                                    <li><a href="contact.html">CONTACT</a></li>
+                                </ul>
+                            </nav>
+                        </div><!-- Main Menu End -->
+                    </div>
+
+                    <div class="col order-2 order-lg-12 order-xl-12">
+                        <!-- Header Shop Links Start -->
+                        <div class="header-shop-links">
+
+                            <!-- Compare -->
+                            {{-- <a href="compare.html" class="header-compare"><i class="ti-control-shuffle"></i></a> --}}
+                            <!-- Wishlist -->
+                            <a href="wishlist.html" class="header-wishlist"><i class="ti-heart"></i> <span class="number">3</span></a>
+                            <!-- Cart -->
+                            <a href="{{ route('cart.index') }}" class=""><i class="ti-shopping-cart"></i> <span class="number">{{ $cart }}</span></a>
+
+                        </div><!-- Header Shop Links End -->
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu order-12 d-block d-lg-none col"></div>
+
+                </div>
+            </div>
+        </div><!-- Header Bottom End -->
+
+        <!-- Header Category Start -->
+        <div class="header-category-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <!-- Header Category -->
+                        <div class="header-category">
+
+                            <!-- Category Toggle Wrap -->
+                            <div class="category-toggle-wrap d-block d-lg-none">
+                                <!-- Category Toggle -->
+                                <button class="category-toggle">Categories <i class="ti-menu"></i></button>
+                            </div>
+
+                            <!-- Category Menu -->
+                            <nav class="category-menu">
+                                <ul style="border-bottom:1px solid black;">
+                                    {{-- <li><a href="category-1.html">Tv & Audio System</a></li>
+                                    <li><a href="category-2.html">Computer & Laptop</a></li>
+                                    <li><a href="category-3.html">Phones & Tablets</a></li>
+                                    <li><a href="category-1.html">Home Appliances</a></li>
+                                    <li><a href="category-2.html">Kitchen appliances</a></li>
+                                    <li><a href="category-3.html">Accessories</a></li> --}}
+                                </ul>
+                            </nav>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div><!-- Header Category End -->
+
+    </div>
 <!-- Header Section End -->
-
+</div>
 
 @yield('section')
 
