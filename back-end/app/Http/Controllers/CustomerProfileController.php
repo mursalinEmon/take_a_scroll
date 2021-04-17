@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CustomerProfile;
+use App\Delivery;
 use App\User;
 use Cart;
 use Illuminate\Http\Request;
@@ -31,12 +32,16 @@ class CustomerProfileController extends Controller
         $orders=DB::table('orders')
             ->where('email',auth()->user()->email)->get();
             $carts=[];
+            $deliveries=[];
         foreach ($orders as $order){
             $cart=Cart::stored_data($order->cart_identifier);
-//            array_push($carts,$cart);
             $carts[$order->id]=$cart;
+            $delivery=Delivery::where('order_id',$order->id)->get();
+
+            $deliveries[$order->id]=$delivery[0];
         }
-        return view('customer.orders',compact('orders','carts'));
+
+        return view('customer.orders',compact('orders','carts','deliveries'));
 
 
     }

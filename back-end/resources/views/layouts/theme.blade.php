@@ -331,6 +331,12 @@
 
 
     </script>
+    <script>
+        function reload(){
+            location.reload();
+        }
+
+    </script>
 
 
 </body>
