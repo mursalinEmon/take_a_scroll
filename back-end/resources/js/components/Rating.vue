@@ -1,6 +1,8 @@
 <template>
     <div>
-        <div class="btn btn-success mt-4 d-flex justify-content-center" @click="()=>this.modal=true">Rate This</div>
+        <div v-if="stat" class="btn btn-success mt-4 d-flex justify-content-center" @click="()=>this.modal=true">Rate This</div>
+        <div v-else class=" mt-4 d-flex justify-content-center">Delivered</div>
+
         <div v-if="modal" class="modal">
             <div class="rating">
                 <h2>Do You Want To Rate This Course ?</h2>
@@ -24,16 +26,17 @@
             }
         },
         mounted(){
+            this.check_Rating();
         },
         data:()=>({
             modal:false,
             rating:0,
+            stat:true,
 
         }),
         methods:{
             manage_Rating(){
                 this.modal=false;
-
                 //then make a axios call based on the rating
                 let formData = new FormData();
                 formData.append('rating',this.rating);
@@ -44,6 +47,11 @@
                         "",
                         "success"
                     );
+                }).catch((err)=>{console.log(err);})
+            },
+            check_Rating(){
+                axios.get(`/product-rating/${this.product_id}`).then((res)=>{
+                        this.stat=res.data.stat;
                 }).catch((err)=>{console.log(err);})
             }
         }

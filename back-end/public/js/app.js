@@ -4010,17 +4010,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     product_id: {
       "default": null
     }
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.check_Rating();
+  },
   data: function data() {
     return {
       modal: false,
-      rating: 0
+      rating: 0,
+      stat: true
     };
   },
   methods: {
@@ -4034,6 +4039,15 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('product_id', this.product_id);
       axios.post("/product-rating", formData).then(function (res) {
         _this.$alert(res.data.message, "", "success");
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    check_Rating: function check_Rating() {
+      var _this2 = this;
+
+      axios.get("/product-rating/".concat(this.product_id)).then(function (res) {
+        _this2.stat = res.data.stat;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -66994,18 +67008,22 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass: "btn btn-success mt-4 d-flex justify-content-center",
-        on: {
-          click: function() {
-            return (this$1.modal = true)
-          }
-        }
-      },
-      [_vm._v("Rate This")]
-    ),
+    _vm.stat
+      ? _c(
+          "div",
+          {
+            staticClass: "btn btn-success mt-4 d-flex justify-content-center",
+            on: {
+              click: function() {
+                return (this$1.modal = true)
+              }
+            }
+          },
+          [_vm._v("Rate This")]
+        )
+      : _c("div", { staticClass: " mt-4 d-flex justify-content-center" }, [
+          _vm._v("Delivered")
+        ]),
     _vm._v(" "),
     _vm.modal
       ? _c("div", { staticClass: "modal" }, [

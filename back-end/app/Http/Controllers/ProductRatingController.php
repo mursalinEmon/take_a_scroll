@@ -87,4 +87,13 @@ class ProductRatingController extends Controller
     {
         //
     }
+    public function check_rating($id){
+        $stat=true;
+        $pr=ProductRating::where('product_id',$id)->where('user_id',auth()->user()->id)->get();
+        if($pr->count()>0){
+            $stat=false;
+        }
+        return response(['stat'=>$stat]);
+
+    }
 }
