@@ -63,7 +63,7 @@
                         @if($order->status=="Pending")
                         <div class="col-md-2 text-left"><h6 class="text text-danger">Payment Status:{{$order->status}}</h6></div>
                         @else
-                            <div class="col-md-2 text-left"><h6 class="text text-primary">Payment Status:{{$order->status}}</h6></div>
+                            <div class="col-md-2 text-left"><h6 class="text text-primary mt-2">Payment Status:{{$order->status}}</h6></div>
                         @endif
 
                     </div>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="stat" class="btn btn-success mt-4 d-flex justify-content-center" @click="()=>this.modal=true">Rate This</div>
-        <div v-else class=" mt-4 d-flex justify-content-center">Delivered</div>
+        <div v-else class=" mt-4 d-flex justify-content-center">You Rated This</div>
 
         <div v-if="modal" class="modal">
             <div class="rating">

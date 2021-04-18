@@ -67022,7 +67022,7 @@ var render = function() {
           [_vm._v("Rate This")]
         )
       : _c("div", { staticClass: " mt-4 d-flex justify-content-center" }, [
-          _vm._v("Delivered")
+          _vm._v("You Rated This")
         ]),
     _vm._v(" "),
     _vm.modal
