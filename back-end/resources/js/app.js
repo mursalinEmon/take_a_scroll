@@ -7,6 +7,7 @@
 require("./bootstrap");
 
 window.Vue = require("vue");
+window.axios = require("axios");
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,6 +29,8 @@ files.keys().map(key =>
 );
 import VueChatScroll from "vue-chat-scroll";
 import VueSimpleAlert from "vue-simple-alert";
+import StarRating from "vue-star-rating";
+Vue.component("star-rating", StarRating);
 
 Vue.use(VueSimpleAlert);
 Vue.use(VueChatScroll);

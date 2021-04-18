@@ -15,7 +15,7 @@
             @foreach($carts as $key=>$value)
                 @if($key == $order->id)
                     <div class="row">
-                        <div class="col-md-6"></div>
+                        <div class="col-md-4"></div>
                         <div class="col-md-6">
                             <h5 class="text-primary">Order Issued At : {{\Carbon\Carbon::parse($order->created_at)->format('D-M-Y')}}</h5>
                         </div>
@@ -40,7 +40,12 @@
                                     <td scope="row"><img style="width: 80px;height: 80px;" src="{{asset($row->model->product_pictures[0])}}" alt=""></td>
                                     <td class="text text-center">{{$row->model->name}}</td>
                                     <td  class="text text-center">{{$row->qty}}</td>
-                                    <td  class="text text-center">{{$deliveries[$order->id]->delivery_status}}</td>
+                                    @if($deliveries[$order->id]->delivery_status=="delivered")
+                                        <td>  <rating :product_id="{{$row->model->id}}"></rating></td>
+
+                                    @else
+                                        <td  class="text text-center">{{$deliveries[$order->id]->delivery_status}}</td>
+                                    @endif
                                     <td  class="text text-center">{{$row->model->price }}</td>
                                     @php $total+=$row->model->price @endphp
                                 </tr>

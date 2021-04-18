@@ -107,6 +107,10 @@ Route::middleware(['verified','customer'])->group( function () {
 
 
     Route::post('/address-update','CustomerProfileController@address_update');
+    Route::post('/product-rating','CustomerProfileController@address_update');
+
+
+
 
 
 });
