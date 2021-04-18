@@ -35,7 +35,12 @@ class ProductRatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      ProductRating::create([
+         'user_id'=>auth()->user()->id,
+          'product_id'=>$request->product_id,
+          'rating'=>$request->rating
+      ]);
+      return response(['message'=>'You FeedBack Has Been Recorded..!!']);
     }
 
     /**
