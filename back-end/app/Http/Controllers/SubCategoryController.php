@@ -28,7 +28,7 @@ class SubCategoryController extends Controller
         else{
             $products=Product::where('sub_category_id',$sub_cat)->paginate($qty);
 //            dd($products);
-            return view('front-end.product-view.productsView',compact('products','sub_cat_name'));
+            return view('front-end.product-view.productsView',compact('products','sub_cat_name','qty'));
 
 
         }

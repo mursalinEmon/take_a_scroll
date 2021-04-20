@@ -31,11 +31,37 @@
                             <div class="product-showing">
                                 <p>Showing</p>
                                 <select id="paginate" name="showing" class="nice-select">
-                                    <option selected value="8">8</option>
-                                    <option value="12">12</option>
-                                    <option value="16">16</option>
-                                    <option value="20">20</option>
-                                    <option value="24">24</option>
+                                    @if($qty==8)
+                                        <option selected value="8">8</option>
+
+                                    @else
+                                        <option  value="8">8</option>
+                                    @endif
+                                        @if($qty==12)
+                                            <option selected value="12">12</option>
+
+                                        @else
+                                            <option value="12">12</option>
+                                        @endif
+                                        @if($qty==16)
+                                            <option selected value="16">16</option>
+
+                                        @else
+                                            <option value="16">16</option>
+                                        @endif
+                                        @if($qty==20)
+                                            <option selected value="20">20</option>
+
+                                        @else
+                                            <option value="20">20</option>
+                                        @endif
+                                        @if($qty==24)
+                                            <option selected value="24">24</option>
+
+                                        @else
+                                            <option value="24">24</option>
+                                        @endif
+
                                 </select>
                             </div>
 
