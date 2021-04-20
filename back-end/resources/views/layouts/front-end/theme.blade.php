@@ -180,7 +180,7 @@
                                                 <li><a href="#">{{ $cat->name }}</a>
                                                     <ul>
                                                         @forelse ($cat->subCategories as $sub_cat)
-                                                            <li><a href="{{ route('category.products.index',['category'=>$cat->id,'sub_cat_name'=>$sub_cat->name,'sub_cat'=>$sub_cat->id]) }}">{{ $sub_cat->name }}</a></li>
+                                                            <li><a href="{{ route('category.products.index',['category'=>$cat->id,'sub_cat_name'=>$sub_cat->name,'sub_cat'=>$sub_cat->id,'qty'=>8]) }}">{{ $sub_cat->name }}</a></li>
                                                         @empty
                                                             <h1 class="text text-danger"> NO Data Found...!!</h1>
                                                         @endforelse
@@ -383,6 +383,18 @@
 
 <!-- Main JS -->
 <script src={{ asset("js/main.js") }}></script>
+<script>
+    window.$("#paginate").change(function(){
+        $val=document.getElementById("paginate").value;
+        var url      = window.location.href;
+        let temp=url.slice(0, -1);
+        let f=temp.concat($val);
+        console.log(f);
+        location.replace(f);
+
+        {{--location.replace('categories/'{{$product[0]->category->id}}.'/'.{{$product[0]->subCategory->name}}.'/'.{{$product[0]->subCategory->id}}.'/'.+val');--}}
+    })
+</script>
 
 
 

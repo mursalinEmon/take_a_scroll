@@ -147,7 +147,7 @@ Route::get('/notifications','DeliveryController@allnotifications');
 //sub actegory or products
 
 
-Route::get('categories/{category}/{sub_cat_name}/{sub_cat}','SubCategoryController@index')->name('category.products.index');
+Route::get('categories/{category}/{sub_cat_name}/{sub_cat}/{qty}','SubCategoryController@index')->name('category.products.index');
 Route::get('categories/{category}/{sub_cat_name}/{sub_cat}/products/{product}','SubCategoryController@show')->name('category.products.show');
 Route::get('categories/{category}/{sub_cat_name}/{sub_cat}/realestates/{realestate}','SubCategoryController@show_realestate')->name('category.realestate.products.show');
 

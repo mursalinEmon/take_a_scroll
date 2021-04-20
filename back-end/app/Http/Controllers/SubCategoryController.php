@@ -16,7 +16,7 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category , $sub_cat_name,$sub_cat)
+    public function index(Category $category , $sub_cat_name,$sub_cat,$qty)
 
     {
         if($category->categoryType==="RealEstate"){
@@ -26,7 +26,7 @@ class SubCategoryController extends Controller
 
         }
         else{
-            $products=Product::where('sub_category_id',$sub_cat)->paginate(8);
+            $products=Product::where('sub_category_id',$sub_cat)->paginate($qty);
 //            dd($products);
             return view('front-end.product-view.productsView',compact('products','sub_cat_name'));
 

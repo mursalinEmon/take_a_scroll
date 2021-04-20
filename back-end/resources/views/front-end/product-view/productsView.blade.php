@@ -30,12 +30,12 @@
                             <!-- Product Showing -->
                             <div class="product-showing">
                                 <p>Showing</p>
-                                <select name="showing" class="nice-select">
-                                    <option value="1">8</option>
-                                    <option value="2">12</option>
-                                    <option value="3">16</option>
-                                    <option value="4">20</option>
-                                    <option value="5">24</option>
+                                <select id="paginate" name="showing" class="nice-select">
+                                    <option selected value="8">8</option>
+                                    <option value="12">12</option>
+                                    <option value="16">16</option>
+                                    <option value="20">20</option>
+                                    <option value="24">24</option>
                                 </select>
                             </div>
 
