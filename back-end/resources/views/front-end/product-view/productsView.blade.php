@@ -73,7 +73,7 @@
                         <div class="ee-product col-xl-3 col-lg-4 col-md-6 col-12 pb-30 pt-10 ">
 
                             <!-- Image -->
-                            <div class="image" >
+                            <div class="image" style="height: 20vh;width: 100%;">
 
                                 <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{ asset($product->product_pictures[0]) }}" alt="Product Image"></a>
 
@@ -89,6 +89,8 @@
                             </div>
 
                             <!-- Content -->
+                            <br>
+                            <br><br><br><br>
                             <div class="content">
 
                                 <!-- Category & Title -->
