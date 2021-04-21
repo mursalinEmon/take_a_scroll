@@ -191,4 +191,6 @@ Route::post('/fail', 'SslCommerzPaymentController@fail');
 Route::post('/cancel', 'SslCommerzPaymentController@cancel');
 
 Route::post('/ipn', 'SslCommerzPaymentController@ipn');
+
+Route::post('/product/search','ProductController@search_product');
 //SSLCOMMERZ END

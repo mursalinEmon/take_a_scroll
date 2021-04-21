@@ -297,4 +297,19 @@ class ProductController extends Controller
     public function car_create(Store $store){
         return view('product.cars.createCar',compact('store'));
     }
+    public function search_product(Request $request){
+
+       $search_param= explode(',', $request->searctopt);
+
+        if(count($search_param)>1){
+            $cat_id=(int)$search_param[0];
+            $subcat_id=(int)$search_param[1];
+            $products=Product::where('category_id',$cat_id)->where('sub_category_id',$subcat_id)->where('name','like','%'.$request->val.'%')->orWhere('name','like',$request->val.'%')->get();
+//            dd( $products);
+            return response(['products'=>$products]);
+        }else{
+
+//            query in all product
+        }
+    }
 }

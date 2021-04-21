@@ -61,21 +61,34 @@
                         <!-- Header Advance Search Start -->
                         <div class="header-advance-search">
 
-                            <form action="#">
-                                <div class="input"><input type="text" placeholder="Search your product"></div>
+
+                                <div class="input"><input id="searchvalue" type="text" placeholder="Search your product"></div>
                                 <div class="select">
-                                    <select class="nice-select">
-                                        <option>All Categories</option>
-                                        <option>Mobile</option>
-                                        <option>Computer</option>
-                                        <option>Laptop</option>
-                                        <option>Camera</option>
+                                    <select id="serachoption" class="nice-select">
+                                        <option value="all">All Categories</option>
+{{--                                             @forelse ($categories as $cat)--}}
+{{--                                            <option value="{{$cat->id}}" >{{$cat->name}}</option>--}}
+{{--                                            @endforeach--}}
+                                        @forelse ($categories as $cat)
+                                                    @forelse ($cat->subCategories as $sub_cat)
+                                                    <option value="{{$cat->id}},{{$sub_cat->id}}" >{{$sub_cat->name}}</option>
+                                                    @empty
+                                                        <h1 class="text text-danger"> NO Data Found...!!</h1>
+                                                    @endforelse
+
+                                        @empty
+                                            <h1 class="text text-danger"> NO Data Found...!!</h1>
+                                        @endforelse
+
                                     </select>
                                 </div>
-                                <div class="submit"><button><i class="icofont icofont-search-alt-1"></i></button></div>
-                            </form>
+                                <div class="submit"><button><i  id="searchbtn" onclick="search()" class="icofont icofont-search-alt-1"></i></button></div>
+                            <div class="row" style="z-index: 2000;position: absolute;top: 10vh;">
+                                <div class="col-md-12" id="resarea" style="z-index: 2000;"></div>
+                            </div>
 
                         </div><!-- Header Advance Search End -->
+
                     </div>
 
                     <div class="col order-2 order-xs-2 order-lg-12 mt-10 mb-10">
@@ -394,6 +407,27 @@
 
         {{--location.replace('categories/'{{$product[0]->category->id}}.'/'.{{$product[0]->subCategory->name}}.'/'.{{$product[0]->subCategory->id}}.'/'.+val');--}}
     })
+</script>
+<script>
+    function search() {
+        var opt=document.querySelector('#serachoption').value;
+        var val=document.querySelector('#searchvalue').value
+        axios.post(`/product/search`,{
+            searctopt:opt,
+            val:val
+        }).then((res)=>{
+        var products=res.data.products;
+console.log(products);
+        var result='';
+        products.forEach((p)=>{
+
+            result+=`<div class="row"><div class="col-md-6"><img style="height: 10rem;" src="../../../../${p.product_pictures[0]}" alt="product-image"></div>
+<div class="col-md-6 mt-4">${p.name}<p><b>${p.price}৳</b></p></div></div>`;
+        })
+            document.getElementById("resarea").innerHTML=result;
+
+        }).catch((err)=>console.log(err));
+    }
 </script>
 
 
