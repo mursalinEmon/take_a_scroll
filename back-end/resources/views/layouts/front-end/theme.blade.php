@@ -64,7 +64,7 @@
 
                                 <div class="input"><input id="searchvalue" onkeyup="randsearch()" type="text" placeholder="Search your product"></div>
                                 <div class="select">
-                                    <select id="serachoption" onchange="clear()" class="nice-select">
+                                    <select id="serachoption"  class="nice-select">
                                         <option value="all">All Categories</option>
 {{--                                             @forelse ($categories as $cat)--}}
 {{--                                            <option value="{{$cat->id}}" >{{$cat->name}}</option>--}}
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="submit"><button><i  id="searchbtn" onclick="search()" class="icofont icofont-search-alt-1"></i></button></div>
                             <div class="row" style="z-index: 2; position: absolute;top: 10vh;background-color: white;">
-                                <div class="col-md-12" id="resarea" style=""></div>
+                                <div class="col-md-12" id="resarea" style="max-height:70vh;overflow-y:scroll;"></div>
                             </div>
 
                         </div><!-- Header Advance Search End -->
@@ -408,14 +408,25 @@
 
         {{--location.replace('categories/'{{$product[0]->category->id}}.'/'.{{$product[0]->subCategory->name}}.'/'.{{$product[0]->subCategory->id}}.'/'.+val');--}}
     })
+    window.$("#serachoption").change(function(){
+        console.log("hit");
+        document.getElementById("resarea").innerHTML="";
+
+    })
 </script>
 <script>
     function clear() {
-        console.log("hit");
+
         document.getElementById("resarea").innerHTML="";
     }
     function randsearch(){
-         search();
+      if(document.querySelector('#searchvalue').value){
+          search();
+      }else{
+          document.getElementById("resarea").innerHTML="";
+
+      }
+
     }
     function search() {
         var opt=document.querySelector('#serachoption').value;
@@ -431,7 +442,7 @@
         if(products.length>0){
             products.forEach((p)=>{
 
-                result+=`<div class="row"><div class="col-md-6"><img style="height: 10rem;" src="{{ URL::asset("") }}${p.product_pictures[0]}" alt="product-image"></div>
+                result+=`<div class="row" ><div class="col-md-6"><img style="height: 10rem;" src="{{ URL::asset("") }}${p.product_pictures[0]}" alt="product-image"></div>
 <div class="col-md-6 " style="margin-top: 9vh;"><a href="/product-search/${p.category_id}/${p.sub_category_id}/${p.id}">${p.name}</a><p><b>${p.price}৳</b></p></div></div>`;
 
             })
