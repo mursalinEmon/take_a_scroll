@@ -386,10 +386,10 @@
 <script>
     window.$("#paginate").change(function(){
         $val=document.getElementById("paginate").value;
-        var url      = window.location.href;
-        let temp=url.slice(0, -1);
+        var url = window.location.href;
+        // let temp=url.slice(0, -1);
+        let temp=url.substring(0, url.lastIndexOf("/") + 1);
         let f=temp.concat($val);
-        console.log(f);
         location.replace(f);
 
         {{--location.replace('categories/'{{$product[0]->category->id}}.'/'.{{$product[0]->subCategory->name}}.'/'.{{$product[0]->subCategory->id}}.'/'.+val');--}}

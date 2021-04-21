@@ -22,10 +22,7 @@
                         <div class="shop-top-bar">
 
                             <!-- Product View Mode -->
-                            <div class="product-view-mode">
-                                <a class="active" href="#" data-target="grid"><i class="fa fa-th"></i></a>
-                                <a href="#" data-target="list"><i class="fa fa-list"></i></a>
-                            </div>
+
 
                             <!-- Product Showing -->
                             <div class="product-showing">
@@ -79,9 +76,7 @@
                             </div>
 
                             <!-- Product Pages -->
-                            <div class="product-pages">
-                                <p>Pages 1 of 25</p>
-                            </div>
+
 
                         </div><!-- Shop Top Bar End -->
 
@@ -161,9 +156,9 @@
                     <div class="col">
 
                         <ul class="pagination">
-                            <li><a href="#"><i class="fa fa-angle-left"></i>Back</a></li>
+
                             {{ $products->links() }}
-                            <li><a href="#">Next<i class="fa fa-angle-right"></i></a></li>
+
                         </ul>
 
                     </div>
