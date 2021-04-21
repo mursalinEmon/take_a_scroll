@@ -426,10 +426,8 @@
         var result='';
         products.forEach((p)=>{
 
-            result+=`<div class="row"><div class="col-md-6"><img style="height: 10rem;" src="../../../../${p.product_pictures[0]}" alt="product-image"></div>
+            result+=`<div class="row"><div class="col-md-6"><img style="height: 10rem;" src="{{ URL::asset("") }}${p.product_pictures[0]}" alt="product-image"></div>
 <div class="col-md-6 " style="margin-top: 9vh;"><a href="/product-search/${p.category_id}/${p.sub_category_id}/${p.id}">${p.name}</a><p><b>${p.price}৳</b></p></div></div>`;
-
-
 
         })
             document.getElementById("resarea").innerHTML=result;

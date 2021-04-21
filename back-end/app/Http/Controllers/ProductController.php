@@ -315,7 +315,9 @@ class ProductController extends Controller
 //            dd( $products);
             return response(['products'=>$products]);
         }else{
-
+            $products=Product::where('name','like','%'.$request->val.'%')->orWhere('name','like',$request->val.'%')->get();
+//            dd( $products);
+            return response(['products'=>$products]);
 //            query in all product
         }
     }
