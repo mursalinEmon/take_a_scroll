@@ -62,7 +62,7 @@
                         <div class="header-advance-search">
 
 
-                                <div class="input"><input id="searchvalue" type="text" placeholder="Search your product"></div>
+                                <div class="input"><input id="searchvalue" onkeyup="randsearch()" type="text" placeholder="Search your product"></div>
                                 <div class="select">
                                     <select id="serachoption" onchange="clear()" class="nice-select">
                                         <option value="all">All Categories</option>
@@ -414,6 +414,9 @@
         console.log("hit");
         document.getElementById("resarea").innerHTML="";
     }
+    function randsearch(){
+         search();
+    }
     function search() {
         var opt=document.querySelector('#serachoption').value;
         var val=document.querySelector('#searchvalue').value
@@ -421,15 +424,22 @@
             searctopt:opt,
             val:val
         }).then((res)=>{
+            document.getElementById("resarea").innerHTML="";
         var products=res.data.products;
 
         var result='';
-        products.forEach((p)=>{
+        if(products.length>0){
+            products.forEach((p)=>{
 
-            result+=`<div class="row"><div class="col-md-6"><img style="height: 10rem;" src="{{ URL::asset("") }}${p.product_pictures[0]}" alt="product-image"></div>
+                result+=`<div class="row"><div class="col-md-6"><img style="height: 10rem;" src="{{ URL::asset("") }}${p.product_pictures[0]}" alt="product-image"></div>
 <div class="col-md-6 " style="margin-top: 9vh;"><a href="/product-search/${p.category_id}/${p.sub_category_id}/${p.id}">${p.name}</a><p><b>${p.price}৳</b></p></div></div>`;
 
-        })
+            })
+        }else{
+            result+=`<div class="row">
+<div class="col-md-12" style="margin-top: 9vh;"><h6 class="text-danger">NO Product Found..!!</h6></div></div>`;
+        }
+
             document.getElementById("resarea").innerHTML=result;
 
         }).catch((err)=>console.log(err));

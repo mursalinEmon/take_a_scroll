@@ -311,7 +311,7 @@ class ProductController extends Controller
         if(count($search_param)>1){
             $cat_id=(int)$search_param[0];
             $subcat_id=(int)$search_param[1];
-            $products=Product::where('category_id',$cat_id)->where('sub_category_id',$subcat_id)->where('name','like','%'.$request->val.'%')->orWhere('name','like',$request->val.'%')->get();
+            $products=Product::where('category_id',$cat_id)->where('sub_category_id',$subcat_id)->where('name','like','%'.$request->val.'%')->get();
 //            dd( $products);
             return response(['products'=>$products]);
         }else{
