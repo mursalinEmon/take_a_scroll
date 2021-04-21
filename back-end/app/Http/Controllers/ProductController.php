@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Store;
 use App\Product;
 use App\Category;
@@ -17,6 +18,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search_show($catid,$subcatir,$pid){
+            $sub_cat=SubCategory::findOrFail($subcatir);
+            $sub_cat_name=$sub_cat->name;
+            return redirect()->route('category.products.show',['category'=>$catid,'sub_cat_name'=>$sub_cat_name,'sub_cat'=>$subcatir,'product'=>$pid]);
+    }
+
     public function index(Store $store)
     {
 

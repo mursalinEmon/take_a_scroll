@@ -64,7 +64,7 @@
 
                                 <div class="input"><input id="searchvalue" type="text" placeholder="Search your product"></div>
                                 <div class="select">
-                                    <select id="serachoption" class="nice-select">
+                                    <select id="serachoption" onchange="clear()" class="nice-select">
                                         <option value="all">All Categories</option>
 {{--                                             @forelse ($categories as $cat)--}}
 {{--                                            <option value="{{$cat->id}}" >{{$cat->name}}</option>--}}
@@ -83,8 +83,8 @@
                                     </select>
                                 </div>
                                 <div class="submit"><button><i  id="searchbtn" onclick="search()" class="icofont icofont-search-alt-1"></i></button></div>
-                            <div class="row" style="z-index: 2000;position: absolute;top: 10vh;">
-                                <div class="col-md-12" id="resarea" style="z-index: 2000;"></div>
+                            <div class="row" style="z-index: 2; position: absolute;top: 10vh;background-color: white;">
+                                <div class="col-md-12" id="resarea" style=""></div>
                             </div>
 
                         </div><!-- Header Advance Search End -->
@@ -398,6 +398,7 @@
 <script src={{ asset("js/main.js") }}></script>
 <script>
     window.$("#paginate").change(function(){
+
         $val=document.getElementById("paginate").value;
         var url = window.location.href;
         // let temp=url.slice(0, -1);
@@ -409,6 +410,10 @@
     })
 </script>
 <script>
+    function clear() {
+        console.log("hit");
+        document.getElementById("resarea").innerHTML="";
+    }
     function search() {
         var opt=document.querySelector('#serachoption').value;
         var val=document.querySelector('#searchvalue').value
@@ -417,18 +422,22 @@
             val:val
         }).then((res)=>{
         var products=res.data.products;
-console.log(products);
+
         var result='';
         products.forEach((p)=>{
 
             result+=`<div class="row"><div class="col-md-6"><img style="height: 10rem;" src="../../../../${p.product_pictures[0]}" alt="product-image"></div>
-<div class="col-md-6 mt-4">${p.name}<p><b>${p.price}৳</b></p></div></div>`;
+<div class="col-md-6 " style="margin-top: 9vh;"><a href="/product-search/${p.category_id}/${p.sub_category_id}/${p.id}">${p.name}</a><p><b>${p.price}৳</b></p></div></div>`;
+
+
+
         })
             document.getElementById("resarea").innerHTML=result;
 
         }).catch((err)=>console.log(err));
     }
 </script>
+
 
 
 
