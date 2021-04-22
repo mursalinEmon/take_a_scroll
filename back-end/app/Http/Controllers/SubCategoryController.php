@@ -20,9 +20,9 @@ class SubCategoryController extends Controller
 
     {
         if($category->categoryType==="RealEstate"){
-            $products=Realestate::all()->where('sub_category_id',$sub_cat);
+            $products=Realestate::where('sub_category_id',$sub_cat)->paginate($qty);
 
-            return view('front-end.product-view.realestateProductsView',compact('products','sub_cat_name'));
+            return view('front-end.product-view.realestateProductsView',compact('products','sub_cat_name','qty'));
 
         }
         else{
