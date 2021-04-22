@@ -36,7 +36,7 @@
                                 @forelse(Cart::content() as $row)
                                 @php $count++;@endphp
                                     <tr>
-                                        <td class="pro-thumbnail"><img src="{{  asset($row->model->product_pictures[0])  }}" alt="Product"></a></td>
+                                        <td class="pro-thumbnail"><img src="{{  asset($row->model->product_pictures[0])  }}" style="max-height: 150px;max-width:150px;" alt="Product"></a></td>
                                         <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
                                         <td class="pro-price"><span> ৳{{ $row->price }}</span></td>
 
