@@ -30,12 +30,38 @@
                             <!-- Product Showing -->
                             <div class="product-showing">
                                 <p>Showing</p>
-                                <select name="showing" class="nice-select">
-                                    <option value="1">8</option>
-                                    <option value="2">12</option>
-                                    <option value="3">16</option>
-                                    <option value="4">20</option>
-                                    <option value="5">24</option>
+                                <select id="paginate" name="showing" class="nice-select">
+                                    @if($qty==8)
+                                        <option selected value="8">8</option>
+
+                                    @else
+                                        <option  value="8">8</option>
+                                    @endif
+                                    @if($qty==12)
+                                        <option selected value="12">12</option>
+
+                                    @else
+                                        <option value="12">12</option>
+                                    @endif
+                                    @if($qty==16)
+                                        <option selected value="16">16</option>
+
+                                    @else
+                                        <option value="16">16</option>
+                                    @endif
+                                    @if($qty==20)
+                                        <option selected value="20">20</option>
+
+                                    @else
+                                        <option value="20">20</option>
+                                    @endif
+                                    @if($qty==24)
+                                        <option selected value="24">24</option>
+
+                                    @else
+                                        <option value="24">24</option>
+                                    @endif
+
                                 </select>
                             </div>
 
@@ -75,7 +101,7 @@
                             <!-- Image -->
                             <div class="image">
 
-                                <a href="{{ route('category.realestate.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'realestate'=>$product->id]) }}" class="img"><img src="{{ asset($product->images[0]??"") }}" alt="Product Image"></a>
+                                <a href="{{ route('category.realestate.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'realestate'=>$product->id]) }}" class="img"><img style="height:40vh;max-height: 40vh;max-width: 20vw;" src="{{ asset($product->images[0]??"") }}" alt="Product Image"></a>
 
                                 {{-- <div class="wishlist-compare">
                                     <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
@@ -85,6 +111,7 @@
                                 {{-- <a href="{{ route('cart.add',$product->id) }}" data-para2="{{$product->id}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a> --}}
 
                             </div>
+                            <br><br><br>
 
                             <!-- Content -->
                             <div class="content">
@@ -220,15 +247,9 @@
                     <div class="col">
 
                         <ul class="pagination">
-                            <li><a href="#"><i class="fa fa-angle-left"></i>Back</a></li>
-                            <li><a href="#">1</a></li>
-                            <li class="active"><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li> - - - - - </li>
-                            <li><a href="#">18</a></li>
-                            <li><a href="#">18</a></li>
-                            <li><a href="#">20</a></li>
-                            <li><a href="#">Next<i class="fa fa-angle-right"></i></a></li>
+
+                            {{ $products->links() }}
+
                         </ul>
 
                     </div>

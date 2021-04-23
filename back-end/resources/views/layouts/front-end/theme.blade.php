@@ -40,7 +40,7 @@
 
         <chat-head></chat-head>
 
-
+</div>
 <!-- Ft -->
     <div class="header-section section">
 
@@ -268,9 +268,9 @@
 
     </div>
 <!-- Header Section End -->
-</div>
 
-@yield('section')
+
+    @yield('section')
 
 
 <!-- Footer Section Start -->
@@ -406,7 +406,7 @@
         let f=temp.concat($val);
         location.replace(f);
 
-        {{--location.replace('categories/'{{$product[0]->category->id}}.'/'.{{$product[0]->subCategory->name}}.'/'.{{$product[0]->subCategory->id}}.'/'.+val');--}}
+
     })
     window.$("#serachoption").change(function(){
         console.log("hit");
