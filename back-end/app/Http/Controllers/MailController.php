@@ -92,8 +92,12 @@ public function send_contact_request($store_id,$product_id)
 
     {
 
+
         $store=Store::findOrFail($store_id);
+
         $vendor=Vendor::findOrFail($store->vendor_id);
+     
+
         $user=User::findOrFail($vendor->user_id);
         $email=$user->email;
 
@@ -105,6 +109,6 @@ public function send_contact_request($store_id,$product_id)
         ];
 
         Mail::to($email)->send(new \App\Mail\ContactMail($details));
-return back();
+        return back();
     }
 }
