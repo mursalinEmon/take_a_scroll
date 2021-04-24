@@ -18,8 +18,9 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $num=rand(1,2);
-    $type=$num==1?"customer":"vendor";
+//    $num=rand(1,2);
+//    $type=$num==1?"customer":"vendor";
+    $type="customer";
     return [
         'name' => $faker->name,
         'contact_no'=>$faker->phoneNumber,
