@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\CustomerProfile;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -18,8 +19,9 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $num=rand(1,2);
-    $type=$num==1?"customer":"vendor";
+//    $num=rand(1,2);
+//    $type=$num==1?"customer":"vendor";
+    $type="customer";
     return [
         'name' => $faker->name,
         'contact_no'=>$faker->phoneNumber,
@@ -29,4 +31,10 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => Hash::make("secret"), // password
         'remember_token' => Str::random(10),
     ];
+});
+$factory->afterCreating(User::class, function ($user, $faker) {
+    CustomerProfile::create([
+        'user_id'=>$user->id,
+
+    ]);
 });
