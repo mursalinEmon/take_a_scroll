@@ -102,6 +102,7 @@
                             <div class="image">
 
                                 <a href="{{ route('category.realestate.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'realestate'=>$product->id]) }}" class="img"><img style="height:40vh;max-height: 40vh;max-width: 20vw;" src="{{ asset($product->images[0]??"") }}" alt="Product Image"></a>
+<<<<<<< HEAD
 
                                 {{-- <div class="wishlist-compare">
                                     <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
@@ -109,6 +110,8 @@
                                 </div> --}}
 
                                 {{-- <a href="{{ route('cart.add',$product->id) }}" data-para2="{{$product->id}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a> --}}
+=======
+>>>>>>> 70ec40998fbc316a0fe29e1edde8b6f764b400f6
 
                             </div>
                             <br><br><br>
@@ -161,82 +164,6 @@
                         @empty
                             <h1 class="text text-danger">NO Products ..!!</h1>
                         @endforelse
-
-
-
-
-
-
-
-
-
-                        <!-- Product List Start -->
-                        <div class="ee-product-list">
-
-                            <!-- Image -->
-                            <div class="image">
-
-                                <a href="single-product.html" class="img"><img src="assets/images/product/product-1.png" alt="Product Image"></a>
-
-                            </div>
-
-                            <!-- Content -->
-                            <div class="content">
-
-                                <!-- Category & Title -->
-                                <div class="head-content">
-
-                                    <div class="category-title">
-                                        <a href="#" class="cat">Laptop</a>
-                                        <h5 class="title"><a href="single-product.html">Zeon Zen 4 Pro</a></h5>
-                                    </div>
-
-                                    <h5 class="price">৳295.00</h5>
-
-                                </div>
-
-                                <div class="left-content">
-
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-
-                                    <div class="desc">
-                                        <p>enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni res eos qui ratione voluptatem sequi nesciunt</p>
-                                    </div>
-
-                                    <div class="actions">
-
-                                        <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
-
-                                        <div class="wishlist-compare">
-                                            <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
-                                            <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="right-content">
-                                    <div class="specification">
-                                        <h5>Specifications</h5>
-                                        <ul>
-                                            <li>Intel Core i7 Processor</li>
-                                            <li>Zeon Z 170 Pro Motherboad</li>
-                                            <li>16 GB RAM</li>
-                                        </ul>
-                                    </div>
-                                    <span class="availability">Availability: <span>In Stock</span></span>
-                                </div>
-
-                            </div>
-
-                        </div><!-- Product List End -->
 
                     </div>
 
