@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\CustomerProfile;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -30,4 +31,10 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => Hash::make("secret"), // password
         'remember_token' => Str::random(10),
     ];
+});
+$factory->afterCreating(User::class, function ($user, $faker) {
+    CustomerProfile::create([
+        'user_id'=>$user->id,
+
+    ]);
 });
