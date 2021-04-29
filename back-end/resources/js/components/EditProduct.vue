@@ -64,11 +64,30 @@
                         >
                     </select>
                 </div>
+                <!--                status-->
+                <div
+                    v-if="p_category"
+                    class="form-group col-md-6 col-sm-12"
+                >
+                    <label>Product Status</label>
+                    <select
+                        class="form-control"
+                        ref="sub_category"
+                        v-model="p_status"
+                    >
+                        <option class="text-center" value="" selected
+                        >-----Select-----</option
+                        >
+                        <option value="used">Used</option>
+                        <option value="new">New</option>
+
+                    </select>
+                </div>
             </div>
             <!-- warrenty , in stock amount -->
             <div class="row">
                 <div class="form-group col-md-4 col-sm-12 col-lg-4">
-                    <label for="productName">Product Warrenty (Optonal)</label>
+                    <label for="productName">Product Warranty (Optional)</label>
                     <input
                         type="text"
                         class="form-control"
@@ -182,6 +201,7 @@ created(){
         this.p_warrenty=this.product.product_warranty;
         this.p_tags=this.product.product_tags;
         this.p_category_id=this.product.category_id;
+        this.p_status=this.product.p_status?this.product.p_status:"used";
         this.p_sub_category_id=this.product.sub_category_id;
         this.fetch_categories();
         this.dropzoneOptions.params.product_id=this.product.id;
@@ -191,6 +211,7 @@ created(){
 },
 data:()=>{
     return{
+        p_status:"",
         path_image:"/",
         n_category:"",
         n_sub_category:"",
@@ -267,6 +288,7 @@ methods:{
             formData.append("product_pictures",this.product_pictures);
             formData.append("product_barnd",this.p_brand);
             formData.append("product_description",this.p_description);
+            formData.append("status", this. p_status);
             // formData.append("tags",this.tags);
             axios.post(`/products/${this.product.id}/update`,formData).then((res)=>{
                 console.log(res);
