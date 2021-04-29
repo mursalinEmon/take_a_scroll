@@ -3507,6 +3507,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -3609,8 +3614,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateProduct: function updateProduct() {
+      var _this3 = this;
+
       var formData = new FormData();
-      formData.append("category_id", this.n_category ? this.n_category_id : this.p_category_id);
+      formData.append("category_id", this.n_category ? this.p_category_id : this.p_category_id);
       formData.append("sub_cat", this.n_sub_category);
       formData.append("name", this.p_name);
       formData.append("price", this.p_price);
@@ -3620,7 +3627,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("status", this.p_status); // formData.append("tags",this.tags);
 
       axios.post("/products/".concat(this.product.id, "/update"), formData).then(function (res) {
-        console.log(res);
+        _this3.$alert(res.data.message, "", "success");
       })["catch"](function (err) {
         console.log(err);
       });
@@ -66159,67 +66166,65 @@ var render = function() {
                 2
               )
             ]
-          ),
-          _vm._v(" "),
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
           _vm.n_category
-            ? _c(
-                "div",
-                { staticClass: "form-group col-md-6 col-sm-12 col-lg-12" },
-                [
-                  _c("label", [_vm._v("Product Sub-Category")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.n_sub_category,
-                          expression: "n_sub_category"
-                        }
-                      ],
-                      ref: "sub_category",
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.n_sub_category = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
+            ? _c("div", { staticClass: "form-group col-md-6 col-sm-12 " }, [
+                _c("label", [_vm._v("Product Sub-Category")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.n_sub_category,
+                        expression: "n_sub_category"
                       }
-                    },
-                    [
-                      _c(
-                        "option",
-                        {
-                          staticClass: "text-center",
-                          attrs: { value: "", selected: "" }
-                        },
-                        [_vm._v("-----Select-----")]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.sub_categories, function(category, index) {
-                        return _c("option", { key: index }, [
-                          _vm._v(_vm._s(category.name))
-                        ])
-                      })
                     ],
-                    2
-                  )
-                ]
-              )
+                    ref: "sub_category",
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.n_sub_category = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        staticClass: "text-center",
+                        attrs: { value: "", selected: "" }
+                      },
+                      [_vm._v("-----Select-----")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.sub_categories, function(category, index) {
+                      return _c("option", { key: index }, [
+                        _vm._v(_vm._s(category.name))
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
             : _vm._e(),
           _vm._v(" "),
-          _vm.p_category
+          _vm.n_category
             ? _c("div", { staticClass: "form-group col-md-6 col-sm-12" }, [
                 _c("label", [_vm._v("Product Status")]),
                 _vm._v(" "),
