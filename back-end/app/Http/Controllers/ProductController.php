@@ -87,6 +87,7 @@ class ProductController extends Controller
             'product_tags'=>"none",
             'product_pictures'=>[],
             'store_id'=>$store->id,
+            'status'=>$request->status
         ]);
 
         return response(['product'=>$product]);
@@ -190,6 +191,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'product_decription'=> $request->product_description,
             'name' => $request->name,
+            'status'=>$request->status,
             'category_id' => $request->category_id,
             'product_pictures'=>$pictures,
             'brand_name' => $request->product_barnd,

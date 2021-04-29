@@ -46,7 +46,7 @@
                 <!-- sub-categories -->
                 <div
                     v-if="p_category"
-                    class="form-group col-md-6 col-sm-12 col-lg-12"
+                    class="form-group col-md-6 col-sm-12"
                 >
                     <label>Product Sub-Category</label>
                     <select
@@ -64,11 +64,32 @@
                         >
                     </select>
                 </div>
+
+<!--                status-->
+                <div
+                    v-if="p_category"
+                    class="form-group col-md-6 col-sm-12"
+                >
+                    <label>Product Status</label>
+                    <select
+                        class="form-control"
+                        ref="sub_category"
+                        v-model="p_status"
+                    >
+                        <option class="text-center" value="" selected
+                        >-----Select-----</option
+                        >
+                        <option value="used">Used</option>
+                        <option value="new">New</option>
+
+                    </select>
+                </div>
+
             </div>
             <!-- warrenty , in stock amount -->
             <div class="row">
                 <div class="form-group col-md-4 col-sm-12 col-lg-4">
-                    <label for="productName">Product Warrenty (Optonal)</label>
+                    <label for="productName">Product Warranty (Optional)</label>
                     <input
                         type="text"
                         class="form-control"
@@ -170,6 +191,7 @@ export default {
             product_id: "",
             categories: [],
             sub_categories: [],
+            p_status:"",
 
             dropzoneOptions: {
                 url: "/product-image",
@@ -240,6 +262,9 @@ export default {
             formData.append("warrenty", this.p_warrenty);
             formData.append("stock", this.p_stock);
             formData.append("descrption", this.p_description);
+            formData.append("status", this. p_status);
+
+
             if(this.p_category_id === "" || this.p_sub_category === "" || this.p_name==="" || this.p_brand ==="" ||  this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" ||  this.p_description === ""){
 
                         this.$alert(

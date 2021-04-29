@@ -2628,6 +2628,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2665,6 +2686,7 @@ __webpack_require__.r(__webpack_exports__);
       product_id: "",
       categories: [],
       sub_categories: [],
+      p_status: "",
       dropzoneOptions: {
         url: "/product-image",
         autoProcessQueue: false,
@@ -2728,6 +2750,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("warrenty", this.p_warrenty);
       formData.append("stock", this.p_stock);
       formData.append("descrption", this.p_description);
+      formData.append("status", this.p_status);
 
       if (this.p_category_id === "" || this.p_sub_category === "" || this.p_name === "" || this.p_brand === "" || this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" || this.p_description === "") {
         this.$alert(res.data.message, "", "Fill all The Form Fields ");
@@ -3465,6 +3488,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3497,6 +3539,7 @@ __webpack_require__.r(__webpack_exports__);
     this.p_warrenty = this.product.product_warranty;
     this.p_tags = this.product.product_tags;
     this.p_category_id = this.product.category_id;
+    this.p_status = this.product.p_status ? this.product.p_status : "used";
     this.p_sub_category_id = this.product.sub_category_id;
     this.fetch_categories();
     this.dropzoneOptions.params.product_id = this.product.id;
@@ -3504,6 +3547,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      p_status: "",
       path_image: "/",
       n_category: "",
       n_sub_category: "",
@@ -3572,7 +3616,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("price", this.p_price);
       formData.append("product_pictures", this.product_pictures);
       formData.append("product_barnd", this.p_brand);
-      formData.append("product_description", this.p_description); // formData.append("tags",this.tags);
+      formData.append("product_description", this.p_description);
+      formData.append("status", this.p_status); // formData.append("tags",this.tags);
 
       axios.post("/products/".concat(this.product.id, "/update"), formData).then(function (res) {
         console.log(res);
@@ -64690,61 +64735,112 @@ var render = function() {
               ),
               _vm._v(" "),
               _vm.p_category
-                ? _c(
-                    "div",
-                    { staticClass: "form-group col-md-6 col-sm-12 col-lg-12" },
-                    [
-                      _c("label", [_vm._v("Product Sub-Category")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.p_sub_category,
-                              expression: "p_sub_category"
-                            }
-                          ],
-                          ref: "sub_category",
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.p_sub_category = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
+                ? _c("div", { staticClass: "form-group col-md-6 col-sm-12" }, [
+                    _c("label", [_vm._v("Product Sub-Category")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.p_sub_category,
+                            expression: "p_sub_category"
                           }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              staticClass: "text-center",
-                              attrs: { value: "", selected: "" }
-                            },
-                            [_vm._v("-----Select-----")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.sub_categories, function(category, index) {
-                            return _c("option", { key: index }, [
-                              _vm._v(_vm._s(category.name))
-                            ])
-                          })
                         ],
-                        2
-                      )
-                    ]
-                  )
+                        ref: "sub_category",
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.p_sub_category = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            staticClass: "text-center",
+                            attrs: { value: "", selected: "" }
+                          },
+                          [_vm._v("-----Select-----")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.sub_categories, function(category, index) {
+                          return _c("option", { key: index }, [
+                            _vm._v(_vm._s(category.name))
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.p_category
+                ? _c("div", { staticClass: "form-group col-md-6 col-sm-12" }, [
+                    _c("label", [_vm._v("Product Status")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.p_status,
+                            expression: "p_status"
+                          }
+                        ],
+                        ref: "sub_category",
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.p_status = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            staticClass: "text-center",
+                            attrs: { value: "", selected: "" }
+                          },
+                          [_vm._v("-----Select-----")]
+                        ),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "used" } }, [
+                          _vm._v("Used")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "new" } }, [
+                          _vm._v("New")
+                        ])
+                      ]
+                    )
+                  ])
                 : _vm._e()
             ]),
             _vm._v(" "),
@@ -64754,7 +64850,7 @@ var render = function() {
                 { staticClass: "form-group col-md-4 col-sm-12 col-lg-4" },
                 [
                   _c("label", { attrs: { for: "productName" } }, [
-                    _vm._v("Product Warrenty (Optonal)")
+                    _vm._v("Product Warranty (Optional)")
                   ]),
                   _vm._v(" "),
                   _c("input", {
@@ -64889,9 +64985,9 @@ var render = function() {
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _vm._v(
-                  "\n                    Upload Product Images For Product : " +
+                  "\n                        Upload Product Images For Product : " +
                     _vm._s(_vm.p_name) +
-                    "\n                "
+                    "\n                    "
                 )
               ]),
               _vm._v(" "),
@@ -64917,7 +65013,11 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("\n                    upload\n                ")]
+                [
+                  _vm._v(
+                    "\n                        upload\n                    "
+                  )
+                ]
               )
             ])
           ])
@@ -66117,13 +66217,66 @@ var render = function() {
                   )
                 ]
               )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.p_category
+            ? _c("div", { staticClass: "form-group col-md-6 col-sm-12" }, [
+                _c("label", [_vm._v("Product Status")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.p_status,
+                        expression: "p_status"
+                      }
+                    ],
+                    ref: "sub_category",
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.p_status = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        staticClass: "text-center",
+                        attrs: { value: "", selected: "" }
+                      },
+                      [_vm._v("-----Select-----")]
+                    ),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "used" } }, [
+                      _vm._v("Used")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "new" } }, [_vm._v("New")])
+                  ]
+                )
+              ])
             : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "form-group col-md-4 col-sm-12 col-lg-4" }, [
             _c("label", { attrs: { for: "productName" } }, [
-              _vm._v("Product Warrenty (Optonal)")
+              _vm._v("Product Warranty (Optional)")
             ]),
             _vm._v(" "),
             _c("input", {

@@ -102,8 +102,13 @@ class CustomerProfileController extends Controller
     }
 
     public function address_update(Request $request){
+<<<<<<< HEAD
         $profile=CustomerProfile::all()->where('user_id',auth()->user()->id);
         dd($profile);
+=======
+        $profile=CustomerProfile::where('user_id',auth()->user()->id)->get();
+//        dd($profile);
+>>>>>>> a916cf8e61eed2090608caa265bc0600a7350c66
         $profile=$profile[0];
         $profile->update([
             'address'=>$request->address,

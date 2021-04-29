@@ -551,7 +551,12 @@
             url: `/cart/products/${para2}/add`
             // data: { name: "John", location: "Boston" }
         }).done(function(res) {
-            alert(res.data.message);
+            console.log("hit");
+            // alert(res.data.message);
+            let val=$("#cartcount").text();
+            val=parseInt(val)+1;
+            console.log(val);
+            document.getElementById("cartcount").innerHTML=val;
         });
 
         if ($(this).hasClass("added")) {
