@@ -37,7 +37,7 @@ class CustomerProfileController extends Controller
             $cart=Cart::stored_data($order->cart_identifier);
             $carts[$order->id]=$cart;
             $delivery=Delivery::where('order_id',$order->id)->get();
-
+//            dd($delivery);
             $deliveries[$order->id]=$delivery[0];
         }
 
