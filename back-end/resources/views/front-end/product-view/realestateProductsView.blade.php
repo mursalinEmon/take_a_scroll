@@ -102,6 +102,16 @@
                             <div class="image">
 
                                 <a href="{{ route('category.realestate.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'realestate'=>$product->id]) }}" class="img"><img style="height:40vh;max-height: 40vh;max-width: 20vw;" src="{{ asset($product->images[0]??"") }}" alt="Product Image"></a>
+<<<<<<< HEAD
+
+                                {{-- <div class="wishlist-compare">
+                                    <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
+                                    <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
+                                </div> --}}
+
+                                {{-- <a href="{{ route('cart.add',$product->id) }}" data-para2="{{$product->id}}" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a> --}}
+=======
+>>>>>>> 70ec40998fbc316a0fe29e1edde8b6f764b400f6
 
                             </div>
                             <br><br><br>
