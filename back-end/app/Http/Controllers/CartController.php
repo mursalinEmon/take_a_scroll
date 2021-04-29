@@ -110,8 +110,17 @@ class CartController extends Controller
 
     // $cart=Cart::content();
     $indentity=auth()->user()->name.auth()->user()->id;
+    $exist=DB::table('shoppingcart')
+        ->where('identifier',$indentity)->get();
+        if($exist->count()>0){
+            DB::table('shoppingcart')
+                ->where('identifier',$indentity)->delete();
+            Cart::store( $indentity);
 
-    Cart::store( $indentity);
+    }else{
+        Cart::store( $indentity);
+    }
+
 
     return response(['message' => "product added to the cart"]);
     }
