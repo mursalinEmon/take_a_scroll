@@ -87,7 +87,7 @@ Route::middleware(['verified','vendor'])->group( function () {
 // customer routes
 Route::middleware(['verified','customer'])->group( function () {
     Route::get('/customer-dashboard','CustomerProfileController@index')->name('customer.dashboard');
-    Route::get('/customer-orders','CustomerProfileController@orderFs')->name('customer.orders');
+    Route::get('/customer-orders','CustomerProfileController@orders')->name('customer.orders');
 
     Route::get('/customer-profile', 'CustomerProfileController@show_profile')->name('customer_profile.show');
     Route::get('/edit-profile', 'CustomerProfileController@edit_profile')->name('customer_profile.edit');
