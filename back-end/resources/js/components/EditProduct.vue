@@ -43,10 +43,15 @@
                         >
                     </select>
                 </div>
+
+            </div>
+            <div class="row">
+                <!-- categories -->
+
                 <!-- sub-categories -->
                 <div
                     v-if="n_category"
-                    class="form-group col-md-6 col-sm-12 col-lg-12"
+                    class="form-group col-md-6 col-sm-12 "
                 >
                     <label>Product Sub-Category</label>
                     <select
@@ -55,18 +60,18 @@
                         v-model="n_sub_category"
                     >
                         <option class="text-center" value="" selected
-                            >-----Select-----</option
+                        >-----Select-----</option
                         >
                         <option
                             v-for="(category, index) in sub_categories"
                             :key="index"
-                            >{{ category.name }}</option
+                        >{{ category.name }}</option
                         >
                     </select>
                 </div>
                 <!--                status-->
                 <div
-                    v-if="p_category"
+                    v-if="n_category"
                     class="form-group col-md-6 col-sm-12"
                 >
                     <label>Product Status</label>
@@ -281,7 +286,7 @@ methods:{
 
     updateProduct(){
             let formData = new FormData();
-            formData.append("category_id", (this.n_category?this.n_category_id:this.p_category_id));
+            formData.append("category_id", (this.n_category?this.p_category_id:this.p_category_id));
             formData.append("sub_cat", this.n_sub_category);
             formData.append("name",this.p_name);
             formData.append("price",this.p_price);
@@ -291,7 +296,11 @@ methods:{
             formData.append("status", this. p_status);
             // formData.append("tags",this.tags);
             axios.post(`/products/${this.product.id}/update`,formData).then((res)=>{
-                console.log(res);
+                this.$alert(
+                    res.data.message,
+                    "",
+                    "success"
+                );
             }).catch((err)=>{console.log(err);});
     },
     crossImage(index){

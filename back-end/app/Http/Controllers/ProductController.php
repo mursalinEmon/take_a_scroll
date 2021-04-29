@@ -179,7 +179,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        // dd($request);
+//         dd($request);
         $pictures=explode(",",$request->product_pictures);
         $sub_category_id=null;
         if($request->sub_cat){
