@@ -11,7 +11,15 @@ use Illuminate\Support\Facades\DB;
 class ChatController extends Controller
 {
     public function contacts(){
-        $contacts=User::where('id','!=', auth()->user()->id)->get();
+        $contacts=[];
+        if(auth()->user()->type == "admin"){
+            $contacts=User::where('id','!=', auth()->user()->id)->get();
+
+        }
+        else{
+            $admin=User::findOrFail('6');
+            array_push($contacts,$admin);
+        }
 
         return response()->json($contacts);
     }

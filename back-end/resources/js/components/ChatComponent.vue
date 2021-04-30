@@ -7,7 +7,8 @@
              <message-composer @send="sendMessage"></message-composer>
         </div>
         <div class=" col-md-4">
-            <div> <h2 class="text-center">Contacts <span class="badge badge-primary rounded-pill">20</span></h2></div>
+<!--            <span class="badge badge-primary rounded-pill"></span>-->
+            <div> <h2 class="text-center">Contacts</h2></div>
             <div class="contacts">
                 <ul>
                     <li  v-for="(contact,index) in contacts" :key="index" @click="selectedContact(index,contact)" >
