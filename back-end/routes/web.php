@@ -18,10 +18,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return view('front-end.landing');
-});
+//Route::get('/', function () {
+//    // return view('welcome');
+//
+//    return view('front-end.landing');
+//});
+Route::get('/','HomeController@landing')->name('landing');
 
 
 Auth::routes(['verify'=>true]);

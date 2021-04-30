@@ -12,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -29,5 +29,13 @@ class HomeController extends Controller
     }
     public function chat(){
         return view('chat.chat');
+    }
+    public  function landing(){
+//        featured
+        $fts=Product::inRandomOrder()->limit(5)->get();
+//        best sellers
+        $bsts=Product::inRandomOrder()->limit(5)->get();
+
+        return view('front-end.landing',compact('fts','bsts'));
     }
 }
