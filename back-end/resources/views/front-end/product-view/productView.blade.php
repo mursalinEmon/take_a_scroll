@@ -95,7 +95,7 @@
                              @if($product->category->categoryType=='RealEstate' )
                                 <p> {!! $product->sub_area !!}  ,{!! $product->area !!}  ,{!! $product->district  !!}</p>
                             @else
-                                <p>{{ $product->product_decription }}</p>
+                                <p> {!!  $product->product_decription !!}</p>
                                  @endif
                         </div>
 
@@ -186,7 +186,7 @@
                                      {!! $product->description !!}
                               @else
                                 <p>
-                                    {!!  $product->product_decription !!}}
+                                    {!!  $product->product_decription !!}
                                 </p>
                               @endif
                             </div>
