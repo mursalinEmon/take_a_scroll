@@ -3,9 +3,6 @@
 @section('content')
     <div class="container">
 
-
-
-
           <!-- Content Row -->
     </div>
 @endsection

@@ -160,20 +160,24 @@ class DeliveryController extends Controller
             $p= $notification->data['order_id'];
             $order=DB::table('orders')
                 ->where('id',$p)->get();
-          $order=$order[0];
-            $stat=$order->status;
-            $amount=$order->amount;
-            $tid=$order->transaction_id;
-            $user=User::where('email',$order->email)->get();
+
+           if($order->count()>0){
+               $order=$order[0];
+               $stat=$order->status;
+               $amount=$order->amount;
+               $tid=$order->transaction_id;
+               $user=User::where('email',$order->email)->get();
             $user=$user[0];
-            array_push($data,[
-                'stat'=>$stat,
-                'amount'=>$amount,
-                'tid'=>$tid,
-                'cus'=>$user,
-                'order_id'=>$order->id,
-                'noti_id'=>$notification->id
-            ]);
+//            dd($user);
+               array_push($data,[
+                   'stat'=>$stat,
+                   'amount'=>$amount,
+                   'tid'=>$tid,
+                   'cus'=>$user,
+                   'order_id'=>$order->id,
+                   'noti_id'=>$notification->id
+               ]);
+           }
 
         }
         return response(['notifications'=>$data]) ;
