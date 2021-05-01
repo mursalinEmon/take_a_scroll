@@ -95,7 +95,9 @@
 
                             <!-- Image -->
                             <div class="image" style="height:20vh;max-height: 20vh;min-height:20vh;min-width:100%;max-width: 100%;">
-
+                                @if($product->status=="new")
+                                    <span class="badge badge-pill badge-danger text-center" style="color: white;margin-right: -2rem; z-index: 20000;" >New</span>
+                                @endif
                                 <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{ asset($product->product_pictures[0]) }}" alt="Product Image"></a>
 
 

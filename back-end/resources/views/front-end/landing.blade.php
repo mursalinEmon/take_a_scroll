@@ -290,7 +290,9 @@
 
                                             <!-- Image -->
                                             <div class="image">
-
+                                                @if($product->status=="new")
+                                                <span class="badge badge-pill badge-danger text-center" style="color: white" >New</span>
+                                                @endif
                                                 <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{asset($product->product_pictures[0])}}" style="height:20vh;" alt="Product Image"></a>
 
                                                 <div class="wishlist-compare">
