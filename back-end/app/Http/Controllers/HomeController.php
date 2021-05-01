@@ -32,10 +32,11 @@ class HomeController extends Controller
     }
     public  function landing(){
 //        featured
-        $fts=Product::inRandomOrder()->limit(5)->get();
+        $fts=Product::inRandomOrder()->limit(10)->get();
 //        best sellers
-        $bsts=Product::inRandomOrder()->limit(5)->get();
+        $bsts=Product::inRandomOrder()->limit(10)->get();
+        $bsds=Product::inRandomOrder()->limit(10)->get();
 
-        return view('front-end.landing',compact('fts','bsts'));
+        return view('front-end.landing',compact('fts','bsts','bsds'));
     }
 }
