@@ -91,11 +91,18 @@
                         </div>
 
                         <div class="desc">
-                            <p>{{ $product->product_decription }}</p>
+
+                             @if($product->category->categoryType=='RealEstate' )
+                                <p> {!! $product->sub_area !!}  ,{!! $product->area !!}  ,{!! $product->district  !!}</p>
+                            @else
+                                <p>{{ $product->product_decription }}</p>
+                                 @endif
                         </div>
 
                         <span class="availability">Availability:
                             @if($product->product_stock > 0)<span>In Stock</span>
+                                @elseif($product->category->categoryType)
+                                <span>Available</span>
                             @else
                             <span>Out Of Stock</span>
                             @endif
@@ -107,17 +114,6 @@
                                 <h5>Quantity</h5>
                                 <div class="pro-qty"><input type="text" value="1"></div>
                             </div>
-
-                            {{-- <div class="colors">
-                                <h5>Color</h5>
-                                <select class="nice-select">
-                                    <option>red</option>
-                                    <option>black</option>
-                                    <option>yellow</option>
-                                    <option>grey</option>
-                                </select>
-                            </div> --}}
-
                         </div>
 
                         <div class="actions">
@@ -146,16 +142,6 @@
                         </div>
 
                         <div class="tags">
-
-
-                            {{-- @if($product->product_tags)
-                                @forelse($product->product_tags as $value)
-                                <h5>Tags:</h5>
-                                    <a href="#">{{ $value }}</a>
-                                @empty
-
-                                @endforelse
-                            @endif --}}
 
 
 
@@ -194,18 +180,15 @@
 
                         <div class="row">
                             <div class="single-product-description-content col-lg-8 col-12">
-                              @if($product->category->categoryType=='realestate')
+                              @if($product->category->categoryType=='RealEstate')
                               <h3>Location:</h3>
-                                    <h4> {{ $product->sub_area }} ,{{ $product->area }} ,{{ $product->district }}</h4>
-                                     {{ $product->description }}
+                                    <h4> {!! $product->sub_area !!}  ,{!! $product->area !!}  ,{!! $product->district  !!} </h4>
+                                     {!! $product->description !!}
                               @else
                                 <p>
-                                    {{ $product->product_decription }}
+                                    {!!  $product->product_decription !!}}
                                 </p>
                               @endif
-                            </div>
-                            <div class="single-product-description-image col-lg-4 col-12">
-                                <img src="assets/images/single-product/description.png" alt="description">
                             </div>
                         </div>
 
@@ -352,291 +335,291 @@
     </div>
 </div><!-- Single Product Section End -->
 
-<!-- Related Product Section Start -->
-<div class="product-section section mb-70">
-    <div class="container">
-        <div class="row">
+{{--<!-- Related Product Section Start -->--}}
+{{--<div class="product-section section mb-70">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row">--}}
 
-            <!-- Section Title Start -->
-            <div class="col-12 mb-40">
-                <div class="section-title-one" data-title="RELATED PRODUCT"><h1>RELATED PRODUCT</h1></div>
-            </div><!-- Section Title End -->
+{{--            <!-- Section Title Start -->--}}
+{{--            <div class="col-12 mb-40">--}}
+{{--                <div class="section-title-one" data-title="RELATED PRODUCT"><h1>RELATED PRODUCT</h1></div>--}}
+{{--            </div><!-- Section Title End -->--}}
 
-            <!-- Product Tab Content Start -->
-            <div class="col-12">
+{{--            <!-- Product Tab Content Start -->--}}
+{{--            <div class="col-12">--}}
 
-                <!-- Product Slider Wrap Start -->
-                <div class="product-slider-wrap product-slider-arrow-one">
-                    <!-- Product Slider Start -->
-                    <div class="product-slider product-slider-4">
+{{--                <!-- Product Slider Wrap Start -->--}}
+{{--                <div class="product-slider-wrap product-slider-arrow-one">--}}
+{{--                    <!-- Product Slider Start -->--}}
+{{--                    <div class="product-slider product-slider-4">--}}
 
-                        <div class="col pb-20 pt-10">
-                            <!-- Product Start -->
-                            <div class="ee-product">
+{{--                        <div class="col pb-20 pt-10">--}}
+{{--                            <!-- Product Start -->--}}
+{{--                            <div class="ee-product">--}}
 
-                                <!-- Image -->
-                                <div class="image">
+{{--                                <!-- Image -->--}}
+{{--                                <div class="image">--}}
 
-                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-1.png" alt="Product Image"></a>
+{{--                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-1.png" alt="Product Image"></a>--}}
 
-                                    <div class="wishlist-compare">
-                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
-                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
-                                    </div>
+{{--                                    <div class="wishlist-compare">--}}
+{{--                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>--}}
+{{--                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>--}}
+{{--                                    </div>--}}
 
-                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+{{--                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                                <!-- Content -->
-                                <div class="content">
+{{--                                <!-- Content -->--}}
+{{--                                <div class="content">--}}
 
-                                    <!-- Category & Title -->
-                                    <div class="category-title">
+{{--                                    <!-- Category & Title -->--}}
+{{--                                    <div class="category-title">--}}
 
-                                        <a href="#" class="cat">Laptop</a>
-                                        <h5 class="title"><a href="single-product.html">Zeon Zen 4 Pro</a></h5>
+{{--                                        <a href="#" class="cat">Laptop</a>--}}
+{{--                                        <h5 class="title"><a href="single-product.html">Zeon Zen 4 Pro</a></h5>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <!-- Price & Ratting -->
-                                    <div class="price-ratting">
+{{--                                    <!-- Price & Ratting -->--}}
+{{--                                    <div class="price-ratting">--}}
 
-                                        <h5 class="price">$295.00</h5>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
+{{--                                        <h5 class="price">$295.00</h5>--}}
+{{--                                        <div class="ratting">--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star-half-o"></i>--}}
+{{--                                            <i class="fa fa-star-o"></i>--}}
+{{--                                        </div>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                            </div><!-- Product End -->
-                        </div>
+{{--                            </div><!-- Product End -->--}}
+{{--                        </div>--}}
 
-                        <div class="col pb-20 pt-10">
-                            <!-- Product Start -->
-                            <div class="ee-product">
+{{--                        <div class="col pb-20 pt-10">--}}
+{{--                            <!-- Product Start -->--}}
+{{--                            <div class="ee-product">--}}
 
-                                <!-- Image -->
-                                <div class="image">
+{{--                                <!-- Image -->--}}
+{{--                                <div class="image">--}}
 
-                                    <span class="label sale">sale</span>
+{{--                                    <span class="label sale">sale</span>--}}
 
-                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-2.png" alt="Product Image"></a>
+{{--                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-2.png" alt="Product Image"></a>--}}
 
-                                    <div class="wishlist-compare">
-                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
-                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
-                                    </div>
+{{--                                    <div class="wishlist-compare">--}}
+{{--                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>--}}
+{{--                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>--}}
+{{--                                    </div>--}}
 
-                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+{{--                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                                <!-- Content -->
-                                <div class="content">
+{{--                                <!-- Content -->--}}
+{{--                                <div class="content">--}}
 
-                                    <!-- Category & Title -->
-                                    <div class="category-title">
+{{--                                    <!-- Category & Title -->--}}
+{{--                                    <div class="category-title">--}}
 
-                                        <a href="#" class="cat">Drone</a>
-                                        <h5 class="title"><a href="single-product.html">Aquet Drone D 420</a></h5>
+{{--                                        <a href="#" class="cat">Drone</a>--}}
+{{--                                        <h5 class="title"><a href="single-product.html">Aquet Drone D 420</a></h5>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <!-- Price & Ratting -->
-                                    <div class="price-ratting">
+{{--                                    <!-- Price & Ratting -->--}}
+{{--                                    <div class="price-ratting">--}}
 
-                                        <h5 class="price"><span class="old">$350</span>$275.00</h5>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
+{{--                                        <h5 class="price"><span class="old">$350</span>$275.00</h5>--}}
+{{--                                        <div class="ratting">--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star-half-o"></i>--}}
+{{--                                            <i class="fa fa-star-o"></i>--}}
+{{--                                        </div>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                            </div><!-- Product End -->
-                        </div>
+{{--                            </div><!-- Product End -->--}}
+{{--                        </div>--}}
 
-                        <div class="col pb-20 pt-10">
-                            <!-- Product Start -->
-                            <div class="ee-product">
+{{--                        <div class="col pb-20 pt-10">--}}
+{{--                            <!-- Product Start -->--}}
+{{--                            <div class="ee-product">--}}
 
-                                <!-- Image -->
-                                <div class="image">
+{{--                                <!-- Image -->--}}
+{{--                                <div class="image">--}}
 
-                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-3.png" alt="Product Image"></a>
+{{--                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-3.png" alt="Product Image"></a>--}}
 
-                                    <div class="wishlist-compare">
-                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
-                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
-                                    </div>
+{{--                                    <div class="wishlist-compare">--}}
+{{--                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>--}}
+{{--                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>--}}
+{{--                                    </div>--}}
 
-                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+{{--                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                                <!-- Content -->
-                                <div class="content">
+{{--                                <!-- Content -->--}}
+{{--                                <div class="content">--}}
 
-                                    <!-- Category & Title -->
-                                    <div class="category-title">
+{{--                                    <!-- Category & Title -->--}}
+{{--                                    <div class="category-title">--}}
 
-                                        <a href="#" class="cat">Games</a>
-                                        <h5 class="title"><a href="single-product.html">Game Station X 22</a></h5>
+{{--                                        <a href="#" class="cat">Games</a>--}}
+{{--                                        <h5 class="title"><a href="single-product.html">Game Station X 22</a></h5>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <!-- Price & Ratting -->
-                                    <div class="price-ratting">
+{{--                                    <!-- Price & Ratting -->--}}
+{{--                                    <div class="price-ratting">--}}
 
-                                        <h5 class="price">$295.00</h5>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
+{{--                                        <h5 class="price">$295.00</h5>--}}
+{{--                                        <div class="ratting">--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star-half-o"></i>--}}
+{{--                                        </div>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                            </div><!-- Product End -->
-                        </div>
+{{--                            </div><!-- Product End -->--}}
+{{--                        </div>--}}
 
-                        <div class="col pb-20 pt-10">
-                            <!-- Product Start -->
-                            <div class="ee-product">
+{{--                        <div class="col pb-20 pt-10">--}}
+{{--                            <!-- Product Start -->--}}
+{{--                            <div class="ee-product">--}}
 
-                                <!-- Image -->
-                                <div class="image">
+{{--                                <!-- Image -->--}}
+{{--                                <div class="image">--}}
 
-                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-4.png" alt="Product Image"></a>
+{{--                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-4.png" alt="Product Image"></a>--}}
 
-                                    <div class="wishlist-compare">
-                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
-                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
-                                    </div>
+{{--                                    <div class="wishlist-compare">--}}
+{{--                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>--}}
+{{--                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>--}}
+{{--                                    </div>--}}
 
-                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+{{--                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                                <!-- Content -->
-                                <div class="content">
+{{--                                <!-- Content -->--}}
+{{--                                <div class="content">--}}
 
-                                    <!-- Category & Title -->
-                                    <div class="category-title">
+{{--                                    <!-- Category & Title -->--}}
+{{--                                    <div class="category-title">--}}
 
-                                        <a href="#" class="cat">Accessories</a>
-                                        <h5 class="title"><a href="single-product.html">Roxxe Headphone Z 75</a></h5>
+{{--                                        <a href="#" class="cat">Accessories</a>--}}
+{{--                                        <h5 class="title"><a href="single-product.html">Roxxe Headphone Z 75</a></h5>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <!-- Price & Ratting -->
-                                    <div class="price-ratting">
+{{--                                    <!-- Price & Ratting -->--}}
+{{--                                    <div class="price-ratting">--}}
 
-                                        <h5 class="price">$110.00</h5>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
+{{--                                        <h5 class="price">$110.00</h5>--}}
+{{--                                        <div class="ratting">--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                        </div>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                            </div><!-- Product End -->
-                        </div>
+{{--                            </div><!-- Product End -->--}}
+{{--                        </div>--}}
 
-                        <div class="col pb-20 pt-10">
-                            <!-- Product Start -->
-                            <div class="ee-product">
+{{--                        <div class="col pb-20 pt-10">--}}
+{{--                            <!-- Product Start -->--}}
+{{--                            <div class="ee-product">--}}
 
-                                <!-- Image -->
-                                <div class="image">
+{{--                                <!-- Image -->--}}
+{{--                                <div class="image">--}}
 
-                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-5.png" alt="Product Image"></a>
+{{--                                    <a href="single-product.html" class="img"><img src="assets/images/product/product-5.png" alt="Product Image"></a>--}}
 
-                                    <div class="wishlist-compare">
-                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
-                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>
-                                    </div>
+{{--                                    <div class="wishlist-compare">--}}
+{{--                                        <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>--}}
+{{--                                        <a href="#" data-tooltip="Wishlist"><i class="ti-heart"></i></a>--}}
+{{--                                    </div>--}}
 
-                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>
+{{--                                    <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i><span>ADD TO CART</span></a>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                                <!-- Content -->
-                                <div class="content">
+{{--                                <!-- Content -->--}}
+{{--                                <div class="content">--}}
 
-                                    <!-- Category & Title -->
-                                    <div class="category-title">
+{{--                                    <!-- Category & Title -->--}}
+{{--                                    <div class="category-title">--}}
 
-                                        <a href="#" class="cat">Camera</a>
-                                        <h5 class="title"><a href="single-product.html">Mony Handycam Z 105</a></h5>
+{{--                                        <a href="#" class="cat">Camera</a>--}}
+{{--                                        <h5 class="title"><a href="single-product.html">Mony Handycam Z 105</a></h5>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                    <!-- Price & Ratting -->
-                                    <div class="price-ratting">
+{{--                                    <!-- Price & Ratting -->--}}
+{{--                                    <div class="price-ratting">--}}
 
-                                        <h5 class="price">$110.00</h5>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
+{{--                                        <h5 class="price">$110.00</h5>--}}
+{{--                                        <div class="ratting">--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star"></i>--}}
+{{--                                            <i class="fa fa-star-half-o"></i>--}}
+{{--                                            <i class="fa fa-star-o"></i>--}}
+{{--                                        </div>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
 
-                            </div><!-- Product End -->
-                        </div>
+{{--                            </div><!-- Product End -->--}}
+{{--                        </div>--}}
 
-                    </div><!-- Product Slider End -->
-                </div><!-- Product Slider Wrap End -->
+{{--                    </div><!-- Product Slider End -->--}}
+{{--                </div><!-- Product Slider Wrap End -->--}}
 
-            </div><!-- Product Tab Content End -->
+{{--            </div><!-- Product Tab Content End -->--}}
 
-        </div>
-    </div>
-</div><!-- Related Product Section End -->
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div><!-- Related Product Section End -->--}}
 
-<!-- Brands Section Start -->
-<div class="brands-section section mb-90">
-    <div class="container">
-        <div class="row">
+{{--<!-- Brands Section Start -->--}}
+{{--<div class="brands-section section mb-90">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row">--}}
 
-            <!-- Brand Slider Start -->
-            <div class="brand-slider col">
-                <div class="brand-item col"><img src="assets/images/brands/brand-1.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-2.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-3.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-4.png" alt="Brands"></div>
-                <div class="brand-item col"><img src="assets/images/brands/brand-5.png" alt="Brands"></div>
-            </div><!-- Brand Slider End -->
+{{--            <!-- Brand Slider Start -->--}}
+{{--            <div class="brand-slider col">--}}
+{{--                <div class="brand-item col"><img src="assets/images/brands/brand-1.png" alt="Brands"></div>--}}
+{{--                <div class="brand-item col"><img src="assets/images/brands/brand-2.png" alt="Brands"></div>--}}
+{{--                <div class="brand-item col"><img src="assets/images/brands/brand-3.png" alt="Brands"></div>--}}
+{{--                <div class="brand-item col"><img src="assets/images/brands/brand-4.png" alt="Brands"></div>--}}
+{{--                <div class="brand-item col"><img src="assets/images/brands/brand-5.png" alt="Brands"></div>--}}
+{{--            </div><!-- Brand Slider End -->--}}
 
-        </div>
-    </div>
-</div><!-- Brands Section End -->
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div><!-- Brands Section End -->--}}
 
 @endsection
