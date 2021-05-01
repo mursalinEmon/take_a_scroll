@@ -181,6 +181,18 @@
                         <div class="row">
                             <div class="single-product-description-content col-lg-8 col-12">
                               @if($product->category->categoryType=='RealEstate')
+                              <div class="row">
+                                <div class="col-md-3 col-sm-3 ">
+                                    <i class="fa fa-bed" aria-hidden="true"></i><span class="p-2">Bed: {{ $product->bed }}</span>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <i class="fa fa-bath" aria-hidden="true"></i><span class="p-2">Bath: {{ $product->bath }}</span>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <i  class="fa fa-table" aria-hidden="true"></i><span class="p-2">Area: {{ $product->space_area }}sqft</span>
+                                </div>
+
+                            </div>
                               <h3>Location:</h3>
                                     <h4> {!! $product->sub_area !!}  ,{!! $product->area !!}  ,{!! $product->district  !!} </h4>
                                      {!! $product->description !!}
