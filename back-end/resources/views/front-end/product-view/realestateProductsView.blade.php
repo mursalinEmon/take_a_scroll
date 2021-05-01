@@ -101,7 +101,7 @@
                             <!-- Image -->
                             <div class="image">
 
-                                <a href="{{ route('category.realestate.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'realestate'=>$product->id]) }}" class="img"><img style="height:40vh;max-height: 40vh;max-width: 20vw;" src="{{ asset($product->images[0]??"") }}" alt="Product Image"></a>
+                                <a href="{{ route('category.realestate.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'realestate'=>$product->id]) }}" class="img"><img style="height:30vh;max-height: 30vh;max-width: 20vw;" src="{{ asset($product->images[0]??"") }}" alt="Product Image"></a>
 
                             </div>
                             <br><br><br>

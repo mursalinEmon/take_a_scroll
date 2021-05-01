@@ -82,7 +82,7 @@
                             <!-- Image -->
                             <div class="image">
 
-                                <a href="{{ route('category.realestate.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'realestate'=>$product->id]) }}" class="img"><img src="{{ asset($product->images[0]??"") }}" alt="Product Image"></a>
+                                <a href="{{ route('category.realestate.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'realestate'=>$product->id]) }}" class="img"><img src="{{ asset($product->images[0]??"") }}" style="height:20vh;" alt="Product Image"></a>
 
                                 {{-- <div class="wishlist-compare">
                                     <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
@@ -112,7 +112,7 @@
 
                                 <!-- Price & Ratting -->
                                 <div class="price-ratting">
-
+                                    <h4> {!! $product->sub_area !!}  ,{!! $product->area !!}  ,{!! $product->district  !!} </h4>
                                     <h5 class="price">৳{{ $product->price }}</h5>
                                     <div class="ratting">
                                         <i class="fa fa-star"></i>
@@ -220,7 +220,7 @@
                             <!-- Image -->
                             <div class="image">
 
-                                <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{ asset($product->product_pictures[0]) }}" alt="Product Image"></a>
+                                <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{ asset($product->product_pictures[0]) }}" style="height:20vh;" alt="Product Image"></a>
 
                                 {{-- <div class="wishlist-compare">
                                     <a href="#" data-tooltip="Compare"><i class="ti-control-shuffle"></i></a>
