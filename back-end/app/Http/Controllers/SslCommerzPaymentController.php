@@ -119,10 +119,6 @@ class SslCommerzPaymentController extends Controller
         broadcast(new DeliveryEvent($user))->toOthers();
         $user->notify((new DeliveryRequest($delivery)));
         Cart::destroy();
-<<<<<<< HEAD
-
-=======
->>>>>>> cf1753840d9fd5f363c0571055b26028c131aa5b
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
 

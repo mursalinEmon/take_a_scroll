@@ -39,6 +39,8 @@ Route::middleware(['verified','admin'])->group( function () {
     Route::get('/admin-dashboard', 'AdminProfileController@index')->name('admin.dashboard');
     Route::get('/order-notification/{order_id}/{noti_id}', 'DeliveryController@show_order');
     Route::post('/vendor-order','DeliveryController@process_vendor_order')->name('vendor.order');
+    Route::get('/admin-product-list-update', 'AdminProfileController@update_product_list')->name('admin.update-list');
+
 
 
 

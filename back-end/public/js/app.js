@@ -2650,6 +2650,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2681,6 +2695,7 @@ __webpack_require__.r(__webpack_exports__);
       p_category_id: "",
       p_sub_category: "",
       p_description: "",
+      featured: "",
       p_warrenty: "",
       p_stock: 0,
       p_tags: [],
@@ -2752,6 +2767,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("stock", this.p_stock);
       formData.append("descrption", this.p_description);
       formData.append("status", this.p_status);
+      formData.append("featured", this.featured);
 
       if (this.p_category_id === "" || this.p_sub_category === "" || this.p_name === "" || this.p_brand === "" || this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" || this.p_description === "") {
         this.$alert(res.data.message, "", "Fill all The Form Fields ");
@@ -3513,6 +3529,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3558,6 +3588,7 @@ __webpack_require__.r(__webpack_exports__);
       n_category: "",
       n_sub_category: "",
       p_name: "",
+      featured: "",
       p_price: 0,
       p_brand: "",
       p_description: "",
@@ -3625,7 +3656,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("product_pictures", this.product_pictures);
       formData.append("product_barnd", this.p_brand);
       formData.append("product_description", this.p_description);
-      formData.append("status", this.p_status); // formData.append("tags",this.tags);
+      formData.append("status", this.p_status);
+      formData.append("featured", this.featured); // formData.append("tags",this.tags);
 
       axios.post("/products/".concat(this.product.id, "/update"), formData).then(function (res) {
         _this3.$alert(res.data.message, "", "success");
@@ -10862,7 +10894,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.moving-button{\r\n\r\n\r\n\r\n    transform: translateY(20vh);\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.moving-button{\n\n\n\n    transform: translateY(20vh);\n}\n\n", ""]);
 
 // exports
 
@@ -64683,7 +64715,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c(
                 "div",
-                { staticClass: "form-group col-md-6 col-sm-12 col-lg-12" },
+                { staticClass: "form-group col-md-6 col-sm-6 col-lg-6" },
                 [
                   _c("label", [_vm._v("Product Category")]),
                   _vm._v(" "),
@@ -64733,6 +64765,67 @@ var render = function() {
                       })
                     ],
                     2
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group col-md-6 col-sm-6 col-lg-6" },
+                [
+                  _c("label", [_vm._v("Featured")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.featured,
+                          expression: "featured"
+                        }
+                      ],
+                      ref: "category",
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.featured = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        {
+                          staticClass: "text-center",
+                          attrs: { value: "", selected: "" }
+                        },
+                        [_vm._v("-----Select-----")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        { staticClass: "text-center", attrs: { value: "yes" } },
+                        [_vm._v("Yes ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        { staticClass: "text-center", attrs: { value: "no" } },
+                        [_vm._v("No ")]
+                      )
+                    ]
                   )
                 ]
               ),
@@ -66102,67 +66195,118 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "form-group col-md-6 col-sm-12 col-lg-12" },
-            [
-              _c("label", [
-                _vm._v(
-                  "Product Category( Current: " +
-                    _vm._s(_vm.category_name) +
-                    " )"
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.n_category,
-                      expression: "n_category"
-                    }
-                  ],
-                  ref: "category",
-                  staticClass: "form-control",
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.n_category = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "option",
-                    {
-                      staticClass: "text-center",
-                      attrs: { value: "", selected: "" }
-                    },
-                    [_vm._v("-----Select-----")]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.categories, function(category, index) {
-                    return _c("option", { key: index }, [
-                      _vm._v(_vm._s(category.name))
-                    ])
-                  })
-                ],
-                2
+          _c("div", { staticClass: "form-group col-md-6 col-sm-6 col-lg-6" }, [
+            _c("label", [
+              _vm._v(
+                "Product Category( Current: " + _vm._s(_vm.category_name) + " )"
               )
-            ]
-          )
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.n_category,
+                    expression: "n_category"
+                  }
+                ],
+                ref: "category",
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.n_category = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  {
+                    staticClass: "text-center",
+                    attrs: { value: "", selected: "" }
+                  },
+                  [_vm._v("-----Select-----")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.categories, function(category, index) {
+                  return _c("option", { key: index }, [
+                    _vm._v(_vm._s(category.name))
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6 col-sm-6 col-lg-6" }, [
+            _c("label", [_vm._v("Featured")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.featured,
+                    expression: "featured"
+                  }
+                ],
+                ref: "category",
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.featured = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  {
+                    staticClass: "text-center",
+                    attrs: { value: "", selected: "" }
+                  },
+                  [_vm._v("-----Select-----")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "option",
+                  { staticClass: "text-center", attrs: { value: "yes" } },
+                  [_vm._v("Yes ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "option",
+                  { staticClass: "text-center", attrs: { value: "no" } },
+                  [_vm._v("No ")]
+                )
+              ]
+            )
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
@@ -83934,8 +84078,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Mursalin\take_a_scroll\back-end\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Mursalin\take_a_scroll\back-end\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Sohan Computer\Desktop\client\take_a_scroll\take_a_scroll\take_a_scroll\back-end\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Sohan Computer\Desktop\client\take_a_scroll\take_a_scroll\take_a_scroll\back-end\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

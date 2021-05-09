@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductSellCount;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -32,9 +33,14 @@ class HomeController extends Controller
     }
     public  function landing(){
 //        featured
-        $fts=Product::inRandomOrder()->limit(10)->get();
+        $fts=Product::where('featured','yes')->get();
 //        best sellers
-        $bsts=Product::inRandomOrder()->limit(10)->get();
+        $bsts=[];
+        $ts=ProductSellCount::orderBy('sell_count', 'DESC')->take(15)->get();
+        foreach($ts as $t){
+            $temp=Product::findOrFail($t->product_id);
+            array_push($bsts,$temp);
+        }
         $bsds=Product::inRandomOrder()->limit(10)->get();
 
         return view('front-end.landing',compact('fts','bsts','bsds'));

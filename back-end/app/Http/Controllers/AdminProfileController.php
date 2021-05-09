@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\AdminProfile;
+use App\ProductSellCount;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
+use Cart;
 
 class AdminProfileController extends Controller
 {
@@ -82,5 +86,36 @@ class AdminProfileController extends Controller
     public function destroy(AdminProfile $adminProfile)
     {
         //
+    }
+    public function update_product_list(){
+        $orders=DB::table('orders')->get();
+        $product_count=[];
+        foreach($orders as $order ){
+            $cart_identifier=$order->cart_identifier;
+            $cart=Cart::stored_data($cart_identifier);
+            foreach($cart as $row){
+                $id=$row->id;
+                $qty=$row->qty;
+                if(count($product_count)>0){
+                    foreach($product_count as $key=>$value){
+                        if($key==$id){
+                            $product_count[$id]=$value+$qty;
+                        }else{
+                            $product_count[$id]=$qty;
+                        }
+                    }
+                }else{
+                    $product_count[$id]=$qty;
+                }
+            }
+
+        }
+
+        foreach($product_count as $key=>$value){
+            ProductSellCount::create([
+                'product_id'=>$key,
+                'sell_count'=>$value
+            ]);
+        }
     }
 }

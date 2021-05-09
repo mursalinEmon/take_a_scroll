@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <!-- categories -->
-                <div class="form-group col-md-6 col-sm-12 col-lg-12">
+                <div class="form-group col-md-6 col-sm-6 col-lg-6">
                     <label>Product Category</label>
                     <select
                         class="form-control"
@@ -41,6 +41,20 @@
                             :key="index"
                             >{{ category.name }}</option
                         >
+                    </select>
+                </div>
+                <div class="form-group col-md-6 col-sm-6 col-lg-6">
+                    <label>Featured</label>
+                    <select
+                        class="form-control"
+                        ref="category"
+                        v-model="featured"
+                    >
+                        <option class="text-center" value="" selected
+                            >-----Select-----</option
+                        >
+                        <option class="text-center" value="yes">Yes </option>
+                           <option class="text-center" value="no">No </option>
                     </select>
                 </div>
                 <!-- sub-categories -->
@@ -185,6 +199,7 @@ export default {
             p_category_id: "",
             p_sub_category: "",
             p_description: "",
+            featured:"",
             p_warrenty: "",
             p_stock: 0,
             p_tags: [],
@@ -262,7 +277,10 @@ export default {
             formData.append("warrenty", this.p_warrenty);
             formData.append("stock", this.p_stock);
             formData.append("descrption", this.p_description);
-            formData.append("status", this. p_status);
+            formData.append("status", this.p_status);
+            formData.append("featured", this.featured);
+
+
 
 
             if(this.p_category_id === "" || this.p_sub_category === "" || this.p_name==="" || this.p_brand ==="" ||  this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" ||  this.p_description === ""){
