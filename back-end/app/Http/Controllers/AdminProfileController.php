@@ -110,12 +110,13 @@ class AdminProfileController extends Controller
             }
 
         }
-
+        ProductSellCount::truncate();
         foreach($product_count as $key=>$value){
             ProductSellCount::create([
                 'product_id'=>$key,
                 'sell_count'=>$value
             ]);
         }
+        return redirect()->back()->with(['message'=>'successfully updated..!!','stat'=>'success']);
     }
 }

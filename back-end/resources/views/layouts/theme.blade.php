@@ -33,6 +33,8 @@
         <!-- Page Wrapper -->
   <div id="wrapper">
 
+
+
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" style="background-image: linear-gradient(180deg, #00b09b,  #96c93d)!important;" id="accordionSidebar">
 
@@ -260,6 +262,14 @@
 
           </ul>
         </nav>
+        @if(Session::has('message'))
+        <div class="alert alert-{{ Session::get('stat') }} alert-dismissible fade show" role="alert">
+           <h4> {{ Session::get('message') }}</h4>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <!-- End of Topbar -->
 
         <!-- Main Body -->
@@ -337,6 +347,14 @@
         }
 
     </script>
+     <script>
+        function mask(){
+            document.getElementById("mask").style.display="block";
+
+        }
+
+    </script>
+
 
 
 </body>

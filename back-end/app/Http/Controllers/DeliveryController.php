@@ -232,6 +232,8 @@ class DeliveryController extends Controller
            $user->notify((new DeliveryRequest($delivery[0])));
            broadcast(new DeliveryEvent($user))->toOthers();
        }
+
+       return redirect()->route('admin.dashboard');
     }
 
 
