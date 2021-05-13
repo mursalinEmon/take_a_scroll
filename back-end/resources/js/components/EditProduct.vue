@@ -43,7 +43,7 @@
                         >
                     </select>
                 </div>
-                <div class="form-group col-md-6 col-sm-6 col-lg-6">
+                <div class="form-group col-md-3 col-sm-3 col-lg-3">
                     <label>Featured</label>
                     <select
                         class="form-control"
@@ -57,6 +57,12 @@
                            <option class="text-center" value="no">No </option>
                     </select>
                 </div>
+                 <div class="form-group col-md-3 col-lg-3 col-sm-3">
+                     <!-- sub-categories -->
+                    <label>Product discount</label>
+                    <input class="form-control" type="number" name="discount" v-model="discount">
+                </div>
+
 
             </div>
             <div class="row">
@@ -212,6 +218,7 @@ category_name:"",
     },
 created(){
         this.p_name= this.product.name;
+        this.discount=this.product.discount;
         this.p_price=this.product.price;
         this.p_description=this.product.product_decription;
         this.product_pictures=this.product.product_pictures;
@@ -232,6 +239,7 @@ data:()=>{
     return{
         p_status:"",
         path_image:"/",
+        discount:0,
         n_category:"",
         n_sub_category:"",
         p_name:"",
@@ -310,6 +318,8 @@ methods:{
             formData.append("product_description",this.p_description);
             formData.append("status", this.p_status);
             formData.append("featured", this.featured);
+            formData.append("discount", this.discount);
+
 
 
             // formData.append("tags",this.tags);

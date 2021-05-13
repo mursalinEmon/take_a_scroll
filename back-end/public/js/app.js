@@ -2664,6 +2664,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2688,6 +2693,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       // we will pass the pruduct id  in the url collected from the server response after the product creation and the add image as update value
       store_id: '',
+      discount: 0,
       p_name: "",
       p_brand: "",
       p_price: 0.0,
@@ -2768,6 +2774,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("descrption", this.p_description);
       formData.append("status", this.p_status);
       formData.append("featured", this.featured);
+      formData.append("discount", this.discount);
 
       if (this.p_category_id === "" || this.p_sub_category === "" || this.p_name === "" || this.p_brand === "" || this.p_warrenty === "" || this.p_price === 0 || this.p_warrenty === "" || this.p_description === "") {
         this.$alert(res.data.message, "", "Fill all The Form Fields ");
@@ -3543,6 +3550,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3568,6 +3581,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.p_name = this.product.name;
+    this.discount = this.product.discount;
     this.p_price = this.product.price;
     this.p_description = this.product.product_decription;
     this.product_pictures = this.product.product_pictures;
@@ -3585,6 +3599,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       p_status: "",
       path_image: "/",
+      discount: 0,
       n_category: "",
       n_sub_category: "",
       p_name: "",
@@ -3657,7 +3672,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("product_barnd", this.p_brand);
       formData.append("product_description", this.p_description);
       formData.append("status", this.p_status);
-      formData.append("featured", this.featured); // formData.append("tags",this.tags);
+      formData.append("featured", this.featured);
+      formData.append("discount", this.discount); // formData.append("tags",this.tags);
 
       axios.post("/products/".concat(this.product.id, "/update"), formData).then(function (res) {
         _this3.$alert(res.data.message, "", "success");
@@ -64771,7 +64787,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "form-group col-md-6 col-sm-6 col-lg-6" },
+                { staticClass: "form-group col-md-3 col-sm-3 col-lg-3" },
                 [
                   _c("label", [_vm._v("Featured")]),
                   _vm._v(" "),
@@ -64827,6 +64843,36 @@ var render = function() {
                       )
                     ]
                   )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group col-md-3 col-lg-3 col-sm-3" },
+                [
+                  _c("label", [_vm._v("Product discount")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.discount,
+                        expression: "discount"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number", name: "discount" },
+                    domProps: { value: _vm.discount },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.discount = $event.target.value
+                      }
+                    }
+                  })
                 ]
               ),
               _vm._v(" "),
@@ -66251,7 +66297,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-6 col-sm-6 col-lg-6" }, [
+          _c("div", { staticClass: "form-group col-md-3 col-sm-3 col-lg-3" }, [
             _c("label", [_vm._v("Featured")]),
             _vm._v(" "),
             _c(
@@ -66306,6 +66352,32 @@ var render = function() {
                 )
               ]
             )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-3 col-lg-3 col-sm-3" }, [
+            _c("label", [_vm._v("Product discount")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.discount,
+                  expression: "discount"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", name: "discount" },
+              domProps: { value: _vm.discount },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.discount = $event.target.value
+                }
+              }
+            })
           ])
         ]),
         _vm._v(" "),

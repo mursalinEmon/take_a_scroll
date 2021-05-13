@@ -395,6 +395,9 @@
                                         <div class="ee-product">
 
                                             <!-- Image -->
+                                            @if($product->discount > 0)
+                                            <span class="badge badge-pill badge-danger text-center" style="color: white;margin-right: -2rem; z-index: 20000;padding:1rem;" >{{ $product->discount }}% off</span>
+                                        @endif
                                             <div class="image">
 
                                                 <a href="{{ route('category.products.show',['category'=>$product->category->id,'sub_cat_name'=>$product->subCategory->name,'sub_cat'=>$product->subCategory->id,'product'=>$product->id]) }}" class="img"><img src="{{asset($product->product_pictures[0])}}" style="height:20vh;" alt="Product Image"></a>

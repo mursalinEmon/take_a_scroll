@@ -88,6 +88,7 @@ class ProductController extends Controller
             'product_pictures'=>[],
             'store_id'=>$store->id,
             'status'=>$request->status,
+            'discount'=>$request->discount,
             'featured'=>$request->featured
         ]);
 
@@ -197,6 +198,7 @@ class ProductController extends Controller
             'product_pictures'=>$pictures,
             'featured'=>$request->featured,
             'brand_name' => $request->product_barnd,
+            'discount'=>$request->discount,
             'sub_category_id' => $sub_category_id ? $sub_category_id: $product->sub_category_id,
         ]);
 

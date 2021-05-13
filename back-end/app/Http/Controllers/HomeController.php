@@ -41,7 +41,7 @@ class HomeController extends Controller
             $temp=Product::findOrFail($t->product_id);
             array_push($bsts,$temp);
         }
-        $bsds=Product::inRandomOrder()->limit(10)->get();
+        $bsds=Product::where('discount','>',0)->limit(10)->get();
 
         return view('front-end.landing',compact('fts','bsts','bsds'));
     }

@@ -43,7 +43,7 @@
                         >
                     </select>
                 </div>
-                <div class="form-group col-md-6 col-sm-6 col-lg-6">
+                <div class="form-group col-md-3 col-sm-3 col-lg-3">
                     <label>Featured</label>
                     <select
                         class="form-control"
@@ -57,7 +57,12 @@
                            <option class="text-center" value="no">No </option>
                     </select>
                 </div>
-                <!-- sub-categories -->
+                <div class="form-group col-md-3 col-lg-3 col-sm-3">
+                     <!-- sub-categories -->
+                    <label>Product discount</label>
+                    <input class="form-control" type="number" name="discount" v-model="discount">
+                </div>
+
                 <div
                     v-if="p_category"
                     class="form-group col-md-6 col-sm-12"
@@ -192,6 +197,7 @@ export default {
         return {
             // we will pass the pruduct id  in the url collected from the server response after the product creation and the add image as update value
             store_id:'',
+            discount:0,
             p_name: "",
             p_brand: "",
             p_price: 0.0,
@@ -279,6 +285,9 @@ export default {
             formData.append("descrption", this.p_description);
             formData.append("status", this.p_status);
             formData.append("featured", this.featured);
+            formData.append("discount", this.discount);
+
+
 
 
 
