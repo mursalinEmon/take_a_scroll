@@ -51,10 +51,15 @@
 
                     <div class="col mt-10 mb-10">
                         <!-- Header Links Start -->
+                        @if(!auth()->user())
+
+                        @elseif(auth()->user()->type == "customer")
                         <div class="header-links">
-                            <a href="track-order.html"><img src="{{ asset('assets/images/icons/car.png') }}" alt="Car Icon"> <span>Track your order</span></a>
+                            <a href="{{ route('customer.orders') }}"><img src="{{ asset('assets/images/icons/car.png') }}" alt="Car Icon"> <span>Track your order</span></a>
                             {{-- <a href="store.html"><img src="{{ asset('assets/images/icons/marker.png') }}" alt="Car Icon"> <span>Locate Store</span></a> --}}
-                        </div><!-- Header Links End -->
+                        </div>
+                        @else<!-- Header Links End -->
+                        @endif
                     </div>
 
                     <div class="col order-12 order-xs-12 order-lg-2 mt-10 mb-10">
