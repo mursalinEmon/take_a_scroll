@@ -23,10 +23,10 @@
                         @forelse (Cart::content() as $product)
                             <tr>
                                 <th scope="row">{{ $product->name }}</th>
-                                <td>{{ $product->price }}</td>
+                                <td>{{$product->model->price - ($product->model->price * ($product->model->discount/100)) }}</td>
                                 <td>{{ $product->qty }}</td>
-                                <td>{{ $product->price * $product->qty }}</td>
-                                @php $total+=$product->price * $product->qty;@endphp
+                                <td>{{ ($product->model->price - ($product->model->price * ($product->model->discount/100)))  * $product->qty }}</td>
+                                @php $total+=($product->model->price - ($product->model->price * ($product->model->discount/100))) * $product->qty;@endphp
                             </tr>
                         @empty
                             <h1 class="text text-danger">Not Item in Cart...!!</h1>

@@ -76,7 +76,7 @@
                             <h5 class="title">{{ $product->name }}</h5>
                         </div>
 
-                        <h5 class="price">৳{{ $product->price }}</h5>
+                        <h5 class="price">৳{{ $product->price - ($product->price * ($product->discount/100)) }}</h5>
 
                     </div>
 

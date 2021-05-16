@@ -38,11 +38,11 @@
                                     <tr>
                                         <td class="pro-thumbnail"><img src="{{  asset($row->model->product_pictures[0])  }}" style="max-height: 150px;max-width:150px;" alt="Product"></a></td>
                                         <td class="pro-title"><a href="#">{{ $row->name }}</a></td>
-                                        <td class="pro-price"><span> ৳{{ $row->price }}</span></td>
+                                        <td class="pro-price"><span> ৳{{ $row->model->price - ($row->model->price * ($row->model->discount/100)) }}</span></td>
 
                                         <td class="pro-quantity"><div class="pro-qty"><span id="{{ $row->rowId }}"  class="dec qtybtn">-</span><input  type="text" value="{{ $row->qty }}"><span id="{{ $row->rowId }}" class="inc qtybtn">+</span></div></td>
 
-                                        <td class="pro-subtotal"> ৳<input id="item-price-{{ $row->rowId }}"  value={{ $row->price }} size="5"  disabled ></td>
+                                        <td class="pro-subtotal"> ৳<input id="item-price-{{ $row->rowId }}"  value={{ $row->model->price - ($row->model->price * ($row->model->discount/100)) }} size="5"  disabled ></td>
 
                                         <td class="pro-remove"><a href="#"><i class="fa fa-trash-o remove-cart" data-rowid="{{ $row->rowId }}"></i></a></td>
                                     </tr>
