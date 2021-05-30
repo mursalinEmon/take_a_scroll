@@ -24,6 +24,8 @@ use Illuminate\Http\Request;
 //    return view('front-end.landing');
 //});
 Route::get('/','HomeController@landing')->name('landing');
+Route::get('/contact','HomeController@contact_us')->name('contact');
+Route::post('/contact/message','ContactController@store')->name('contact.store');
 
 
 Auth::routes(['verify'=>true]);

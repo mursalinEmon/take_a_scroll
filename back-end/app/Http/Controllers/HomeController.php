@@ -45,4 +45,8 @@ class HomeController extends Controller
 
         return view('front-end.landing',compact('fts','bsts','bsds'));
     }
+
+    public function contact_us(){
+        return view('layouts.front-end.contact');
+    }
 }
